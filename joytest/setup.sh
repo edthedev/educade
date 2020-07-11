@@ -1,0 +1,1 @@
+chmod +x joytest.sh
