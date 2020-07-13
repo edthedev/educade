@@ -1,9 +1,11 @@
 
 
-$gameDir = "/home/pi/RetroPie/roms/ports/joytest"
+$gameDir = "/opt/retropi/ports/joytest"
+$scriptDir = "/home/pi/RetroPie/roms/ports"
+$script = "/home/pi/RetroPie/roms/ports/joytest.sh"
 
-Write-Host "mkdir $gameDir"
 ssh pi@tmntcade -C "mkdir $gameDir"
-scp ./joytest/* pi@tmntcade:"$gameDir"
-ssh pi@tmntcade -C "chmod +x $gameDir/joytest.sh"
+scp ./joytest/joytest.sh pi@tmntcade:"$gameDir"
+ssh pi@tmntcade -C "chmod +x $script"
 ssh pi@tmntcade -C "ls -al $gameDir"
+ssh pi@tmntcade -C "ls -al $scriptDir"
