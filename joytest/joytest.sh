@@ -1,3 +1,3 @@
 #!/bin/bash
 cd "$(dirname "$0")"
-sudo python /opt/retropie/ports/joytest/joytest.py
+sudo python3 /opt/retropie/ports/joytest/joytest.py
