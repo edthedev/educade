@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Sample Python/Pygame Programs
 Simpson College Computer Science
