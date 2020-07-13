@@ -73,6 +73,8 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+
+
  
         # Possible joystick actions: JOYAXISMOTION JOYBALLMOTION JOYBUTTONDOWN
         # JOYBUTTONUP JOYHATMOTION
@@ -80,6 +82,8 @@ while not done:
             print("Joystick button pressed.")
         if event.type == pygame.JOYBUTTONUP:
             print("Joystick button released.")
+        
+
  
     # DRAWING STEP
     # First, clear the screen to white. Don't put other drawing commands
@@ -97,6 +101,12 @@ while not done:
     for i in range(joystick_count):
         joystick = pygame.joystick.Joystick(i)
         joystick.init()
+
+        # Exit like RetroArch
+        button7 = joystick.get_button(7)
+        button8 = joystick.get_button(8)
+        if button7 == button8 == 1:
+            done = True
  
         textPrint.print(screen, "Joystick {}".format(i))
         textPrint.indent()
