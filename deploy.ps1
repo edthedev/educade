@@ -1,13 +1,15 @@
 
 
-$gameDir = "/opt/retropie/ports/joytest"
+# $gameName = "joytest"
+$gameName = "in4ders"
+$gameDir = "/opt/retropie/ports/$gameName"
 $scriptDir = "/home/pi/RetroPie/roms/ports"
-$script = "/home/pi/RetroPie/roms/ports/joytest.sh"
+$script = "/home/pi/RetroPie/roms/ports/$gameName.sh"
 
 ssh pi@tmntcade -C "sudo mkdir -p $gameDir"
 ssh pi@tmntcade -C "sudo chown pi $gameDir"
-scp ./joytest/joytest.sh pi@tmntcade:"$scriptDir"
-scp ./joytest/joytest.py pi@tmntcade:"$gameDir"
+scp "./$gameName/$gameName.sh" pi@tmntcade:"$scriptDir"
+scp "./$gameName/$gameName.py" pi@tmntcade:"$gameDir"
 ssh pi@tmntcade -C "chmod +x $script"
 ssh pi@tmntcade -C "dos2unix $script"
 ssh pi@tmntcade -C "dos2unix $gameDir/*"
