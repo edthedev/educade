@@ -1,7 +1,9 @@
 
 
 # $gameName = "joytest"
-$gameName = "in4ders"
+# $gameName = "in4ders"
+$gameName = "bouncetest"
+
 $gameDir = "/opt/retropie/ports/$gameName"
 $scriptDir = "/home/pi/RetroPie/roms/ports"
 $script = "/home/pi/RetroPie/roms/ports/$gameName.sh"
