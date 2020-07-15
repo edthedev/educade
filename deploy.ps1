@@ -1,7 +1,7 @@
 
 
 # $gameName = "joytest"
-$gameName = "in4ders"
+$gameName = "inv4ders"
 # $gameName = "bouncetest"
 
 $gameDir = "/opt/retropie/ports/$gameName"
