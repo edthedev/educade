@@ -26,8 +26,8 @@ pygame.mouse.set_visible(False)
 
 class ControlSet():
     """A controller mapping."""
-    def __init__(self, up = pygame.K_UP, down = pygame.K_DOWN,
-        left = pygame.K_LEFT, right = pygame.K_RIGHT):
+    def __init__(self, up=pygame.K_UP, down=pygame.K_DOWN,
+        left=pygame.K_LEFT, right=pygame.K_RIGHT):
         self.up_key = up
         self.down_key = down
         self.left_key = left
@@ -36,8 +36,8 @@ class ControlSet():
 class Player():
     """A game player."""
     controls = [ControlSet()]
-    pos_x = 0
-    pos_y = 0
+    pos_x = 100
+    pos_y = 100
     size_x = 50
     size_y = 50
     move_amt = 5
@@ -56,9 +56,6 @@ class Player():
             self._key_control(keys)
         if joystick:
             self._joy_control(joystick)
-        #for event in events:
-        #    if event.type == pygame.KEYDOWN:
-        #        self._key_control(event.key)
 
     def _joy_control(self, joystick):
         """Apply joystick controls.
@@ -111,11 +108,7 @@ class Player():
 
 class invaders():
     """Game loggic goes here."""
-
     done = False
-    # Starting position of the rectangle
-    rect_x = 500
-    rect_y = 500
 
     player1 = Player(color=RED,
         controls=[ControlSet(), ControlSet(up=pygame.K_w, down=pygame.K_s,
@@ -169,8 +162,6 @@ class invaders():
 
     def logic(self):
         """Calculate game logic."""
-        self.rect_x += self.rect_change_x
-        self.rect_y += self.rect_change_y
         # --- Event Processing
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
