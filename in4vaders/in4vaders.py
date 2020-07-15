@@ -36,13 +36,13 @@ class Player():
     pos_y = 0
     size_x = 50
     size_y = 50
-    move_amt = 50
+    move_amt = 5
 
     def control(self, keys):
         if keys[self.controls.up_key]:
-            self.pos_y += self.move_amt
-        if keys[self.controls.down_key]:
             self.pos_y -= self.move_amt
+        if keys[self.controls.down_key]:
+            self.pos_y += self.move_amt
         if keys[self.controls.left_key]:
             self.pos_x -= self.move_amt
         if keys[self.controls.right_key]:
@@ -50,10 +50,13 @@ class Player():
 
     def draw(self):
         # Draw the rectangle
-        pygame.draw.rect(screen, WHITE, [self.pos_x, self.pos_y, self.size_x, self.size_y])
-        pygame.draw.rect(screen, RED, [self.pos_x + 10, self.pos_y + 10, self.size_x - 10, size_y - 10])
+        pygame.draw.rect(screen, WHITE, 
+            [self.pos_x, self.pos_y, self.size_x, self.size_y])
+        pygame.draw.rect(screen, RED, 
+            [self.pos_x + 10, self.pos_y + 10, self.size_x - 10, self.size_y - 10])
 
 class invaders():
+    """Game loggic goes here."""
 
     done = False
     # Starting position of the rectangle
@@ -71,7 +74,7 @@ class invaders():
 
         ## Keyboard controls - for testing without joysticks
         keys=pygame.key.get_pressed()
-        player1.control(keys)
+        self.player1.control(keys)
 
         # Get count of joysticks
         joystick_count = pygame.joystick.get_count()
