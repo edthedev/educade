@@ -18,6 +18,40 @@ clock = pygame.time.Clock()
 pygame.joystick.init()
 size = [700, 500]
 screen = pygame.display.set_mode(size)
+pygame.mouse.set_visible(False)
+
+class ControlSet():
+    """A controller mapping."""
+    # TODO: Make this mappable on init
+    up_key = pygame.K_UP
+    down_key = pygame.K_DOWN
+    left_key = pygame.K_LEFT
+    right_key = pygame.K_RIGHT
+
+class Player():
+    """A game player."""
+    # TODO: make controls a set
+    controls = ControlSet()
+    pos_x = 0
+    pos_y = 0
+    size_x = 50
+    size_y = 50
+    move_amt = 50
+
+    def control(self, keys):
+        if keys[self.controls.up_key]:
+            self.pos_y += self.move_amt
+        if keys[self.controls.down_key]:
+            self.pos_y -= self.move_amt
+        if keys[self.controls.left_key]:
+            self.pos_x -= self.move_amt
+        if keys[self.controls.right_key]:
+            self.pos_x += self.move_amt
+
+    def draw(self):
+        # Draw the rectangle
+        pygame.draw.rect(screen, WHITE, [self.pos_x, self.pos_y, self.size_x, self.size_y])
+        pygame.draw.rect(screen, RED, [self.pos_x + 10, self.pos_y + 10, self.size_x - 10, size_y - 10])
 
 class invaders():
 
@@ -30,7 +64,15 @@ class invaders():
     rect_change_x = 2
     rect_change_y = 2
 
+    player1 = Player()
+
     def controls(self):
+        """Check for control inputs."""
+
+        ## Keyboard controls - for testing without joysticks
+        keys=pygame.key.get_pressed()
+        player1.control(keys)
+
         # Get count of joysticks
         joystick_count = pygame.joystick.get_count()
     
@@ -39,13 +81,14 @@ class invaders():
             joystick = pygame.joystick.Joystick(i)
             joystick.init()
 
-            # Exit like RetroArch
+            # Exit like RetroArch - any joystick
             button7 = joystick.get_button(7)
             button8 = joystick.get_button(8)
             if button7 == button8 == 1:
                 self.done = True
 
     def logic(self):
+        """Calculate game logic."""
         self.rect_x += self.rect_change_x
         self.rect_y += self.rect_change_y
         # --- Event Processing
@@ -54,13 +97,12 @@ class invaders():
                 self.done = True
 
     def draw(self):
+        """Update the screen."""
         # --- Drawing
         # Set the screen background
         screen.fill(BLACK)
     
-        # Draw the rectangle
-        pygame.draw.rect(screen, WHITE, [self.rect_x, self.rect_y, 50, 50])
-        pygame.draw.rect(screen, RED, [self.rect_x + 10, self.rect_y + 10, 30, 30])
+        self.player1.draw()
     
         # --- Wrap-up
         # Limit to 60 frames per second
