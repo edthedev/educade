@@ -11,6 +11,10 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
+# Joystick X / Y Axis
+JOY_Y = 0
+JOY_X = 1
+
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
  
@@ -46,17 +50,57 @@ class Player():
         self.controls = controls
         self.color = color
 
-    def control(self, keys):
+    def control(self, keys=None, joystick=None):
         """Look for signals accepted by this player, and apply them."""
+        if keys:
+            self._key_control(keys)
+        if joystick:
+            self._joy_control(joystick)
+        #for event in events:
+        #    if event.type == pygame.KEYDOWN:
+        #        self._key_control(event.key)
+
+    def _joy_control(self, joystick):
+        """Apply joystick controls.
+
+        Only pass in the joystick you want to have accepted.
+        """
+        if joystick.get_axis(JOY_Y) >= 1:
+            self._up()
+        if joystick.get_axis(JOY_Y) <= 1:
+            self._down()
+        if joystick.get_axis(JOY_X) >= 1:
+            self._right()
+        if joystick.get_axis(JOY_X) <= 1:
+            self._left()
+
+    def _up(self):
+        """Move self up."""
+        self.pos_y -= self.move_amt
+
+    def _down(self):
+        """Move self down."""
+        self.pos_y += self.move_amt
+
+    def _left(self):
+        """Move self left."""
+        self.pos_x -= self.move_amt
+
+    def _right(self):
+        """Move self right."""
+        self.pos_x += self.move_amt
+
+    def _key_control(self, keys):
+        """Apply keyboard controls - as accepted by this player."""
         for controlSet in self.controls:
             if keys[controlSet.up_key]:
-                self.pos_y -= self.move_amt
+                self._up()
             if keys[controlSet.down_key]:
-                self.pos_y += self.move_amt
+                self._down()
             if keys[controlSet.left_key]:
-                self.pos_x -= self.move_amt
+                self._left()
             if keys[controlSet.right_key]:
-                self.pos_x += self.move_amt
+                self._right()
 
     def draw(self):
         # Draw the rectangle
@@ -70,12 +114,8 @@ class invaders():
 
     done = False
     # Starting position of the rectangle
-    rect_x = 50
-    rect_y = 50
-    
-    # Speed and direction of rectangle
-    rect_change_x = 2
-    rect_change_y = 2
+    rect_x = 500
+    rect_y = 500
 
     player1 = Player(color=RED,
         controls=[ControlSet(), ControlSet(up=pygame.K_w, down=pygame.K_s,
@@ -94,11 +134,14 @@ class invaders():
         """Check for control inputs."""
 
         ## Keyboard controls - for testing without joysticks
+
+        # events = pygame.event.get()
+
         keys=pygame.key.get_pressed()
-        self.player1.control(keys)
-        self.player2.control(keys)
-        self.player3.control(keys)
-        self.player4.control(keys)
+        self.player1.control(keys=keys)
+        self.player2.control(keys=keys)
+        self.player3.control(keys=keys)
+        self.player4.control(keys=keys)
 
         # Get count of joysticks
         joystick_count = pygame.joystick.get_count()
@@ -113,6 +156,16 @@ class invaders():
             button8 = joystick.get_button(8)
             if button7 == button8 == 1:
                 self.done = True
+            
+            if i == 0:
+                self.player1.control(joystick=joystick)
+            if i == 1:
+                self.player2.control(joystick=joystick)
+            if i == 2:
+                self.player3.control(joystick=joystick)
+            if i == 3:
+                self.player4.control(joystick=joystick)
+        
 
     def logic(self):
         """Calculate game logic."""
