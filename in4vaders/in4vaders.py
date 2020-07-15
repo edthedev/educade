@@ -14,8 +14,8 @@ GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
 # Joystick X / Y Axis
-JOY_Y = 0
-JOY_X = 1
+JOY_X = 0
+JOY_Y = 1
 
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
@@ -67,13 +67,13 @@ class Player():
 
         Only pass in the joystick you want to have accepted.
         """
-        if joystick.get_axis(JOY_Y) >= 1:
-            self._up()
-        if joystick.get_axis(JOY_Y) <= 1:
+        if joystick.get_axis(JOY_Y) >= .8:
             self._down()
-        if joystick.get_axis(JOY_X) >= 1:
+        if joystick.get_axis(JOY_Y) <= -.8:
+            self._up()
+        if joystick.get_axis(JOY_X) >= .8:
             self._right()
-        if joystick.get_axis(JOY_X) <= 1:
+        if joystick.get_axis(JOY_X) <= -.8:
             self._left()
 
     def _up(self):
@@ -197,6 +197,8 @@ while not inv.done:
     inv.controls()
     inv.logic()
     inv.draw()
+    # Limit to 60 frames per second
+    clock.tick(60)
 
 # Close everything down
 pygame.quit()
