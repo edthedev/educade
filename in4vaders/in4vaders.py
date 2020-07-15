@@ -81,8 +81,14 @@ class invaders():
         controls=[ControlSet(), ControlSet(up=pygame.K_w, down=pygame.K_s,
             left=pygame.K_a, right=pygame.K_d)])
     player2 = Player(color=WHITE,
-        controls=[ControlSet(), ControlSet(up=pygame.K_i, down=pygame.K_k,
-            left=pygame.K_j, right=pygame.K_l)])
+        controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
+            left=pygame.K_h, right=pygame.K_l)])
+    player3 = Player(color=GREEN,
+        controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
+            left=pygame.K_1, right=pygame.K_4)])
+    player4 = Player(color=GREEN,
+        controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
+            left=pygame.K_5, right=pygame.K_8)])
 
     def controls(self):
         """Check for control inputs."""
@@ -90,6 +96,9 @@ class invaders():
         ## Keyboard controls - for testing without joysticks
         keys=pygame.key.get_pressed()
         self.player1.control(keys)
+        self.player2.control(keys)
+        self.player3.control(keys)
+        self.player4.control(keys)
 
         # Get count of joysticks
         joystick_count = pygame.joystick.get_count()
@@ -121,6 +130,9 @@ class invaders():
         screen.fill(BLACK)
     
         self.player1.draw()
+        self.player2.draw()
+        self.player3.draw()
+        self.player4.draw()
     
         # --- Wrap-up
         # Limit to 60 frames per second
