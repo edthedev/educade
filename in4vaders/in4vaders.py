@@ -22,15 +22,15 @@ pygame.mouse.set_visible(False)
 
 class ControlSet():
     """A controller mapping."""
-    # TODO: Make this mappable on init
-    up_key = pygame.K_UP
-    down_key = pygame.K_DOWN
-    left_key = pygame.K_LEFT
-    right_key = pygame.K_RIGHT
+    def __init__(self, up = pygame.K_UP, down = pygame.K_DOWN,
+        left = pygame.K_LEFT, right = pygame.K_RIGHT):
+        self.up_key = up
+        self.down_key = down
+        self.left_key = left
+        self.right_key = right
 
 class Player():
     """A game player."""
-    # TODO: make controls a set
     controls = [ControlSet()]
     pos_x = 0
     pos_y = 0
@@ -77,7 +77,12 @@ class invaders():
     rect_change_x = 2
     rect_change_y = 2
 
-    player1 = Player(color=RED,controls=[ControlSet()])
+    player1 = Player(color=RED,
+        controls=[ControlSet(), ControlSet(up=pygame.K_w, down=pygame.K_s,
+            left=pygame.K_a, right=pygame.K_d)])
+    player2 = Player(color=WHITE,
+        controls=[ControlSet(), ControlSet(up=pygame.K_i, down=pygame.K_k,
+            left=pygame.K_j, right=pygame.K_l)])
 
     def controls(self):
         """Check for control inputs."""
