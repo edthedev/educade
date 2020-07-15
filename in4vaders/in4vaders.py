@@ -31,28 +31,38 @@ class ControlSet():
 class Player():
     """A game player."""
     # TODO: make controls a set
-    controls = ControlSet()
+    controls = [ControlSet()]
     pos_x = 0
     pos_y = 0
     size_x = 50
     size_y = 50
     move_amt = 5
+    color = RED
+
+    def __init__(self, color, controls):
+        """Make a new player.
+
+        Assign unique color and controls."""
+        self.controls = controls
+        self.color = color
 
     def control(self, keys):
-        if keys[self.controls.up_key]:
-            self.pos_y -= self.move_amt
-        if keys[self.controls.down_key]:
-            self.pos_y += self.move_amt
-        if keys[self.controls.left_key]:
-            self.pos_x -= self.move_amt
-        if keys[self.controls.right_key]:
-            self.pos_x += self.move_amt
+        """Look for signals accepted by this player, and apply them."""
+        for controlSet in self.controls:
+            if keys[controlSet.up_key]:
+                self.pos_y -= self.move_amt
+            if keys[controlSet.down_key]:
+                self.pos_y += self.move_amt
+            if keys[controlSet.left_key]:
+                self.pos_x -= self.move_amt
+            if keys[controlSet.right_key]:
+                self.pos_x += self.move_amt
 
     def draw(self):
         # Draw the rectangle
         pygame.draw.rect(screen, WHITE, 
             [self.pos_x, self.pos_y, self.size_x, self.size_y])
-        pygame.draw.rect(screen, RED, 
+        pygame.draw.rect(screen, self.color, 
             [self.pos_x + 10, self.pos_y + 10, self.size_x - 10, self.size_y - 10])
 
 class invaders():
@@ -67,7 +77,7 @@ class invaders():
     rect_change_x = 2
     rect_change_y = 2
 
-    player1 = Player()
+    player1 = Player(color=RED,controls=[ControlSet()])
 
     def controls(self):
         """Check for control inputs."""
