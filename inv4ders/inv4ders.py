@@ -8,6 +8,9 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+BLUE = (0, 0, 255)
+PURPLE = (128, 0, 128)
+YELLOW = (255, 255, 0)
 
 # Joystick X / Y Axis
 JOY_X = 0
@@ -155,13 +158,13 @@ class invaders():
     player1 = Player(color=RED,
                      controls=[ControlSet(), ControlSet(up=pygame.K_w, down=pygame.K_s,
                                                         left=pygame.K_a, right=pygame.K_d)])
-    player2 = Player(color=WHITE,
+    player2 = Player(color=BLUE,
                      controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
                                           left=pygame.K_h, right=pygame.K_l)])
-    player3 = Player(color=GREEN,
+    player3 = Player(color=PURPLE,
                      controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
                                           left=pygame.K_1, right=pygame.K_4)])
-    player4 = Player(color=GREEN,
+    player4 = Player(color=YELLOW,
                      controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
                                           left=pygame.K_5, right=pygame.K_8)])
 
