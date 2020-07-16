@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 """Four Player invaders clone."""
 
-import math
-import re
-import time
 import pygame
-from random import randint
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -94,14 +90,14 @@ class Player():
 
     def _key_control(self, keys):
         """Apply keyboard controls - as accepted by this player."""
-        for controlSet in self.controls:
-            if keys[controlSet.up_key]:
+        for control_set in self.controls:
+            if keys[control_set.up_key]:
                 self._up()
-            if keys[controlSet.down_key]:
+            if keys[control_set.down_key]:
                 self._down()
-            if keys[controlSet.left_key]:
+            if keys[control_set.left_key]:
                 self._left()
-            if keys[controlSet.right_key]:
+            if keys[control_set.right_key]:
                 self._right()
 
     def draw(self):
