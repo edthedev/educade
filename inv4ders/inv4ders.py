@@ -17,11 +17,47 @@ JOY_Y = 1
 clock = pygame.time.Clock()
 
 # Initialize the joysticks
+pygame.init()
 pygame.joystick.init()
 size = [700, 500]
 screen = pygame.display.set_mode(size)
+pygame.display.set_caption("Inv4ders")
 pygame.mouse.set_visible(False)
 
+class TextPrint(object):
+    """
+    This is a simple class that will help us print to the screen
+    It has nothing to do with the joysticks, just outputting the
+    information.
+    """
+    def __init__(self):
+        """ Constructor """
+        self.reset()
+        self.x_pos = 10
+        self.y_pos = 10
+        self.font = pygame.font.Font(None, 20)
+
+    def print(self, my_screen, text_string):
+        """ Draw text onto the screen. """
+        text_bitmap = self.font.render(text_string, True, BLACK)
+        my_screen.blit(text_bitmap, [self.x_pos, self.y_pos])
+        self.y_pos += self.line_height
+
+    def reset(self):
+        """ Reset text to the top of the screen. """
+        self.x_pos = 10
+        self.y_pos = 10
+        self.line_height = 15
+
+    def indent(self):
+        """ Indent the next line of text """
+        self.x_pos += 10
+
+    def unindent(self):
+        """ Unindent the next line of text """
+        self.x_pos -= 10
+
+textPrint = TextPrint()
 
 class ControlSet():
     """A controller mapping."""
@@ -64,12 +100,16 @@ class Player():
         Only pass in the joystick you want to have accepted.
         """
         if joystick.get_axis(JOY_Y) >= .8:
+            textPrint.print(screen, "Joystick DOWN: {}".format(joystick.get_axis(JOY_Y)))
             self._down()
         if joystick.get_axis(JOY_Y) <= -.8:
+            textPrint.print(screen, "Joystick UP: {}".format(joystick.get_axis(JOY_Y)))
             self._up()
         if joystick.get_axis(JOY_X) >= .8:
+            textPrint.print(screen, "Joystick RIGHT: {}".format(joystick.get_axis(JOY_X)))
             self._right()
         if joystick.get_axis(JOY_X) <= -.8:
+            textPrint.print(screen, "Joystick LEFT: {}".format(joystick.get_axis(JOY_X)))
             self._left()
 
     def _up(self):
@@ -101,7 +141,7 @@ class Player():
                 self._right()
 
     def draw(self):
-        # Draw the rectangle
+        """Draw the player."""
         pygame.draw.rect(screen, WHITE,
                          [self.pos_x, self.pos_y, self.size_x, self.size_y])
         pygame.draw.rect(screen, self.color,
@@ -172,20 +212,18 @@ class invaders():
         """Update the screen."""
         # --- Drawing
         # Set the screen background
-        screen.fill(BLACK)
 
         self.player1.draw()
         self.player2.draw()
         self.player3.draw()
         self.player4.draw()
 
-        # --- Wrap-up
-        # Limit to 60 frames per second
-        clock.tick(60)
-
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
-
+        textPrint.reset()
+        screen.fill(WHITE)
+        joystick_count = pygame.joystick.get_count()
+        textPrint.print(screen, "Number of joysticks: {}".format(joystick_count))
 
 # -------- Main Program Loop -----------
 inv = invaders()
