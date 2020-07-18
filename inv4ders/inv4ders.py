@@ -155,16 +155,16 @@ class invaders():
     """Game loggic goes here."""
     done = False
 
-    player1 = Player(color=RED,
+    player1 = Player(color=YELLOW,
                      controls=[ControlSet(), ControlSet(up=pygame.K_w, down=pygame.K_s,
                                                         left=pygame.K_a, right=pygame.K_d)])
-    player2 = Player(color=BLUE,
+    player2 = Player(color=RED,
                      controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
                                           left=pygame.K_h, right=pygame.K_l)])
-    player3 = Player(color=PURPLE,
+    player3 = Player(color=BLUE,
                      controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
                                           left=pygame.K_1, right=pygame.K_4)])
-    player4 = Player(color=YELLOW,
+    player4 = Player(color=PURPLE,
                      controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
                                           left=pygame.K_5, right=pygame.K_8)])
 
