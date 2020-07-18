@@ -82,17 +82,22 @@ class Player():
         self.text_print = TextPrint()
 
     def control(self, keys=None, joystick=None):
-        """Look for signals accepted by this player, and apply them."""
+        """Look for signals accepted by this player, and apply them.
+       
+        Return True if the player fired.
+        """
         if keys:
-            self._key_control(keys)
+            return self._key_control(keys)
         if joystick:
-            self._joy_control(joystick)
+            return self._joy_control(joystick)
 
     def _joy_control(self, joystick):
         """Apply joystick controls.
 
         Only pass in the joystick you want to have accepted.
+        Return True if the player fired.
         """
+        fired = False
         if joystick.get_axis(JOY_Y) >= .8:
             self.text_print.print(self.screen, "Joystick DOWN: {}".format(joystick.get_axis(JOY_Y)))
             self._down()
@@ -105,6 +110,10 @@ class Player():
         if joystick.get_axis(JOY_X) <= -.8:
             self.text_print.print(self.screen, "Joystick LEFT: {}".format(joystick.get_axis(JOY_X)))
             self._left()
+        if joystick.get_button(0):
+            fired = True
+        return fired
+
 
     def _up(self):
         """Move self up."""
@@ -123,7 +132,10 @@ class Player():
         self.pos_x += self.move_amt
 
     def _key_control(self, keys):
-        """Apply keyboard controls - as accepted by this player."""
+        """Apply keyboard controls - as accepted by this player.
+        Return True if the player fired.
+        """
+        fired = False
         for control_set in self.controls:
             if keys[control_set.up_key]:
                 self._up()
@@ -133,6 +145,9 @@ class Player():
                 self._left()
             if keys[control_set.right_key]:
                 self._right()
+            if keys[pygame.K_SPACE]:
+                fired = True
+        return fired
 
     def draw(self):
         """Draw the player."""

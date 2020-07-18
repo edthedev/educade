@@ -155,7 +155,7 @@ class Player():
                          [self.pos_x + 10, self.pos_y + 10, self.size_x - 10, self.size_y - 10])
 
 
-class invaders():
+class Invaders():
     """Game loggic goes here."""
     done = False
 
@@ -233,7 +233,7 @@ class invaders():
         textPrint.print(screen, "Number of joysticks: {}".format(joystick_count))
 
 # -------- Main Program Loop -----------
-inv = invaders()
+inv = Invaders()
 while not inv.done:
     inv.controls()
     inv.logic()

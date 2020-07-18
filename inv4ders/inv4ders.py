@@ -31,6 +31,19 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Inv4ders")
 pygame.mouse.set_visible(False)
 
+class Laser():
+    """Track the lasters."""
+    pos_x = 0
+    pos_y = 0
+    dir = 1
+    size_x = 3
+    size_y = 10
+
+    def draw(self, screen):
+        """Draw this laser."""
+        pygame.draw.rect(screen, RED,
+                         [self.pos_x, self.pos_y, self.size_x, self.size_y])
+
 class Invaders():
     """Game loggic goes here."""
     done = False
@@ -47,6 +60,17 @@ class Invaders():
     player4 = Player(screen=screen, color=PURPLE,
                      controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
                                           left=pygame.K_5, right=pygame.K_8)])
+    def __init__(self):
+        """Setup"""
+        self._lasers = []
+
+    def fired(self, player):
+        """This player fired!"""
+        new_laser = Laser()
+        new_laser.pos_x = player.pos_x
+        new_laser.pos_y = player.pos_y
+        new_laser.dir = -1 # Going up!
+        self._lasers.append(new_laser)
 
     def controls(self):
         """Check for control inputs."""
@@ -76,7 +100,9 @@ class Invaders():
                 self.done = True
 
             if i == 0:
-                self.player1.control(joystick=joystick)
+                fired = self.player1.control(joystick=joystick)
+                if fired:
+                    self.fired(player1)
             if i == 1:
                 self.player2.control(joystick=joystick)
             if i == 2:
@@ -90,11 +116,16 @@ class Invaders():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.done = True
+        for laser in self._lasers:
+            laser.pox_y += laser.dir
 
     def draw(self):
         """Update the screen."""
         # --- Drawing
         # Set the screen background
+
+        for laser in self._lasers:
+            laser.draw()
 
         self.player1.draw()
         self.player2.draw()
