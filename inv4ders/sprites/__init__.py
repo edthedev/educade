@@ -27,6 +27,7 @@ class TextPrint(object):
         self.reset()
         self.x_pos = 10
         self.y_pos = 10
+        pygame.init()
         self.font = pygame.font.Font(None, 20)
 
     def print(self, my_screen, text_string):
