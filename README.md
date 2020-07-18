@@ -10,11 +10,11 @@ sudo apt-get install python-pygame
 
 Copy everything in joytest to:
 
+Deploy these to PORTS using this command:
 ```
-\\tmntcade\roms\ports\joytest
+./deploy.ps1
 ```
 
-Use the 'Ports' Menu to add joytest.sh to the ports games list.
 Restart EmulationStation.
 
 ## References
