@@ -32,7 +32,7 @@ class TextPrint(object):
 
     def print(self, my_screen, text_string):
         """ Draw text onto the screen. """
-        text_bitmap = self.font.render(text_string, True, BLACK)
+        text_bitmap = self.font.render(text_string, True, WHITE)
         my_screen.blit(text_bitmap, [self.x_pos, self.y_pos])
         self.y_pos += self.line_height
 
@@ -111,6 +111,7 @@ class Player():
             self.text_print.print(self.screen, "Joystick LEFT: {}".format(joystick.get_axis(JOY_X)))
             self._left()
         if joystick.get_button(0):
+            self.text_print.print(self.screen, "Player fired!")
             fired = True
         return fired
 
@@ -145,8 +146,11 @@ class Player():
                 self._left()
             if keys[control_set.right_key]:
                 self._right()
-            if keys[pygame.K_SPACE]:
-                fired = True
+        if keys[pygame.K_SPACE]:
+            self.text_print.reset()
+            self.text_print.indent()
+            self.text_print.print(self.screen, "GODZILLA LASER GO!!! Player fired!")
+            fired = True
         return fired
 
     def draw(self):
@@ -155,4 +159,3 @@ class Player():
                          [self.pos_x, self.pos_y, self.size_x, self.size_y])
         pygame.draw.rect(self.screen, self.color,
                          [self.pos_x + 10, self.pos_y + 10, self.size_x - 10, self.size_y - 10])
-

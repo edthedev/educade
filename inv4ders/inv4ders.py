@@ -66,6 +66,7 @@ class Invaders():
 
     def fired(self, player):
         """This player fired!"""
+        textPrint.print(screen, "Player fired! - Missle count is {}".format(self._lasers.count))
         new_laser = Laser()
         new_laser.pos_x = player.pos_x
         new_laser.pos_y = player.pos_y
@@ -102,13 +103,19 @@ class Invaders():
             if i == 0:
                 fired = self.player1.control(joystick=joystick)
                 if fired:
-                    self.fired(player1)
+                    self.fired(self.player1)
             if i == 1:
-                self.player2.control(joystick=joystick)
+                fired = self.player2.control(joystick=joystick)
+                if fired:
+                    self.fired(self.player2)
             if i == 2:
-                self.player3.control(joystick=joystick)
+                fired = self.player3.control(joystick=joystick)
+                if fired:
+                    self.fired(self.player3)
             if i == 3:
-                self.player4.control(joystick=joystick)
+                fired = self.player4.control(joystick=joystick)
+                if fired:
+                    self.fired(self.player4)
 
     def logic(self):
         """Calculate game logic."""
@@ -121,8 +128,8 @@ class Invaders():
 
     def draw(self):
         """Update the screen."""
-        # --- Drawing
         # Set the screen background
+        screen.fill(BLACK)
 
         for laser in self._lasers:
             laser.draw()
@@ -132,12 +139,14 @@ class Invaders():
         self.player3.draw()
         self.player4.draw()
 
-        # Go ahead and update the screen with what we've drawn.
-        pygame.display.flip()
         textPrint.reset()
-        screen.fill(WHITE)
         joystick_count = pygame.joystick.get_count()
         textPrint.print(screen, "Number of joysticks: {}".format(joystick_count))
+
+        textPrint.print(screen, "Number of lasers: {}".format(len(self._lasers)))
+
+        # Go ahead and update the screen with what we've drawn.
+        pygame.display.flip()
 
 # -------- Main Program Loop -----------
 inv = Invaders()
