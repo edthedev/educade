@@ -3,6 +3,10 @@
 
 import pygame
 
+# Set these to the two buttons you want to use for 'exit'. Count up starting from 0
+SELECT = 3
+START = 4
+
 # Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -190,8 +194,8 @@ class invaders():
             joystick.init()
 
             # Exit like RetroArch - any joystick
-            button7 = joystick.get_button(7)
-            button8 = joystick.get_button(8)
+            button7 = joystick.get_button(SELECT)
+            button8 = joystick.get_button(START)
             if button7 == button8 == 1:
                 self.done = True
 
