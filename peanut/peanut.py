@@ -9,7 +9,9 @@ This four player tribute is presented along with full open source code in the ho
 
 TODO:
 - [x] Make sandwiches!
-- [ ] Press down to eat sandwiches to get fat.
+- [x] Press down to eat sandwiches to get fat.
+- [ ] Fix collision detection for fat players.
+- [ ] Fix off-by-one in sandwich display.
 - [ ] Launch eachother for the higher stars!
 - [ ] Snarfs!
 - [ ] Show total sandwiches eaten as score.

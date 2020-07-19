@@ -33,6 +33,9 @@ class Player():
     jump_max = 500 # this will change during play
     ground_y = 0 # override this!
     has_sandwich = 0
+    fatten_x = 10
+    fatten_y = 5
+    fat_count = 50
 
     def __init__(self, color, controls):
         """Make a new player.
@@ -105,15 +108,25 @@ class Player():
             self.pos_x+self.size_x > other.pos_x+other.size_x and
             self.pos_y + self.size_y > other.pos_y
         )
+    
+    def fatten(self):
+        """Get fatter."""
+        self.fat_count += 10
 
     def _up(self):
         """Start a jump."""
-        if not self.falling:
+        if not self.falling and not self.jumping:
             self.jumping = 1
+            self.fat_count -= 1  # Starting a jump costs your fat.
 
     def _down(self):
         """Interrupt a jump. - New experimental feature...might remove this."""
         self.falling = 1
+
+        ## Eat to get fatter.
+        if self.has_sandwich > 0:
+            self.has_sandwich = 0
+            self.fatten()
 
     def _left(self):
         """Move self left."""
@@ -144,6 +157,12 @@ class Player():
 
     def draw(self, screen):
         """Draw the player."""
+        if self.fat_count < 30:
+            self.fat_count = 30
+
+        self.size_x = self.fat_count
+        self.size_y = self.fat_count * 2 / 3
+
         pygame.draw.rect(screen, WHITE,
                          [self.pos_x, self.pos_y, self.size_x, self.size_y])
         pygame.draw.rect(screen, self.color,
