@@ -4,15 +4,16 @@
 # $gameName = "inv4ders"
 # $gameName = "bouncetest"
 
+$scriptDir = "/home/pi/RetroPie/roms/ports"
 
 Write-Host "Deploying Launcher Scripts"
 scp "./scripts/*.sh" pi@tmntcade:"$scriptDir"
-ssh pi@tmntcade -C "chmod +x /home/pi/RetroPie/roms/ports/*.sh"
-ssh pi@tmntcade -C "dos2unix /home/pi/RetroPie/roms/ports/*.sh"
+ssh pi@tmntcade -C "chmod +x $scriptDir/*.sh"
+ssh pi@tmntcade -C "dos2unix $scriptDir/*.sh"
 
 Write-Host "Deploying Game Files"
 
-$games = "joytest","inv4ders"
+$games = "joytest","inv4ders","peanut"
 
 foreach ($gameName in $games) {
     $gameDir = "/opt/retropie/ports/$gameName"
