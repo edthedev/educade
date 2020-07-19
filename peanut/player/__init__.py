@@ -4,6 +4,7 @@ import pygame
 
 from text import TextPrint
 from controls import ControlSet
+from sandwich import Sandwich
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -31,6 +32,7 @@ class Player():
     falling = 0
     jump_max = 500 # this will change during play
     ground_y = 0 # override this!
+    has_sandwich = 0
 
     def __init__(self, color, controls):
         """Make a new player.
@@ -149,3 +151,7 @@ class Player():
 
         self.text_print.indent()
         self.text_print.print(screen, "Player message: {}".format(self.debug))
+
+        if self.has_sandwich:
+            Sandwich.draw(screen, self.pos_x, 
+                    pos_y=self.pos_y - Sandwich.sandwich_tall)

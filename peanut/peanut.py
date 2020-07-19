@@ -175,6 +175,9 @@ class PlayField():
                 if player.collide(star):
                     self.stars.remove(star)
                     self.sandwich_bar.slice_count += 1
+                if player.collide(self.sandwich_bar) and player.has_sandwich == 0 and self.sandwich_bar.sandwich_count > 0:
+                    player.has_sandwich = 1
+                    self.sandwich_bar.sandwich_count -= 1
 
         # Slices add up to sandwiches.
         self.sandwich_bar.logic()
