@@ -32,10 +32,10 @@ textPrint = TextPrint()
 
 class PlayField():
     """Track the play field."""
-    GROUND_Y = 400
     MIN_X = 0
     MAX_X = 800
-    MIN_Y = 800
+    MIN_Y = 600
+    GROUND_Y = MIN_Y - 100
     MAX_Y = 0
 
     def __init__(self):
@@ -74,6 +74,7 @@ class PlayField():
         self.players = [player1, player2, player3, player4]
         for player in self.players:
             player.pos_y = self.GROUND_Y
+            player.ground_y = self.GROUND_Y
         self.sprites += self.players
 
     def draw(self):

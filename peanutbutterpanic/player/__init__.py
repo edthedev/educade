@@ -27,6 +27,10 @@ class Player():
     size_y = 50
     move_amt = 5
     color = RED
+    jumping = 0
+    falling = 0
+    jump_max = 300 # this will change during play
+    ground_y = 0 # override this!
 
     def __init__(self, color, controls):
         """Make a new player.
@@ -39,7 +43,22 @@ class Player():
 
     def logic(self):
         """Do player game logic."""
-        pass
+
+        # Can't jump forever.
+        if self.jumping and self.pos_y < self.ground_y - self.jump_max:
+            self.jumping = 0
+            self.falling = 1
+
+        if self.falling and self.pos_y > self.ground_y:
+            self.falling = 0
+
+        if self.jumping:
+            self.pos_y -= self.move_amt
+
+        if self.falling:
+            self.jumping = 0 # Supports voluntary fall.
+            self.pos_y += self.move_amt
+
 
     def control(self, keys=None, joystick=None):
         """Look for signals accepted by this player, and apply them.
@@ -78,12 +97,13 @@ class Player():
 
 
     def _up(self):
-        """Move self up."""
-        self.pos_y -= self.move_amt
+        """Start a jump."""
+        if not self.falling:
+            self.jumping = 1
 
     def _down(self):
-        """Move self down."""
-        self.pos_y += self.move_amt
+        """Interrupt a jump. - New experimental feature...might remove this."""
+        self.falling = 1
 
     def _left(self):
         """Move self left."""
