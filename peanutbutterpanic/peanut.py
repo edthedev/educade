@@ -1,5 +1,29 @@
 #!/usr/bin/env python3
-"""Four Player invaders clone."""
+"""Peanut Butter Panic!
+
+Lovingly updated for four players.
+
+Peanut Butter Panic! was easily one of my favorite games for the good old Commordore 64.
+It was a part of my inspiration to become a programmer.
+This four player tribute is presented along with full open source code in the hopes of inspiring at least a few smiles and maybe a few careers.
+
+TODO:
+- [ ] Make sandwiches!
+- [ ] Track player scores.
+- [ ] Eat sandwiches to get fat.
+- [ ] Launch eachother for the higher stars!
+
+
+# Per https://www.mobygames.com/game/peanut-butter-panic
+
+Commodore 64 Credits (10 people)
+
+CTW Software Group was a US software development group, part of Children's Computer Workshop, Inc., 
+mainly involved with developing educational games and software based on the Sesame Street license.
+
+CTW Software Group Development Team for Peanut Butter Panic:
+Harold Byrd, Dick Codor, Sandy Damashek, Bernie De Koven, Lisa Feder, Laura Kurland, Dan Oehlsen, Mary Schenck Balcer, Alan Shapiro, Debra Weinberger
+"""
 
 import random
 import pygame
