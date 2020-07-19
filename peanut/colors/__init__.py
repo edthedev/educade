@@ -10,3 +10,4 @@ class Colors():
     YELLOW = (255, 255, 0)
     ORANGE = (255, 128, 0)
     GROUND = (0, 128, 0)
+    BROWN = (100, 100, 60)
