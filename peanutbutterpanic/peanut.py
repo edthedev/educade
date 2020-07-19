@@ -53,9 +53,6 @@ class PlayField():
         self.screen = pygame.display.set_mode(size)
         pygame.display.set_caption("Peanut Butter Panic")
         pygame.mouse.set_visible(False)
-        self.add_star()
-        self.add_star()
-        self.add_star()
 
     def add_star(self):
         """Add a star."""
@@ -142,6 +139,8 @@ class PlayField():
             if event.type == pygame.QUIT:
                 self.done = True
 
+        if random.randint(0, 1000) > 990: # New star frequency
+            self.add_star()
 
 class Star():
     """Track the stars."""
