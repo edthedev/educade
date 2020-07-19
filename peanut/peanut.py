@@ -58,7 +58,7 @@ textPrint = TextPrint()
 class SandwichBar():
     """A place to make sandwiches."""
     sandwich_count = 0
-    sandwich_size = 40
+    sandwich_size = 5
 
     def __init__(self, pos_x, pos_y, size_x, size_y):
         self.pos_x = pos_x
@@ -70,10 +70,11 @@ class SandwichBar():
         """Draw the sandwich bar, with sandwiches on it."""
         pygame.draw.rect(screen, Colors.BLUE,
                          [self.pos_x, self.pos_y, self.size_x, self.size_y])
-        for i in range(0, self.sandwich_count):
-            pygame.draw.rect(screen, Colors.GREEN,
-                         [self.pos_x + 10, self.pos_y + 10 + (self.sandwich_size * i), self.size_x - 10, self.pos_y + 10 + ((self.sandwich_size + 1) * i)])
 
+        if self.sandwich_size > 0:
+            for i in range(1, self.sandwich_count):
+                pygame.draw.rect(screen, Colors.ORANGE,
+                         [self.pos_x + 5, self.pos_y + 5 + (self.sandwich_size * (i-1)), self.size_x - 10, self.sandwich_size])
 
 class PlayField():
     """Track the play field."""
@@ -110,7 +111,7 @@ class PlayField():
                                         size_x=60, 
                                         pos_y=self.GROUND_Y - 20, 
                                         size_y=self.MAX_Y + self.GROUND_Y + 20)
-        self.sprites += [self.sandwich_bar]
+        # self.sprites += [self.sandwich_bar]
 
     def add_players(self):
         """Create the players.
@@ -139,6 +140,7 @@ class PlayField():
         self.screen.fill(Colors.BLACK)  # background
         pygame.draw.rect(self.screen, Colors.GROUND,
                          [self.MIN_X, self.GROUND_Y, self.MAX_X, self.MIN_Y])
+        self.sandwich_bar.draw(self.screen)
 
         for sprite in self.sprites:
             sprite.draw(self.screen)
