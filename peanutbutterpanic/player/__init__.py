@@ -95,6 +95,14 @@ class Player():
             fired = True
         return fired
 
+    def collide(self, other):
+        """Detect a collision."""
+        return (
+            self.pos_x-self.size_x < other.pos_x + other.size_x and
+            self.pos_y - self.size_y < other.pos_y and
+            self.pos_x+self.size_x > other.pos_x+other.size_x and
+            self.pos_y + self.size_y > other.pos_y
+        )
 
     def _up(self):
         """Start a jump."""

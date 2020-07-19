@@ -12,7 +12,7 @@ SELECT = 3
 START = 4
 
 class colors():
-    # Define some colors
+    """Define some colors."""
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     GREEN = (0, 255, 0)
@@ -44,6 +44,7 @@ class PlayField():
         self.done = False
         self.sprites = []
         self.players = []
+        self.stars = []
         self.add_players()
         self.screen = None
 
@@ -57,7 +58,7 @@ class PlayField():
 
     def add_star(self):
         """Add a star."""
-        self.sprites += [Star()]
+        self.stars += [Star()]
 
     def add_players(self):
         """Create the players.
@@ -80,7 +81,6 @@ class PlayField():
         for player in self.players:
             player.pos_y = self.GROUND_Y
             player.ground_y = self.GROUND_Y
-        self.sprites += self.players
 
     def draw(self):
         """Re-Draw the play field."""
@@ -130,18 +130,29 @@ class PlayField():
 
     def logic(self):
         """Calculate game logic."""
+        self.sprites = self.players + self.stars # Changes because stars get removed.
 
-        # --- Every sprite does it's thing.
+
+        # The field adds things
+        if random.randint(0, 1000) > 990:  # New star frequency
+            self.add_star()
+
+        # Every sprite does it's thing.
         for sprite in self.sprites:
             sprite.logic()
+
+        # The field taketh away
+        for star in self.stars:
+            for player in self.players:
+                if player.collide(star):
+                    self.stars.remove(star)
+                    # TODO: Start making sandwiches!!
 
         # --- Event Processing
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.done = True
 
-        if random.randint(0, 1000) > 990:  # New star frequency
-            self.add_star()
 
 
 class Star():
