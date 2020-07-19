@@ -90,9 +90,8 @@ class PlayField():
         self.players = []
         self.stars = []
         self.add_players()
+        self.add_sandwich_bar()
         self.screen = None
-        self.sandwich_bar = SandwichBar(pos_x = self.MAX_X / 2, size_x = 60, 
-            pos_y = self.GROUND_Y - 20, size_y = self.MAX_Y - self.GROUND_Y + 20)
 
         # Initialize the joysticks
         pygame.init()
@@ -105,6 +104,13 @@ class PlayField():
     def add_star(self):
         """Add a star."""
         self.stars += [Star(self.MAX_X)]
+
+    def add_sandwich_bar(self):
+        self.sandwich_bar = SandwichBar(pos_x=self.MAX_X / 2, 
+                                        size_x=60, 
+                                        pos_y=self.GROUND_Y - 20, 
+                                        size_y=self.MAX_Y + self.GROUND_Y + 20)
+        self.sprites += [self.sandwich_bar]
 
     def add_players(self):
         """Create the players.
@@ -202,8 +208,6 @@ class PlayField():
             if event.type == pygame.QUIT:
                 self.done = True
 
-
-
 class Star():
     """Track the stars."""
     pos_x = 0
@@ -212,10 +216,10 @@ class Star():
     size_x = 5
     size_y = 5
     STAR_TOP_LAYER = 20
-    STAR_MID_LAYER = 150
-    STAR_LOW_LAYER = 200
+    STAR_MID_LAYER = 200
+    STAR_LOW_LAYER = 400
     LAYERS = [STAR_TOP_LAYER, STAR_MID_LAYER,
-              STAR_MID_LAYER, STAR_LOW_LAYER, STAR_LOW_LAYER]
+              STAR_MID_LAYER, STAR_LOW_LAYER, STAR_LOW_LAYER, STAR_LOW_LAYER]
     STAR_COLORS = [Colors.RED, Colors.YELLOW, Colors.ORANGE, Colors.WHITE, Colors.BLUE]
 
     def __init__(self, max_x):
