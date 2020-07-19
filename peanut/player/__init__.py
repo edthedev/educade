@@ -29,7 +29,7 @@ class Player():
     color = RED
     jumping = 0
     falling = 0
-    jump_max = 300 # this will change during play
+    jump_max = 500 # this will change during play
     ground_y = 0 # override this!
 
     def __init__(self, color, controls):

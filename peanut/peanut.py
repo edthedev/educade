@@ -55,12 +55,31 @@ clock = pygame.time.Clock()
 
 textPrint = TextPrint()
 
+class SandwichBar():
+    """A place to make sandwiches."""
+    sandwich_count = 0
+    sandwich_size = 40
+
+    def __init__(self, pos_x, pos_y, size_x, size_y):
+        self.pos_x = pos_x
+        self.pos_y = pos_y
+        self.size_x = size_x
+        self.size_y = size_y
+
+    def draw(self, screen):
+        """Draw the sandwich bar, with sandwiches on it."""
+        pygame.draw.rect(screen, Colors.BLUE,
+                         [self.pos_x, self.pos_y, self.size_x, self.size_y])
+        for i in range(0, self.sandwich_count):
+            pygame.draw.rect(screen, Colors.GREEN,
+                         [self.pos_x + 10, self.pos_y + 10 + (self.sandwich_size * i), self.size_x - 10, self.pos_y + 10 + ((self.sandwich_size + 1) * i)])
+
 
 class PlayField():
     """Track the play field."""
     MIN_X = 0
-    MAX_X = 800
-    MIN_Y = 600
+    MAX_X = 1200
+    MIN_Y = 900
     GROUND_Y = MIN_Y - 100
     MAX_Y = 0
 
@@ -72,6 +91,8 @@ class PlayField():
         self.stars = []
         self.add_players()
         self.screen = None
+        self.sandwich_bar = SandwichBar(pos_x = self.MAX_X / 2, size_x = 60, 
+            pos_y = self.GROUND_Y - 20, size_y = self.MAX_Y - self.GROUND_Y + 20)
 
         # Initialize the joysticks
         pygame.init()
@@ -174,7 +195,7 @@ class PlayField():
             for player in self.players:
                 if player.collide(star):
                     self.stars.remove(star)
-                    # TODO: Start making sandwiches!!
+                    self.sandwich_bar.sandwich_count += 1
 
         # --- Assert --- Event Processing
         for event in pygame.event.get():
