@@ -72,7 +72,7 @@ class Player():
             # self.text_print.print(self.screen, "Joystick LEFT: {}".format(joystick.get_axis(JOY_X)))
             self._left()
         if joystick.get_button(0):
-            self.text_print.print(self.screen, "Player fired!")
+            # self.text_print.print(self.screen, "Player fired!")
             fired = True
         return fired
 

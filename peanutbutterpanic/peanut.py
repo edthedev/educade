@@ -11,14 +11,16 @@ from controls import ControlSet
 SELECT = 3
 START = 4
 
-# Define some colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-BLUE = (0, 0, 255)
-PURPLE = (128, 0, 128)
-YELLOW = (255, 255, 0)
+class colors():
+    # Define some colors
+    BLACK = (0, 0, 0)
+    WHITE = (255, 255, 255)
+    GREEN = (0, 255, 0)
+    RED = (255, 0, 0)
+    BLUE = (0, 0, 255)
+    PURPLE = (128, 0, 128)
+    YELLOW = (255, 255, 0)
+    GROUND = (0, 128, 0)
 
 # GAME FIELD
 STAR_TOP_LAYER = 40
@@ -28,10 +30,13 @@ clock = pygame.time.Clock()
 
 textPrint = TextPrint()
 
-
 class PlayField():
     """Track the play field."""
     GROUND_Y = 400
+    MIN_X = 0
+    MAX_X = 800
+    MIN_Y = 800
+    MAX_Y = 0
 
     def __init__(self):
         """New play field."""
@@ -44,7 +49,7 @@ class PlayField():
         # Initialize the joysticks
         pygame.init()
         pygame.joystick.init()
-        size = [700, 500]
+        size = [self.MAX_X, self.MIN_Y]
         self.screen = pygame.display.set_mode(size)
         pygame.display.set_caption("Peanut Butter Panic")
         pygame.mouse.set_visible(False)
@@ -54,24 +59,28 @@ class PlayField():
 
         Return an array of the players as objects with .draw methods.
         """
-        player1 = Player(color=YELLOW,
+        player1 = Player(color=colors.YELLOW,
                          controls=[ControlSet(), ControlSet(up=pygame.K_w, down=pygame.K_s,
                                                             left=pygame.K_a, right=pygame.K_d)])
-        player2 = Player(color=RED,
+        player2 = Player(color=colors.RED,
                          controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
                                               left=pygame.K_h, right=pygame.K_l)])
-        player3 = Player(color=BLUE,
+        player3 = Player(color=colors.BLUE,
                          controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
                                               left=pygame.K_1, right=pygame.K_4)])
-        player4 = Player(color=PURPLE,
+        player4 = Player(color=colors.PURPLE,
                          controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
                                               left=pygame.K_5, right=pygame.K_8)])
         self.players = [player1, player2, player3, player4]
+        for player in self.players:
+            player.pos_y = self.GROUND_Y
         self.sprites += self.players
 
     def draw(self):
         """Re-Draw the play field."""
-        self.screen.fill(BLACK)  # background
+        self.screen.fill(colors.BLACK)  # background
+        pygame.draw.rect(self.screen, colors.GROUND,
+                         [self.MIN_X, self.GROUND_Y, self.MAX_X, self.MIN_Y])
 
         for sprite in self.sprites:
             sprite.draw(self.screen)
