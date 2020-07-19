@@ -30,22 +30,13 @@ import pygame
 from player import Player
 from text import TextPrint
 from controls import ControlSet
+from sandwich import SandwichBar
+from colors import Colors
 
 # Set these to the two buttons you want to use for 'exit'. Count up starting from 0
 SELECT = 3
 START = 4
 
-class Colors():
-    """Define some colors."""
-    BLACK = (0, 0, 0)
-    WHITE = (255, 255, 255)
-    GREEN = (0, 255, 0)
-    RED = (255, 0, 0)
-    BLUE = (0, 0, 255)
-    PURPLE = (128, 0, 128)
-    YELLOW = (255, 255, 0)
-    ORANGE = (255, 128, 0)
-    GROUND = (0, 128, 0)
 
 # GAME FIELD
 STAR_TOP_LAYER = 40
@@ -54,27 +45,6 @@ STAR_TOP_LAYER = 40
 clock = pygame.time.Clock()
 
 textPrint = TextPrint()
-
-class SandwichBar():
-    """A place to make sandwiches."""
-    sandwich_count = 0
-    sandwich_size = 5
-
-    def __init__(self, pos_x, pos_y, size_x, size_y):
-        self.pos_x = pos_x
-        self.pos_y = pos_y
-        self.size_x = size_x
-        self.size_y = size_y
-
-    def draw(self, screen):
-        """Draw the sandwich bar, with sandwiches on it."""
-        pygame.draw.rect(screen, Colors.BLUE,
-                         [self.pos_x, self.pos_y, self.size_x, self.size_y])
-
-        if self.sandwich_size > 0:
-            for i in range(1, self.sandwich_count):
-                pygame.draw.rect(screen, Colors.ORANGE,
-                         [self.pos_x + 5, self.pos_y + 5 + (self.sandwich_size * (i-1)), self.size_x - 10, self.sandwich_size])
 
 class PlayField():
     """Track the play field."""
@@ -191,6 +161,7 @@ class PlayField():
         if random.randint(0, 1000) > 990:  # New star frequency
             self.add_star()
 
+
         # --- Act
         # Every sprite does it's thing.
         for sprite in self.sprites:
@@ -203,7 +174,10 @@ class PlayField():
             for player in self.players:
                 if player.collide(star):
                     self.stars.remove(star)
-                    self.sandwich_bar.sandwich_count += 1
+                    self.sandwich_bar.slice_count += 1
+
+        # Slices add up to sandwiches.
+        self.sandwich_bar.logic()
 
         # --- Assert --- Event Processing
         for event in pygame.event.get():
