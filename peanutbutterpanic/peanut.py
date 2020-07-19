@@ -74,7 +74,7 @@ class PlayField():
         self.screen.fill(BLACK)  # background
 
         for sprite in self.sprites:
-            sprite.draw()
+            sprite.draw(self.screen)
 
         # textPrint.reset()
         # joystick_count = pygame.joystick.get_count()
