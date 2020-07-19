@@ -175,10 +175,10 @@ class PlayField():
             if star.pos_x < 0 or star.pos_x > self.MAX_X:
                 self.stars.remove(star) # It is off screen. Stop tracking it.
             for player in self.players:
-                if player.collide(star):
+                if player.collide(star): # Catch a star!
                     self.stars.remove(star)
                     self.sandwich_bar.slice_count += 1
-                if player.collide(self.sandwich_bar) and player.has_sandwich == 0 and self.sandwich_bar.sandwich_count > 0:
+                if player.collide(self.sandwich_bar) and player.has_sandwich == 0 and self.sandwich_bar.sandwich_count > 0: # Grab a sandwich!
                     player.has_sandwich = 1
                     self.sandwich_bar.sandwich_count -= 1
 
