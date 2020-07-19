@@ -53,6 +53,13 @@ class PlayField():
         self.screen = pygame.display.set_mode(size)
         pygame.display.set_caption("Peanut Butter Panic")
         pygame.mouse.set_visible(False)
+        self.add_star()
+        self.add_star()
+        self.add_star()
+
+    def add_star(self):
+        """Add a star."""
+        self.sprites += [Star()]
 
     def add_players(self):
         """Create the players.
@@ -141,12 +148,16 @@ class Star():
     pos_x = 0
     pos_y = 0
     dir = 1
-    size_x = 3
-    size_y = 10
+    size_x = 5
+    size_y = 5
+    STAR_TOP_LAYER = 20
+    STAR_MID_LAYER = 150
+    STAR_LOW_LAYER = 200
+    LAYERS = [STAR_TOP_LAYER, STAR_MID_LAYER, STAR_MID_LAYER, STAR_LOW_LAYER, STAR_LOW_LAYER]
 
     def __init__(self):
         """New random star."""
-        self.pos_y = STAR_TOP_LAYER
+        self.pos_y = random.choice(self.LAYERS)
         self.pox_x = 40 + random.randint(10, 100)
 
     def logic(self):
@@ -155,7 +166,7 @@ class Star():
 
     def draw(self, screen):
         """Draw this star."""
-        pygame.draw.rect(screen, RED,
+        pygame.draw.rect(screen, colors.RED,
                          [self.pos_x, self.pos_y, self.size_x, self.size_y])
 
 
