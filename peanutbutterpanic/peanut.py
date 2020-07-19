@@ -3,7 +3,9 @@
 
 import random
 import pygame
-from sprites import TextPrint, ControlSet, Player
+from player import Player
+from text import TextPrint
+from controls import ControlSet
 
 # Set these to the two buttons you want to use for 'exit'. Count up starting from 0
 SELECT = 3
@@ -37,6 +39,7 @@ class PlayField():
         self.sprites = []
         self.players = []
         self.add_players()
+        self.screen = None
 
         # Initialize the joysticks
         pygame.init()
@@ -51,16 +54,16 @@ class PlayField():
 
         Return an array of the players as objects with .draw methods.
         """
-        player1 = Player(screen=self.screen, color=YELLOW,
+        player1 = Player(color=YELLOW,
                          controls=[ControlSet(), ControlSet(up=pygame.K_w, down=pygame.K_s,
                                                             left=pygame.K_a, right=pygame.K_d)])
-        player2 = Player(screen=self.screen, color=RED,
+        player2 = Player(color=RED,
                          controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
                                               left=pygame.K_h, right=pygame.K_l)])
-        player3 = Player(screen=self.screen, color=BLUE,
+        player3 = Player(color=BLUE,
                          controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
                                               left=pygame.K_1, right=pygame.K_4)])
-        player4 = Player(screen=self.screen, color=PURPLE,
+        player4 = Player(color=PURPLE,
                          controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
                                               left=pygame.K_5, right=pygame.K_8)])
         self.players = [player1, player2, player3, player4]

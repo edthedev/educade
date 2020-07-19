@@ -1,7 +1,9 @@
-#!/usr/bin/env python3
-"""Four Player invaders clone."""
+"""Player handler."""
 
 import pygame
+
+from text import TextPrint
+from controls import ControlSet
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -16,52 +18,6 @@ YELLOW = (255, 255, 0)
 JOY_X = 0
 JOY_Y = 1
 
-class TextPrint(object):
-    """
-    This is a simple class that will help us print to the screen
-    It has nothing to do with the joysticks, just outputting the
-    information.
-    """
-    def __init__(self):
-        """ Constructor """
-        self.reset()
-        self.x_pos = 10
-        self.y_pos = 10
-        pygame.init()
-        self.font = pygame.font.Font(None, 20)
-
-    def print(self, my_screen, text_string):
-        """ Draw text onto the screen. """
-        text_bitmap = self.font.render(text_string, True, WHITE)
-        my_screen.blit(text_bitmap, [self.x_pos, self.y_pos])
-        self.y_pos += self.line_height
-
-    def reset(self):
-        """ Reset text to the top of the screen. """
-        self.x_pos = 10
-        self.y_pos = 10
-        self.line_height = 15
-
-    def indent(self):
-        """ Indent the next line of text """
-        self.x_pos += 10
-
-    def unindent(self):
-        """ Unindent the next line of text """
-        self.x_pos -= 10
-
-
-class ControlSet():
-    """A controller mapping."""
-
-    def __init__(self, up=pygame.K_UP, down=pygame.K_DOWN,
-                 left=pygame.K_LEFT, right=pygame.K_RIGHT):
-        self.up_key = up
-        self.down_key = down
-        self.left_key = left
-        self.right_key = right
-
-
 class Player():
     """A game player."""
     controls = [ControlSet()]
@@ -72,14 +28,18 @@ class Player():
     move_amt = 5
     color = RED
 
-    def __init__(self, screen, color, controls):
+    def __init__(self, color, controls):
         """Make a new player.
 
         Assign unique color and controls."""
         self.controls = controls
         self.color = color
-        self.screen = screen
         self.text_print = TextPrint()
+        self.debug = ""
+
+    def logic(self):
+        """Do player game logic."""
+        pass
 
     def control(self, keys=None, joystick=None):
         """Look for signals accepted by this player, and apply them.
@@ -99,16 +59,17 @@ class Player():
         """
         fired = False
         if joystick.get_axis(JOY_Y) >= .8:
-            self.text_print.print(self.screen, "Joystick DOWN: {}".format(joystick.get_axis(JOY_Y)))
+            self.debug += "Joystick down"
+            # self.text_print.print(self.screen, "Joystick DOWN: {}".format(joystick.get_axis(JOY_Y)))
             self._down()
         if joystick.get_axis(JOY_Y) <= -.8:
-            self.text_print.print(self.screen, "Joystick UP: {}".format(joystick.get_axis(JOY_Y)))
+            # self.text_print.print(self.screen, "Joystick UP: {}".format(joystick.get_axis(JOY_Y)))
             self._up()
         if joystick.get_axis(JOY_X) >= .8:
-            self.text_print.print(self.screen, "Joystick RIGHT: {}".format(joystick.get_axis(JOY_X)))
+            # self.text_print.print(self.screen, "Joystick RIGHT: {}".format(joystick.get_axis(JOY_X)))
             self._right()
         if joystick.get_axis(JOY_X) <= -.8:
-            self.text_print.print(self.screen, "Joystick LEFT: {}".format(joystick.get_axis(JOY_X)))
+            # self.text_print.print(self.screen, "Joystick LEFT: {}".format(joystick.get_axis(JOY_X)))
             self._left()
         if joystick.get_button(0):
             self.text_print.print(self.screen, "Player fired!")
@@ -147,15 +108,16 @@ class Player():
             if keys[control_set.right_key]:
                 self._right()
         if keys[pygame.K_SPACE]:
-            self.text_print.reset()
-            self.text_print.indent()
-            self.text_print.print(self.screen, "GODZILLA LASER GO!!! Player fired!")
+            self.debug += "BUTTON PRESS!"
             fired = True
         return fired
 
-    def draw(self):
+    def draw(self, screen):
         """Draw the player."""
-        pygame.draw.rect(self.screen, WHITE,
+        pygame.draw.rect(screen, WHITE,
                          [self.pos_x, self.pos_y, self.size_x, self.size_y])
-        pygame.draw.rect(self.screen, self.color,
+        pygame.draw.rect(screen, self.color,
                          [self.pos_x + 10, self.pos_y + 10, self.size_x - 10, self.size_y - 10])
+
+        self.text_print.indent()
+        self.text_print.print(screen, "Player message: {}".format(self.debug))
