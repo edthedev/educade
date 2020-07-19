@@ -30,6 +30,7 @@ clock = pygame.time.Clock()
 
 textPrint = TextPrint()
 
+
 class PlayField():
     """Track the play field."""
     MIN_X = 0
@@ -139,8 +140,9 @@ class PlayField():
             if event.type == pygame.QUIT:
                 self.done = True
 
-        if random.randint(0, 1000) > 990: # New star frequency
+        if random.randint(0, 1000) > 990:  # New star frequency
             self.add_star()
+
 
 class Star():
     """Track the stars."""
@@ -152,7 +154,8 @@ class Star():
     STAR_TOP_LAYER = 20
     STAR_MID_LAYER = 150
     STAR_LOW_LAYER = 200
-    LAYERS = [STAR_TOP_LAYER, STAR_MID_LAYER, STAR_MID_LAYER, STAR_LOW_LAYER, STAR_LOW_LAYER]
+    LAYERS = [STAR_TOP_LAYER, STAR_MID_LAYER,
+              STAR_MID_LAYER, STAR_LOW_LAYER, STAR_LOW_LAYER]
 
     def __init__(self):
         """New random star."""
