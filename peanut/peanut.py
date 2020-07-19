@@ -8,11 +8,12 @@ It was a part of my inspiration to become a programmer.
 This four player tribute is presented along with full open source code in the hopes of inspiring at least a few smiles and maybe a few careers.
 
 TODO:
-- [ ] Make sandwiches!
-- [ ] Track player scores.
-- [ ] Eat sandwiches to get fat.
+- [x] Make sandwiches!
+- [ ] Press down to eat sandwiches to get fat.
 - [ ] Launch eachother for the higher stars!
-
+- [ ] Snarfs!
+- [ ] Show total sandwiches eaten as score.
+- [ ] Show elapsed time.
 
 # Per https://www.mobygames.com/game/peanut-butter-panic
 
