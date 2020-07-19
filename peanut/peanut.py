@@ -35,7 +35,7 @@ from controls import ControlSet
 SELECT = 3
 START = 4
 
-class colors():
+class Colors():
     """Define some colors."""
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
@@ -44,6 +44,7 @@ class colors():
     BLUE = (0, 0, 255)
     PURPLE = (128, 0, 128)
     YELLOW = (255, 255, 0)
+    ORANGE = (255, 128, 0)
     GROUND = (0, 128, 0)
 
 # GAME FIELD
@@ -82,23 +83,23 @@ class PlayField():
 
     def add_star(self):
         """Add a star."""
-        self.stars += [Star()]
+        self.stars += [Star(self.MAX_X)]
 
     def add_players(self):
         """Create the players.
 
         Return an array of the players as objects with .draw methods.
         """
-        player1 = Player(color=colors.YELLOW,
+        player1 = Player(color=Colors.YELLOW,
                          controls=[ControlSet(), ControlSet(up=pygame.K_w, down=pygame.K_s,
                                                             left=pygame.K_a, right=pygame.K_d)])
-        player2 = Player(color=colors.RED,
+        player2 = Player(color=Colors.RED,
                          controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
                                               left=pygame.K_h, right=pygame.K_l)])
-        player3 = Player(color=colors.BLUE,
+        player3 = Player(color=Colors.BLUE,
                          controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
                                               left=pygame.K_1, right=pygame.K_4)])
-        player4 = Player(color=colors.PURPLE,
+        player4 = Player(color=Colors.PURPLE,
                          controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
                                               left=pygame.K_5, right=pygame.K_8)])
         self.players = [player1, player2, player3, player4]
@@ -108,8 +109,8 @@ class PlayField():
 
     def draw(self):
         """Re-Draw the play field."""
-        self.screen.fill(colors.BLACK)  # background
-        pygame.draw.rect(self.screen, colors.GROUND,
+        self.screen.fill(Colors.BLACK)  # background
+        pygame.draw.rect(self.screen, Colors.GROUND,
                          [self.MIN_X, self.GROUND_Y, self.MAX_X, self.MIN_Y])
 
         for sprite in self.sprites:
@@ -156,23 +157,26 @@ class PlayField():
         """Calculate game logic."""
         self.sprites = self.players + self.stars # Changes because stars get removed.
 
-
+        # --- Arrange
         # The field adds things
         if random.randint(0, 1000) > 990:  # New star frequency
             self.add_star()
 
+        # --- Act
         # Every sprite does it's thing.
         for sprite in self.sprites:
             sprite.logic()
 
         # The field taketh away
         for star in self.stars:
+            if star.pos_x < 0 or star.pos_x > self.MAX_X:
+                self.stars.remove(star) # It is off screen. Stop tracking it.
             for player in self.players:
                 if player.collide(star):
                     self.stars.remove(star)
                     # TODO: Start making sandwiches!!
 
-        # --- Event Processing
+        # --- Assert --- Event Processing
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.done = True
@@ -191,11 +195,18 @@ class Star():
     STAR_LOW_LAYER = 200
     LAYERS = [STAR_TOP_LAYER, STAR_MID_LAYER,
               STAR_MID_LAYER, STAR_LOW_LAYER, STAR_LOW_LAYER]
+    STAR_COLORS = [Colors.RED, Colors.YELLOW, Colors.ORANGE, Colors.WHITE, Colors.BLUE]
 
-    def __init__(self):
+    def __init__(self, max_x):
         """New random star."""
-        self.pos_y = random.choice(self.LAYERS)
+        self.pos_y = random.choice(self.LAYERS) # Randomly pick a layer
         self.pox_x = 40 + random.randint(10, 100)
+        self.dir = random.choice([-1, 1]) # Move left or right.
+        self.color = random.choice(self.STAR_COLORS)
+        if self.dir == 1:
+            self.pox_x = 1
+        else:
+            self.pos_x = max_x - 1
 
     def logic(self):
         """Star movement."""
@@ -203,7 +214,7 @@ class Star():
 
     def draw(self, screen):
         """Draw this star."""
-        pygame.draw.rect(screen, colors.RED,
+        pygame.draw.rect(screen, self.color,
                          [self.pos_x, self.pos_y, self.size_x, self.size_y])
 
 
