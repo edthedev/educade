@@ -25,7 +25,14 @@ JOY_Y = 1
 
 @dataclass
 class Player():
-    """A game player."""
+    """A game player.
+    
+    >>> Player(pos_x=9001,controls=None).pos_x
+    9001
+    
+    >>> Player(pos_x=9001,controls=None).pos_y
+    100
+    """
     controls: List[ControlSet]
     pos_x: int = 100
     pos_y: int = 100
@@ -41,24 +48,6 @@ class Player():
     fatten_x: int = 10
     fatten_y: int = 5
     fat_count: int = 50
-
-    def __init__(self, color, controls):
-        """Make a new player.
-
-        Assign unique color and controls.
-        
-        >>> Player(pos_x=9001).pos_x
-        9001
-        
-        >>> Player(pos_x=9001).pos_y
-        100
-
-        
-        """
-        self.controls = controls
-        self.color = color
-        # self.text_print = TextPrint()
-        self.debug = ""
 
     def logic(self):
         """Do player game logic."""
@@ -192,10 +181,10 @@ class Player():
     def land_on(self, launcher):
         """Detect if we landed on a launcher.
         
-        >>> Player().land_on(Player())
+        >>> Player(controls=[None]).land_on(Player())
         False
 
-        >>> Player(pos_y=100,size_y=10).land_on(Player(pos_y=90))
+        >>> Player(controls=[None],pos_y=100,size_y=10).land_on(Player(controls=[],pos_y=90))
         True
         """
         return (
