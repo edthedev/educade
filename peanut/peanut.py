@@ -36,6 +36,7 @@ from text import TextPrint
 from controls import ControlSet
 from sandwich import SandwichBar
 from colors import Colors
+from launcher import Launcher
 
 # Set these to the two buttons you want to use for 'exit'. Count up starting from 0
 SELECT = 3
@@ -78,6 +79,7 @@ class PlayField():
         self.stars = []
         self.add_players()
         self.add_sandwich_bar()
+        self.add_launchers()
         self.screen = None
 
         # Initialize the joysticks
@@ -97,7 +99,19 @@ class PlayField():
                                         size_x=60, 
                                         pos_y=self.GROUND_Y - 20, 
                                         size_y=self.MAX_Y + self.GROUND_Y + 20)
-        # self.sprites += [self.sandwich_bar]
+
+    def add_launchers(self):
+        """Add a couple of launchers."""
+        LAUNCHER_SIZE_X = 60
+        LAUNCHER_SIZE_Y = 20
+        self.launchers = [
+            Launcher (pos_x=self.MAX_X - LAUNCHER_SIZE_X, size_x=LAUNCHER_SIZE_X, 
+                    pos_y=self.GROUND_Y - 20, 
+                    size_y=LAUNCHER_SIZE_Y),
+            Launcher (pos_x=0, size_x=LAUNCHER_SIZE_X, 
+                    pos_y=self.GROUND_Y - 20, 
+                    size_y=LAUNCHER_SIZE_Y)
+        ]
 
     def add_players(self):
         """Create the players.
@@ -127,6 +141,9 @@ class PlayField():
         pygame.draw.rect(self.screen, Colors.GROUND,
                          [self.MIN_X, self.GROUND_Y, self.MAX_X, self.MIN_Y])
         self.sandwich_bar.draw(self.screen)
+        
+        for launcher in self.launchers:
+            launcher.draw(self.screen)
 
         for sprite in self.sprites:
             sprite.draw(self.screen)
@@ -183,17 +200,23 @@ class PlayField():
         for sprite in self.sprites:
             sprite.logic()
 
-        # The field taketh away
         for star in self.stars:
             if star.pos_x < 0 or star.pos_x > self.MAX_X:
                 self.stars.remove(star) # It is off screen. Stop tracking it.
-            for player in self.players:
+
+        # The field taketh away
+        for player in self.players:
+            if player.collide(self.sandwich_bar) and player.has_sandwich == 0 and self.sandwich_bar.sandwich_count > 0: # Grab a sandwich!
+                player.has_sandwich = 1
+                self.sandwich_bar.sandwich_count -= 1
+            for star in self.stars:
                 if player.collide(star): # Catch a star!
                     self.stars.remove(star)
                     self.sandwich_bar.slice_count += 1
-                if player.collide(self.sandwich_bar) and player.has_sandwich == 0 and self.sandwich_bar.sandwich_count > 0: # Grab a sandwich!
-                    player.has_sandwich = 1
-                    self.sandwich_bar.sandwich_count -= 1
+            for launcher in self.launchers:
+                if player.land_on(launcher):
+                    launcher.launch_players()
+                    launcher.add_player(player)
 
         # Slices add up to sandwiches.
         self.sandwich_bar.logic()

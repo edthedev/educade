@@ -174,3 +174,12 @@ class Player():
         if self.has_sandwich:
             Sandwich.draw(screen, self.pos_x, 
                     pos_y=self.pos_y - Sandwich.sandwich_tall)
+    
+    def land_on(self, launcher):
+        """Detect if we landed on a launcher."""
+        return (
+            launcher.pos_x + launcher.size_x > self.pos_x
+            and launcher.pos_x < self.pos_x + self.size_x
+            and launcher.pos_y < self.pos_y - 5
+            and launcher.pos_y > self.pos_y + 5
+        )
