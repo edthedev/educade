@@ -86,7 +86,6 @@ class Player():
         """
         fired = False
         if joystick.get_axis(JOY_Y) >= .8:
-            self.debug += "Joystick down"
             # self.text_print.print(self.screen, "Joystick DOWN: {}".format(joystick.get_axis(JOY_Y)))
             self._down()
         if joystick.get_axis(JOY_Y) <= -.8:
