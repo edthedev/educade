@@ -16,6 +16,7 @@ TODO:
 - [ ] Snarfs!
 - [ ] Show total sandwiches eaten as score.
 - [ ] Show elapsed time.
+- [ ] Display welcome message at start.
 
 # Per https://www.mobygames.com/game/peanut-butter-panic
 
@@ -40,6 +41,18 @@ from colors import Colors
 SELECT = 3
 START = 4
 
+WELCOME_MESSAGE = """
+* * * * * * * * * * * * * 
+    Welcome Nutniks!
+* * * * * * * * * * * * * 
+
+Your gaol is to make 
+as many sandwiches as 
+you can by catching
+stars to power your
+sandwich machine.
+
+"""
 
 # GAME FIELD
 STAR_TOP_LAYER = 40
