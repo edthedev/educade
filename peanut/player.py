@@ -1,10 +1,14 @@
 """Player handler."""
 
+from dataclasses import dataclass
+from typing import List, Set, Dict, Tuple, Optional
+
 import pygame
 
-from text import TextPrint
+# from text import TextPrint
 from controls import ControlSet
 from sandwich import Sandwich
+from colors import Colors
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -19,31 +23,41 @@ YELLOW = (255, 255, 0)
 JOY_X = 0
 JOY_Y = 1
 
+@dataclass
 class Player():
     """A game player."""
-    controls = [ControlSet()]
-    pos_x = 100
-    pos_y = 100
-    size_x = 50
-    size_y = 50
-    move_amt = 5
-    color = RED
-    jumping = 0
-    falling = 0
-    jump_max = 500 # this will change during play
-    ground_y = 0 # override this!
-    has_sandwich = 0
-    fatten_x = 10
-    fatten_y = 5
-    fat_count = 50
+    controls: List[ControlSet]
+    pos_x: int = 100
+    pos_y: int = 100
+    size_x: int = 50
+    size_y: int = 50
+    move_amt: int = 5
+    color: tuple = Colors.RED
+    jumping: int = 0
+    falling: int = 0
+    jump_max: int = 500 # this will change during play
+    ground_y: int = 0 # override this!
+    has_sandwich: int = 0
+    fatten_x: int = 10
+    fatten_y: int = 5
+    fat_count: int = 50
 
     def __init__(self, color, controls):
         """Make a new player.
 
-        Assign unique color and controls."""
+        Assign unique color and controls.
+        
+        >>> Player(pos_x=9001).pos_x
+        9001
+        
+        >>> Player(pos_x=9001).pos_y
+        100
+
+        
+        """
         self.controls = controls
         self.color = color
-        self.text_print = TextPrint()
+        # self.text_print = TextPrint()
         self.debug = ""
 
     def logic(self):
@@ -176,10 +190,21 @@ class Player():
                     pos_y=self.pos_y - Sandwich.sandwich_tall)
     
     def land_on(self, launcher):
-        """Detect if we landed on a launcher."""
+        """Detect if we landed on a launcher.
+        
+        >>> Player().land_on(Player())
+        False
+
+        >>> Player(pos_y=100,size_y=10).land_on(Player(pos_y=90))
+        True
+        """
         return (
             launcher.pos_x + launcher.size_x > self.pos_x
             and launcher.pos_x < self.pos_x + self.size_x
             and launcher.pos_y < self.pos_y - 5
             and launcher.pos_y > self.pos_y + 5
         )
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
