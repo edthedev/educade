@@ -1,6 +1,6 @@
 """Player handler."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Set, Dict, Tuple, Optional
 
 import pygame
@@ -27,13 +27,13 @@ JOY_Y = 1
 class Player():
     """A game player.
     
-    >>> Player(pos_x=9001,controls=None).pos_x
+    >>> Player(pos_x=9001).pos_x
     9001
     
-    >>> Player(pos_x=9001,controls=None).pos_y
+    >>> Player(pos_x=9001).pos_y
     100
     """
-    controls: List[ControlSet]
+    controls: List[ControlSet]  = field(default_factory=list)
     pos_x: int = 100
     pos_y: int = 100
     size_x: int = 50
