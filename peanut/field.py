@@ -172,6 +172,7 @@ class PlayField():
                     self.sandwich_bar.slice_count += 1
             for launcher in self.launchers:
                 if player.land_on(launcher):
+                    player.falling = 0
                     launcher.launch_players()
                     launcher.add_player(player)
 

@@ -48,6 +48,7 @@ class Player():
     fatten_x: int = 10
     fatten_y: int = 5
     fat_count: int = 50
+    launched: int = 0
 
     def logic(self):
         """Do player game logic."""
@@ -67,6 +68,13 @@ class Player():
             self.jumping = 0 # Supports voluntary fall.
             self.pos_y += self.move_amt
 
+        if self.launched:
+            self.pos_y -= 2*(self.move_amt)
+
+        # Can't Launch forever
+        if self.launched and self.pos_y < self.ground_y - 3*(self.jump_max):
+            self.launched = 0
+            self.falling = 1
 
     def control(self, keys=None, joystick=None):
         """Look for signals accepted by this player, and apply them.
