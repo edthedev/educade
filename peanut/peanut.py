@@ -29,14 +29,14 @@ CTW Software Group Development Team for Peanut Butter Panic:
 Harold Byrd, Dick Codor, Sandy Damashek, Bernie De Koven, Lisa Feder, Laura Kurland, Dan Oehlsen, Mary Schenck Balcer, Alan Shapiro, Debra Weinberger
 """
 
-import random
 import pygame
-from player import Player
 # from text import TextPrint
 from controls import ControlSet
 from sandwich import SandwichBar
 from colors import Colors
 from launcher import Launcher
+from star import Star
+from field import PlayField
 
 # Set these to the two buttons you want to use for 'exit'. Count up starting from 0
 SELECT = 3
@@ -58,218 +58,31 @@ sandwich machine.
 # GAME FIELD
 STAR_TOP_LAYER = 40
 
-# Used to manage how fast the screen updates
-clock = pygame.time.Clock()
 
 # textPrint = TextPrint()
 
-class PlayField():
-    """Track the play field."""
-    MIN_X = 0
-    MAX_X = 1200
-    MIN_Y = 900
-    GROUND_Y = MIN_Y - 100
-    MAX_Y = 0
 
-    def __init__(self):
-        """New play field."""
-        self.done = False
-        self.sprites = []
-        self.players = []
-        self.stars = []
-        self.add_players()
-        self.add_sandwich_bar()
-        self.add_launchers()
-        self.screen = None
+if __name__ == "__main__":
+    import argparse
 
-        # Initialize the joysticks
-        pygame.init()
-        pygame.joystick.init()
-        size = [self.MAX_X, self.MIN_Y]
-        self.screen = pygame.display.set_mode(size)
-        pygame.display.set_caption("Peanut Butter Panic")
-        pygame.mouse.set_visible(False)
+    parser = argparse.ArgumentParser(description='Peanut Butter Panic')
+    parser.add_argument('-s', '--small')
+    args = parser.parse_args()
 
-    def add_star(self):
-        """Add a star."""
-        self.stars += [Star(self.MAX_X)]
+    # Used to manage how fast the screen updates
+    clock = pygame.time.Clock()
 
-    def add_sandwich_bar(self):
-        self.sandwich_bar = SandwichBar(pos_x=self.MAX_X / 2, 
-                                        size_x=60, 
-                                        pos_y=self.GROUND_Y - 20, 
-                                        size_y=self.MAX_Y + self.GROUND_Y + 20)
+    field = None
+    if args.small:
+        field = PlayField(max_x=600, min_y=400)
+    else:
+        field = PlayField()
 
-    def add_launchers(self):
-        """Add a couple of launchers."""
-        LAUNCHER_SIZE_X = 60
-        LAUNCHER_SIZE_Y = 20
-        self.launchers = [
-            Launcher (pos_x=self.MAX_X - LAUNCHER_SIZE_X, size_x=LAUNCHER_SIZE_X, 
-                    pos_y=self.GROUND_Y - 20, 
-                    size_y=LAUNCHER_SIZE_Y),
-            Launcher (pos_x=0, size_x=LAUNCHER_SIZE_X, 
-                    pos_y=self.GROUND_Y - 20, 
-                    size_y=LAUNCHER_SIZE_Y)
-        ]
+    while not field.done:
+        field.controls()
+        field.logic()
+        field.draw()
+        # Limit to 60 frames per second
+        clock.tick(60)
 
-    def add_players(self):
-        """Create the players.
-
-        Return an array of the players as objects with .draw methods.
-        """
-        player1 = Player(color=Colors.YELLOW,
-                         controls=[ControlSet(), ControlSet(up=pygame.K_w, down=pygame.K_s,
-                                                            left=pygame.K_a, right=pygame.K_d)])
-        player2 = Player(color=Colors.RED,
-                         controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
-                                              left=pygame.K_h, right=pygame.K_l)])
-        player3 = Player(color=Colors.BLUE,
-                         controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
-                                              left=pygame.K_1, right=pygame.K_4)])
-        player4 = Player(color=Colors.PURPLE,
-                         controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
-                                              left=pygame.K_5, right=pygame.K_8)])
-        self.players = [player1, player2, player3, player4]
-        for player in self.players:
-            player.pos_y = self.GROUND_Y
-            player.ground_y = self.GROUND_Y
-
-    def draw(self):
-        """Re-Draw the play field."""
-        self.screen.fill(Colors.BLACK)  # background
-        pygame.draw.rect(self.screen, Colors.GROUND,
-                         [self.MIN_X, self.GROUND_Y, self.MAX_X, self.MIN_Y])
-        self.sandwich_bar.draw(self.screen)
-        
-        for launcher in self.launchers:
-            launcher.draw(self.screen)
-
-        for sprite in self.sprites:
-            sprite.draw(self.screen)
-
-        # textPrint.reset()
-        # joystick_count = pygame.joystick.get_count()
-        # textPrint.print(screen, "Number of joysticks: {}".format(joystick_count))
-        # textPrint.print(screen, "Number of lasers: {}".format(len(self._lasers)))
-
-        # Go ahead and update the screen with what we've drawn.
-        pygame.display.flip()
-
-    def controls(self):
-        """Check for control inputs."""
-
-        # Keyboard controls - for testing without joysticks
-
-        # events = pygame.event.get()
-
-        keys = pygame.key.get_pressed()
-        for player in self.players:
-            player.control(keys=keys)
-
-        # Get count of joysticks
-        joystick_count = pygame.joystick.get_count()
-
-        # For each joystick:
-        for i in range(joystick_count):
-            joystick = pygame.joystick.Joystick(i)
-            joystick.init()
-
-            # Exit like RetroArch - any joystick
-            button7 = joystick.get_button(SELECT)
-            button8 = joystick.get_button(START)
-            if button7 == button8 == 1:
-                self.done = True
-
-            _ = self.players[i].control(joystick=joystick)
-            # if jumped:
-            #     self.jumped(self.players[i])
-
-    def logic(self):
-        """Calculate game logic."""
-        self.sprites = self.players + self.stars # Changes because stars get removed.
-
-        # --- Arrange
-        # The field adds things
-        if random.randint(0, 1000) > 990:  # New star frequency
-            self.add_star()
-
-
-        # --- Act
-        # Every sprite does it's thing.
-        for sprite in self.sprites:
-            sprite.logic()
-
-        for star in self.stars:
-            if star.pos_x < 0 or star.pos_x > self.MAX_X:
-                self.stars.remove(star) # It is off screen. Stop tracking it.
-
-        # The field taketh away
-        for player in self.players:
-            if player.collide(self.sandwich_bar) and player.has_sandwich == 0 and self.sandwich_bar.sandwich_count > 0: # Grab a sandwich!
-                player.has_sandwich = 1
-                self.sandwich_bar.sandwich_count -= 1
-            for star in self.stars:
-                if player.collide(star): # Catch a star!
-                    self.stars.remove(star)
-                    self.sandwich_bar.slice_count += 1
-            for launcher in self.launchers:
-                if player.land_on(launcher):
-                    launcher.launch_players()
-                    launcher.add_player(player)
-
-        # Slices add up to sandwiches.
-        self.sandwich_bar.logic()
-
-        # --- Assert --- Event Processing
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.done = True
-
-class Star():
-    """Track the stars."""
-    pos_x = 0
-    pos_y = 0
-    dir = 1
-    size_x = 5
-    size_y = 5
-    STAR_TOP_LAYER = 20
-    STAR_MID_LAYER = 200
-    STAR_LOW_LAYER = 400
-    LAYERS = [STAR_TOP_LAYER, STAR_MID_LAYER,
-              STAR_MID_LAYER, STAR_LOW_LAYER, STAR_LOW_LAYER, STAR_LOW_LAYER]
-    STAR_COLORS = [Colors.RED, Colors.YELLOW, Colors.ORANGE, Colors.WHITE, Colors.BLUE]
-
-    def __init__(self, max_x):
-        """New random star."""
-        self.pos_y = random.choice(self.LAYERS) # Randomly pick a layer
-        self.pox_x = 40 + random.randint(10, 100)
-        self.dir = random.choice([-1, 1]) # Move left or right.
-        self.color = random.choice(self.STAR_COLORS)
-        if self.dir == 1:
-            self.pox_x = 1
-        else:
-            self.pos_x = max_x - 1
-
-    def logic(self):
-        """Star movement."""
-        self.pos_x += self.dir
-
-    def draw(self, screen):
-        """Draw this star."""
-        pygame.draw.rect(screen, self.color,
-                         [self.pos_x, self.pos_y, self.size_x, self.size_y])
-
-
-# -------- Main Program Loop -----------
-field = PlayField()
-
-while not field.done:
-    field.controls()
-    field.logic()
-    field.draw()
-    # Limit to 60 frames per second
-    clock.tick(60)
-
-# Close everything down
-pygame.quit()
+    pygame.quit()

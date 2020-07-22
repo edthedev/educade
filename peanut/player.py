@@ -153,7 +153,6 @@ class Player():
             if keys[control_set.right_key]:
                 self._right()
         if keys[pygame.K_SPACE]:
-            self.debug += "BUTTON PRESS!"
             fired = True
         return fired
 
