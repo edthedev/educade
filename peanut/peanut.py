@@ -32,7 +32,7 @@ Harold Byrd, Dick Codor, Sandy Damashek, Bernie De Koven, Lisa Feder, Laura Kurl
 import random
 import pygame
 from player import Player
-from text import TextPrint
+# from text import TextPrint
 from controls import ControlSet
 from sandwich import SandwichBar
 from colors import Colors
@@ -61,7 +61,7 @@ STAR_TOP_LAYER = 40
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
-textPrint = TextPrint()
+# textPrint = TextPrint()
 
 class PlayField():
     """Track the play field."""
