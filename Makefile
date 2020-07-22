@@ -1,7 +1,7 @@
 .PHONY: test deploy
 
 test:
-	cd peanut;python player.py
+	cd peanut;python3 player.py
 
 deploy:
 	./deploy.ps1
