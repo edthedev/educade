@@ -177,20 +177,41 @@ class Player():
             Sandwich.draw(screen, self.pos_x, 
                     pos_y=self.pos_y - Sandwich.sandwich_tall)
     
-    def land_on(self, launcher):
+    def land_on(self, pad):
         """Detect if we landed on a launcher.
         
-        >>> Player(controls=[None]).land_on(Player())
+        >>> Player().land_on(Player())
         False
 
-        >>> Player(controls=[None],pos_y=100,size_y=10).land_on(Player(controls=[],pos_y=90))
+        >>> Player(pos_y=90, size_y=10).land_on(Player(pos_y=100, size_y=10))
+        True
+        """
+        bottom_of_self = self.pos_y + self.size_y
+        margin = 3
+        return (
+            self.inline_with(pad) 
+            and pad.pos_y - margin < bottom_of_self
+            and bottom_of_self < pad.pos_y + margin
+        )
+
+    def inline_with(self, pad):
+        """Return true if lined up in a vertical column with player.
+
+        >>> Player().inline_with(Player())
+        True
+
+        >>> Player(pos_x=20, size_x=10).inline_with(Player(pos_x=15, size_x=10))
+        True
+
+        >>> Player(pos_x=200, size_x=10).inline_with(Player(pos_x=15, size_x=10))
+        False
+
+        >>> Player(pos_y=100,size_y=10).inline_with(Player(pos_y=90))
         True
         """
         return (
-            launcher.pos_x + launcher.size_x > self.pos_x
-            and launcher.pos_x < self.pos_x + self.size_x
-            and launcher.pos_y < self.pos_y - 5
-            and launcher.pos_y > self.pos_y + 5
+            pad.pos_x + pad.size_x > self.pos_x
+            and pad.pos_x < self.pos_x + self.size_x
         )
 
 if __name__ == "__main__":
