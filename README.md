@@ -1,6 +1,8 @@
 # tmntcade
 Source files to add open source games to a RetroPi
 
+![Test Suite](https://github.com/edthedev/tmntcade/workflows/Test%20Suite/badge.svg)
+
 ## My paths
 
 On the RetroPi run:
