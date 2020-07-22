@@ -162,9 +162,8 @@ class PlayField():
         # The field taketh away
         for player in self.players:
             # Grab a sandwich!
-            if player.collide(self.sandwich_bar) 
-                and player.has_sandwich == 0 
-                and self.sandwich_bar.sandwich_count > 0:
+            if player.collide(self.sandwich_bar) \
+                and (player.has_sandwich == 0) and self.sandwich_bar.sandwich_count > 0:
                 player.has_sandwich = 1
                 self.sandwich_bar.sandwich_count -= 1
             for star in self.stars:
