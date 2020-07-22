@@ -170,8 +170,8 @@ class Player():
         pygame.draw.rect(screen, self.color,
                          [self.pos_x + 10, self.pos_y + 10, self.size_x - 10, self.size_y - 10])
 
-        self.text_print.indent()
-        self.text_print.print(screen, "Player message: {}".format(self.debug))
+        # self.text_print.indent()
+        # self.text_print.print(screen, "Player message: {}".format(self.debug))
 
         if self.has_sandwich:
             Sandwich.draw(screen, self.pos_x, 
