@@ -1,0 +1,22 @@
+
+name: Test Suite
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test-code:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: install make
+      run: sudo apt-get install make python3
+
+    - name: run tests
+      run: make test
