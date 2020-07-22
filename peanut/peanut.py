@@ -66,7 +66,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description='Peanut Butter Panic')
-    parser.add_argument('-s', '--small')
+    parser.add_argument('-s', '--small', action='store_true')
     args = parser.parse_args()
 
     # Used to manage how fast the screen updates
