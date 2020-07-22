@@ -10,6 +10,11 @@ from colors import Colors
 from launcher import Launcher
 from star import Star
 
+# Set these to the two buttons you want to use for 'exit'. Count up starting from 0
+SELECT = 3
+START = 4
+
+
 class PlayField():
     """Track the play field."""
     MIN_X = 0
@@ -44,9 +49,10 @@ class PlayField():
         self.stars += [Star(self.max_x)]
 
     def add_sandwich_bar(self):
-        self.sandwich_bar = SandwichBar(pos_x=self.max_x / 2, 
-                                        size_x=60, 
-                                        pos_y=self.ground_y - 20, 
+        """Add the sandwich bar to the playing field."""
+        self.sandwich_bar = SandwichBar(pos_x=self.max_x / 2,
+                                        size_x=60,
+                                        pos_y=self.ground_y - 20,
                                         size_y=self.MAX_Y + self.ground_y + 20)
 
     def add_launchers(self):
@@ -54,12 +60,12 @@ class PlayField():
         LAUNCHER_SIZE_X = 60
         LAUNCHER_SIZE_Y = 20
         self.launchers = [
-            Launcher (pos_x=self.max_x - LAUNCHER_SIZE_X, size_x=LAUNCHER_SIZE_X, 
-                    pos_y=self.ground_y - 20, 
-                    size_y=LAUNCHER_SIZE_Y),
-            Launcher (pos_x=0, size_x=LAUNCHER_SIZE_X, 
-                    pos_y=self.ground_y - 20, 
-                    size_y=LAUNCHER_SIZE_Y)
+            Launcher(pos_x=self.max_x - LAUNCHER_SIZE_X, size_x=LAUNCHER_SIZE_X,
+                     pos_y=self.ground_y - 20,
+                     size_y=LAUNCHER_SIZE_Y),
+            Launcher(pos_x=0, size_x=LAUNCHER_SIZE_X,
+                     pos_y=self.ground_y - 20,
+                     size_y=LAUNCHER_SIZE_Y)
         ]
 
     def add_players(self):
@@ -90,7 +96,7 @@ class PlayField():
         pygame.draw.rect(self.screen, Colors.GROUND,
                          [self.MIN_X, self.ground_y, self.max_x, self.min_y])
         self.sandwich_bar.draw(self.screen)
-        
+
         for launcher in self.launchers:
             launcher.draw(self.screen)
 
@@ -136,13 +142,13 @@ class PlayField():
 
     def logic(self):
         """Calculate game logic."""
-        self.sprites = self.players + self.stars # Changes because stars get removed.
+        self.sprites = self.players + \
+            self.stars  # Changes because stars get removed.
 
         # --- Arrange
         # The field adds things
         if random.randint(0, 1000) > 990:  # New star frequency
             self.add_star()
-
 
         # --- Act
         # Every sprite does it's thing.
@@ -151,15 +157,18 @@ class PlayField():
 
         for star in self.stars:
             if star.pos_x < 0 or star.pos_x > self.max_x:
-                self.stars.remove(star) # It is off screen. Stop tracking it.
+                self.stars.remove(star)  # It is off screen. Stop tracking it.
 
         # The field taketh away
         for player in self.players:
-            if player.collide(self.sandwich_bar) and player.has_sandwich == 0 and self.sandwich_bar.sandwich_count > 0: # Grab a sandwich!
+            # Grab a sandwich!
+            if player.collide(self.sandwich_bar) 
+                and player.has_sandwich == 0 
+                and self.sandwich_bar.sandwich_count > 0:
                 player.has_sandwich = 1
                 self.sandwich_bar.sandwich_count -= 1
             for star in self.stars:
-                if player.collide(star): # Catch a star!
+                if player.collide(star):  # Catch a star!
                     self.stars.remove(star)
                     self.sandwich_bar.slice_count += 1
             for launcher in self.launchers:

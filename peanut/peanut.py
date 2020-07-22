@@ -38,9 +38,6 @@ from launcher import Launcher
 from star import Star
 from field import PlayField
 
-# Set these to the two buttons you want to use for 'exit'. Count up starting from 0
-SELECT = 3
-START = 4
 
 WELCOME_MESSAGE = """
 * * * * * * * * * * * * * 
@@ -54,13 +51,6 @@ stars to power your
 sandwich machine.
 
 """
-
-# GAME FIELD
-STAR_TOP_LAYER = 40
-
-
-# textPrint = TextPrint()
-
 
 if __name__ == "__main__":
     import argparse
