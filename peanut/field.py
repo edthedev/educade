@@ -170,6 +170,11 @@ class PlayField():
                 if player.collide(star):  # Catch a star!
                     self.stars.remove(star)
                     self.sandwich_bar.slice_count += 1
+                    if player.color == star.color:
+                        self.sandwich_bar.slice_count += 1
+                    if star.pos_y == Star.STAR_TOP_LAYER:
+                        self.sandwich_bar.slice_count += 2
+
             for launcher in self.launchers:
                 if player.land_on(launcher):
                     player.falling = 0
