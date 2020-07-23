@@ -41,7 +41,7 @@ class SandwichBar():
         """Sandwich rules."""
         if self.slice_count >= self.slices_per_sandwich:
             self.slice_count -= self.slices_per_sandwich
-            self.sandwich_count +=1
+            self.sandwich_count += 1
 
     def draw(self, screen):
         """Draw the sandwich bar, with sandwiches on it."""
@@ -50,7 +50,7 @@ class SandwichBar():
 
         # -- Slices
         if self.slice_count > 0:
-            for i in range(1, self.slice_count):
+            for i in range(1, self.slice_count + 1):
                 pygame.draw.rect(screen, Sandwich.sandwich_colors[i - 1],
                          [self.pos_x + 5, self.pos_y + 5 + (self.slice_size * (i-1)), self.size_x - 10, self.slice_size])
 
@@ -60,5 +60,5 @@ class SandwichBar():
     def drawsandwiches(self, screen):
         """Draw a stack of sandwiches."""
         if self.sandwich_count > 0:
-            for i in range(1, self.sandwich_count):
+            for i in range(1, self.sandwich_count + 1):
                 Sandwich.draw(screen, self.pos_x + 5, self.pos_y - (i * Sandwich.sandwich_tall)) # TODO: Make this a multiple of the layer_tall = 10 below...

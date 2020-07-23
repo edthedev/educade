@@ -10,13 +10,13 @@ This four player tribute is presented along with full open source code in the ho
 TODO:
 - [x] Make sandwiches!
 - [x] Press down to eat sandwiches to get fat.
-- [ ] Fix collision detection for fat players.
 - [ ] Fix off-by-one in sandwich display.
-- [ ] Launch eachother for the higher stars!
+- [x] Launch eachother for the higher stars!
 - [ ] Snarfs!
 - [ ] Show total sandwiches eaten as score.
 - [ ] Show elapsed time.
 - [ ] Display welcome message at start.
+- [ ] Better collision detection for fat players.
 
 # Per https://www.mobygames.com/game/peanut-butter-panic
 
