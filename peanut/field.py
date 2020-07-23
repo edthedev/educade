@@ -173,7 +173,7 @@ class PlayField():
             for launcher in self.launchers:
                 if player.land_on(launcher):
                     player.falling = 0
-                    launcher.launch_players()
+                    launcher.launch_players_who_are_not(player)
                     launcher.add_player(player)
 
         # Slices add up to sandwiches.

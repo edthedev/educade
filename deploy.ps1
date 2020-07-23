@@ -11,7 +11,8 @@ scp "./scripts/*.sh" pi@tmntcade:"$scriptDir"
 ssh pi@tmntcade -C "chmod +x $scriptDir/*.sh"
 ssh pi@tmntcade -C "dos2unix $scriptDir/*.sh"
 
-$games = "joytest","inv4ders","peanut"
+# $games = "joytest","inv4ders","peanut"
+$games = "inv4ders","peanut"
 
 Write-Host "Cleaning up Game Files"
 
