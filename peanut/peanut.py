@@ -64,7 +64,7 @@ if __name__ == "__main__":
 
     field = None
     if args.small:
-        field = PlayField(max_x=600, min_y=400)
+        field = PlayField(max_x=800, min_y=600)
     else:
         field = PlayField()
 
