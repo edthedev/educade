@@ -69,7 +69,7 @@ class Player():
             self.pos_y += self.move_amt
 
         if self.launched:
-            self.pos_y -= 2*(self.move_amt)
+            self.pos_y -= 1.5*(self.move_amt)
 
         # Can't Launch forever
         if self.launched and self.pos_y < self.ground_y - 3*(self.jump_max):
