@@ -54,7 +54,7 @@ class Player():
         """Do player game logic."""
 
         # Can't jump forever.
-        if self.jumping and self.pos_y < self.ground_y - self.jump_max:
+        if self.jumping and self.pos_y < self.ground_y - self.jump_max - self.fatten_x:
             self.jumping = 0
             self.falling = 1
 
