@@ -27,7 +27,7 @@ class SandwichBar():
     """A place to make sandwiches."""
     slice_count = 5
     slice_size = 5
-    slices_per_sandwich = 6
+    slices_per_sandwich = 5
 
     sandwich_count = 3
 
