@@ -177,14 +177,16 @@ class Player():
 
     def draw(self, screen):
         """Draw the player."""
-        img = pygame.image.load(self.image)
-        screen.blit(img, (self.pos_x, self.pos_y))
 
         if self.fat_count < 30:
             self.fat_count = 30
 
         self.size_x = self.fat_count
         self.size_y = self.fat_count * 2 / 3
+
+        img = pygame.image.load(self.image)
+        img = pygame.transform.scale(img, (int(self.size_x), int(self.size_y)))
+        screen.blit(img, (self.pos_x, self.pos_y))
 
         #pygame.draw.rect(screen, WHITE,
         #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])

@@ -95,7 +95,7 @@ class PlayField():
         self.players = [player1, player2, player3, player4]
         for player in self.players:
             player.pos_y = self.ground_y - player.size_y
-            player.ground_y = self.ground_y - player.size_y
+            player.ground_y = self.ground_y
 
     def draw(self):
         """Re-Draw the play field."""
