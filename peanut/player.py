@@ -186,13 +186,13 @@ class Player():
 
         img = pygame.image.load(self.image)
         img = pygame.transform.scale(img, (int(self.size_x), int(self.size_y)))
-        screen.blit(img, (self.pos_x, self.pos_y))
 
         #pygame.draw.rect(screen, WHITE,
         #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
         pygame.draw.rect(screen, self.color,
                          [self.pos_x + 10, self.pos_y + 10, self.size_x - 10, self.size_y - 10])
 
+        screen.blit(img, (self.pos_x, self.pos_y))
         # self.text_print.indent()
         # self.text_print.print(screen, "Player message: {}".format(self.debug))
 
