@@ -49,7 +49,7 @@ class Player():
     fatten_y: int = 5
     fat_count: int = 50
     launched: int = 0
-    image: str
+    image: str = ''
 
     def logic(self):
         """Do player game logic."""
@@ -178,7 +178,7 @@ class Player():
     def draw(self, screen):
         """Draw the player."""
         img = pygame.image.load(self.image)
-        screen.blit(img, (self.pos_x, pos_y))
+        screen.blit(img, (self.pos_x, self.pos_y))
 
         if self.fat_count < 30:
             self.fat_count = 30

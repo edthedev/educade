@@ -1,5 +1,5 @@
 """Most of the game is managed by the play field."""
-
+import os
 import random
 import pygame
 from player import Player
@@ -85,10 +85,17 @@ class PlayField():
         player4 = Player(color=Colors.PURPLE,
                          controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
                                               left=pygame.K_5, right=pygame.K_8)])
+
+        path = os.path.dirname(os.path.abspath(__file__))
+        player1.image = path + r'\img\nutnik_blue.png'
+        player2.image = path + r'\img\nutnik_yellow.png'
+        player3.image = path + r'\img\nutnik_purple.png'
+        player4.image = path + r'\img\nutnik_red.png'
+
         self.players = [player1, player2, player3, player4]
         for player in self.players:
-            player.pos_y = self.ground_y
-            player.ground_y = self.ground_y
+            player.pos_y = self.ground_y - player.size_y
+            player.ground_y = self.ground_y - player.size_y
 
     def draw(self):
         """Re-Draw the play field."""
