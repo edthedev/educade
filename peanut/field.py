@@ -74,11 +74,12 @@ class PlayField():
         Return an array of the players as objects with .draw methods.
         """
         player1 = Player(color=Colors.YELLOW,
-                         controls=[ControlSet(), ControlSet(up=pygame.K_w, down=pygame.K_s,
-                                                            left=pygame.K_a, right=pygame.K_d)])
+                         controls=[ControlSet()])
         player2 = Player(color=Colors.RED,
                          controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
-                                              left=pygame.K_h, right=pygame.K_l)])
+                                              left=pygame.K_h, right=pygame.K_l),
+                          ControlSet(up=pygame.K_w, down=pygame.K_s,
+                                                            left=pygame.K_a, right=pygame.K_d)])
         player3 = Player(color=Colors.BLUE,
                          controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
                                               left=pygame.K_1, right=pygame.K_4)])
