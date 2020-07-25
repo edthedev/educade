@@ -24,6 +24,14 @@ JOY_X = 0
 JOY_Y = 1
 
 @dataclass
+class PlayerImages():
+    """Images of a NutNik"""
+    default: str
+    jumping: str
+    falling: str = ''
+    eating: str = ''
+
+@dataclass
 class Player():
     """A game player.
     
@@ -49,7 +57,7 @@ class Player():
     fatten_y: int = 5
     fat_count: int = 50
     launched: int = 0
-    image: str = ''
+    images : PlayerImages = None
 
     def logic(self):
         """Do player game logic."""
@@ -184,13 +192,18 @@ class Player():
         self.size_x = self.fat_count
         self.size_y = self.fat_count * 2 / 3
 
-        img = pygame.image.load(self.image)
+        img = None
+
+        if self.jumping:
+            img = pygame.image.load(self.images.jumping)
+        else:
+            img = pygame.image.load(self.images.default)
         img = pygame.transform.scale(img, (int(self.size_x), int(self.size_y)))
 
         #pygame.draw.rect(screen, WHITE,
         #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
-        pygame.draw.rect(screen, self.color,
-                         [self.pos_x + 10, self.pos_y + 10, self.size_x - 10, self.size_y - 10])
+        # pygame.draw.rect(screen, self.color,
+        #                [self.pos_x + 10, self.pos_y + 10, self.size_x - 10, self.size_y - 10])
 
         screen.blit(img, (self.pos_x, self.pos_y))
         # self.text_print.indent()

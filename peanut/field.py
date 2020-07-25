@@ -2,7 +2,7 @@
 import os
 import random
 import pygame
-from player import Player
+from player import Player, PlayerImages
 # from text import TextPrint
 from controls import ControlSet
 from sandwich import SandwichBar
@@ -73,25 +73,37 @@ class PlayField():
 
         Return an array of the players as objects with .draw methods.
         """
+        path = os.path.dirname(os.path.abspath(__file__))
         player1 = Player(color=Colors.YELLOW,
                          controls=[ControlSet()])
+        player1.images = PlayerImages(
+            default = path + r'\img\nutnik_yellow.png'
+            , jumping = path + r'\img\nutnik_catch_yellow.png'
+        )
         player2 = Player(color=Colors.RED,
                          controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
                                               left=pygame.K_h, right=pygame.K_l),
                           ControlSet(up=pygame.K_w, down=pygame.K_s,
                                                             left=pygame.K_a, right=pygame.K_d)])
+        player2.images = PlayerImages(
+            default = path + r'\img\nutnik_red.png'
+            , jumping = path + r'\img\nutnik_catch_red.png'
+        )
         player3 = Player(color=Colors.BLUE,
                          controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
                                               left=pygame.K_1, right=pygame.K_4)])
+        player3.images = PlayerImages(
+            default = path + r'\img\nutnik_blue.png'
+            , jumping = path + r'\img\nutnik_catch.png'
+        )
         player4 = Player(color=Colors.PURPLE,
                          controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
                                               left=pygame.K_5, right=pygame.K_8)])
+        player4.images = PlayerImages(
+            default = path + r'\img\nutnik_purple.png'
+            , jumping = path + r'\img\nutnik_catch_purple.png'
+        )
 
-        path = os.path.dirname(os.path.abspath(__file__))
-        player1.image = path + r'\img\nutnik_blue.png'
-        player2.image = path + r'\img\nutnik_yellow.png'
-        player3.image = path + r'\img\nutnik_purple.png'
-        player4.image = path + r'\img\nutnik_red.png'
 
         self.players = [player1, player2, player3, player4]
         for player in self.players:
