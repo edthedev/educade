@@ -40,6 +40,7 @@ class Star():
         """Draw this star."""
         path = os.path.dirname(os.path.abspath(__file__))
         img = pygame.image.load(path + r'/img/star.png')
+        Colors.fill(img, self.color)
         if self.pos_y == self.STAR_MID_LAYER:
             img = pygame.image.load(path + r'/img/star_med.png')
         if self.pos_y == self.STAR_TOP_LAYER:
