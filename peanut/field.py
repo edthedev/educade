@@ -9,6 +9,7 @@ from sandwich import SandwichBar
 from colors import Colors
 from launcher import Launcher
 from star import Star
+from image import Images
 
 # Set these to the two buttons you want to use for 'exit'. Count up starting from 0
 SELECT = 3
@@ -73,12 +74,11 @@ class PlayField():
 
         Return an array of the players as objects with .draw methods.
         """
-        path = os.path.dirname(os.path.abspath(__file__))
         player1 = Player(color=Colors.YELLOW,
                          controls=[ControlSet()])
         player1.images = PlayerImages(
-            default = path + r'\img\nutnik_yellow.png'
-            , jumping = path + r'\img\nutnik_catch_yellow.png'
+            default = Images.get_path(r'nutnik_yellow.png')
+            , jumping = Images.get_path(r'nutnik_catch_yellow.png')
         )
         player2 = Player(color=Colors.RED,
                          controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
@@ -86,22 +86,22 @@ class PlayField():
                           ControlSet(up=pygame.K_w, down=pygame.K_s,
                                                             left=pygame.K_a, right=pygame.K_d)])
         player2.images = PlayerImages(
-            default = path + r'\img\nutnik_red.png'
-            , jumping = path + r'\img\nutnik_catch_red.png'
+            default = Images.get_path(r'nutnik_red.png')
+            , jumping = Images.get_path(r'nutnik_catch_red.png')
         )
         player3 = Player(color=Colors.BLUE,
                          controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
                                               left=pygame.K_1, right=pygame.K_4)])
         player3.images = PlayerImages(
-            default = path + r'\img\nutnik_blue.png'
-            , jumping = path + r'\img\nutnik_catch.png'
+            default = Images.get_path(r'nutnik_blue.png')
+            , jumping = Images.get_path(r'nutnik_catch.png')
         )
         player4 = Player(color=Colors.PURPLE,
                          controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
                                               left=pygame.K_5, right=pygame.K_8)])
         player4.images = PlayerImages(
-            default = path + r'\img\nutnik_purple.png'
-            , jumping = path + r'\img\nutnik_catch_purple.png'
+            default = Images.get_path(r'nutnik_purple.png')
+            , jumping = Images.get_path(r'nutnik_catch_purple.png')
         )
 
 

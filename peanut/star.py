@@ -4,6 +4,7 @@ import os
 import pygame
 
 from colors import Colors
+from image import Images
 
 class Star():
     """Track the stars."""
@@ -29,19 +30,19 @@ class Star():
         self.color = random.choice(self.STAR_COLORS)
 
         path = os.path.dirname(os.path.abspath(__file__))
-        self.img = pygame.image.load(path + r'/img/star.png')
+        self.img = pygame.image.load(Images.get_path(r'star.png'))
 
         if self.color == Colors.PURPLE:
-            self.img = pygame.image.load(path + r'/img/star_purple.png')
+            self.img = pygame.image.load(Images.get_path(r'star_purple.png'))
         if self.color == Colors.RED:
-            self.img = pygame.image.load(path + r'/img/star_red.png')
+            self.img = pygame.image.load(Images.get_path(r'star_red.png'))
         if self.color == Colors.BLUE:
-            self.img = pygame.image.load(path + r'/img/star_blue.png')
+            self.img = pygame.image.load(Images.get_path(r'star_blue.png'))
 
         if self.pos_y == self.STAR_MID_LAYER:
-            self.img = pygame.image.load(path + r'/img/star_med.png')
+            self.img = pygame.image.load(Images.get_path(r'star_med.png'))
         if self.pos_y == self.STAR_TOP_LAYER:
-            self.img = pygame.image.load(path + r'/img/star_big.png')
+            self.img = pygame.image.load(Images.get_path(r'star_big.png'))
 
         self.img = pygame.transform.scale(self.img, (int(30), int(30)))
 
@@ -57,6 +58,3 @@ class Star():
     def draw(self, screen):
         """Draw this star."""
         screen.blit(self.img, (self.pos_x, self.pos_y))
-
-        # pygame.draw.rect(screen, self.color,
-                         # [self.pos_x, self.pos_y, self.size_x, self.size_y])
