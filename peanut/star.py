@@ -1,6 +1,6 @@
 """Stars that you can catch!"""
 import random
-
+import os
 import pygame
 
 from colors import Colors
@@ -38,5 +38,16 @@ class Star():
 
     def draw(self, screen):
         """Draw this star."""
-        pygame.draw.rect(screen, self.color,
-                         [self.pos_x, self.pos_y, self.size_x, self.size_y])
+        path = os.path.dirname(os.path.abspath(__file__))
+        img = pygame.image.load(path + r'/img/star.png')
+        if self.pos_y == self.STAR_MID_LAYER:
+            img = pygame.image.load(path + r'/img/star_med.png')
+        if self.pos_y == self.STAR_TOP_LAYER:
+            img = pygame.image.load(path + r'/img/star_big.png')
+
+
+        img = pygame.transform.scale(img, (int(30), int(30)))
+        screen.blit(img, (self.pos_x, self.pos_y))
+
+        # pygame.draw.rect(screen, self.color,
+                         # [self.pos_x, self.pos_y, self.size_x, self.size_y])
