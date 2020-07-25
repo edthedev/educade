@@ -19,7 +19,7 @@ class Star():
     LAYERS = [STAR_TOP_LAYER, STAR_MID_LAYER,
               STAR_MID_LAYER, STAR_LOW_LAYER, STAR_LOW_LAYER, 
               STAR_LOWEST_LAYER, STAR_LOWEST_LAYER, STAR_LOWEST_LAYER]
-    STAR_COLORS = [Colors.RED, Colors.YELLOW, Colors.ORANGE, Colors.WHITE, Colors.BLUE]
+    STAR_COLORS = [Colors.RED, Colors.YELLOW, Colors.ORANGE, Colors.WHITE, Colors.BLUE, Colors.PURPLE]
 
     def __init__(self, max_x):
         """New random star."""
@@ -27,6 +27,24 @@ class Star():
         self.pox_x = 40 + random.randint(10, 100)
         self.dir = random.choice([-1, 1]) # Move left or right.
         self.color = random.choice(self.STAR_COLORS)
+
+        path = os.path.dirname(os.path.abspath(__file__))
+        self.img = pygame.image.load(path + r'/img/star.png')
+
+        if self.color == Colors.PURPLE:
+            self.img = pygame.image.load(path + r'/img/star_purple.png')
+        if self.color == Colors.RED:
+            self.img = pygame.image.load(path + r'/img/star_red.png')
+        if self.color == Colors.BLUE:
+            self.img = pygame.image.load(path + r'/img/star_blue.png')
+
+        if self.pos_y == self.STAR_MID_LAYER:
+            self.img = pygame.image.load(path + r'/img/star_med.png')
+        if self.pos_y == self.STAR_TOP_LAYER:
+            self.img = pygame.image.load(path + r'/img/star_big.png')
+
+        self.img = pygame.transform.scale(self.img, (int(30), int(30)))
+
         if self.dir == 1:
             self.pox_x = 1
         else:
@@ -38,17 +56,7 @@ class Star():
 
     def draw(self, screen):
         """Draw this star."""
-        path = os.path.dirname(os.path.abspath(__file__))
-        img = pygame.image.load(path + r'/img/star.png')
-        Colors.fill(img, self.color)
-        if self.pos_y == self.STAR_MID_LAYER:
-            img = pygame.image.load(path + r'/img/star_med.png')
-        if self.pos_y == self.STAR_TOP_LAYER:
-            img = pygame.image.load(path + r'/img/star_big.png')
-
-
-        img = pygame.transform.scale(img, (int(30), int(30)))
-        screen.blit(img, (self.pos_x, self.pos_y))
+        screen.blit(self.img, (self.pos_x, self.pos_y))
 
         # pygame.draw.rect(screen, self.color,
                          # [self.pos_x, self.pos_y, self.size_x, self.size_y])
