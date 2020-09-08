@@ -37,7 +37,7 @@ class Player():
 
     >>> Player(pos_x=9001).pos_x
     9001
-  
+
     >>> Player(pos_x=9001).pos_y
     100
     """
@@ -131,7 +131,7 @@ class Player():
             self.pos_x+self.size_x > other.pos_x+other.size_x and
             self.pos_y + self.size_y > other.pos_y
         )
-    
+
     def fatten(self):
         """Get fatter."""
         self.fat_count += 10
@@ -216,10 +216,10 @@ class Player():
         if self.has_sandwich:
             Sandwich.draw(screen, self.pos_x,
                           pos_y=self.pos_y - Sandwich.sandwich_tall)
-   
+
     def land_on(self, pad):
         """Detect if we landed on a launcher.
-   
+
         >>> Player().land_on(Player())
         False
 
@@ -229,7 +229,7 @@ class Player():
         bottom_of_self = self.pos_y + self.size_y
         margin = 3
         return (
-            self.inline_with(pad) 
+            self.inline_with(pad)
             and pad.pos_y - margin < bottom_of_self
             and bottom_of_self < pad.pos_y + margin
         )
