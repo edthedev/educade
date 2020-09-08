@@ -4,7 +4,6 @@ from dataclasses import dataclass
 
 import pygame
 
-# from text import TextPrint
 from sandwich import Sandwich
 
 @dataclass
@@ -94,6 +93,7 @@ class Snarf():
         >>> Snarf().land_on(Sandwich())
         False
 
+        ## TODO: Sandwiches don't have a position yet. Hard to detect Snarf collision...
         >>> Snarf(pos_y=90, size_y=10).land_on(Sandwich(pos_y=100, size_y=10))
         True
         """
@@ -108,16 +108,16 @@ class Snarf():
     def inline_with(self, pad):
         """Return true if lined up in a vertical column with player.
 
-        >>> Player().inline_with(Snarf())
+        >>> Snarf().inline_with(Snarf())
         True
 
-        >>> Player(pos_x=20, size_x=10).inline_with(Snarf(pos_x=15, size_x=10))
+        >>> Snarf(pos_x=20, size_x=10).inline_with(Snarf(pos_x=15, size_x=10))
         True
 
-        >>> Player(pos_x=200, size_x=10).inline_with(Snarf(pos_x=15, size_x=10))
+        >>> Snarf(pos_x=200, size_x=10).inline_with(Snarf(pos_x=15, size_x=10))
         False
 
-        >>> Player(pos_y=100,size_y=10).inline_with(Snarf(pos_y=90))
+        >>> Snarf(pos_y=100,size_y=10).inline_with(Snarf(pos_y=90))
         True
         """
         return (
