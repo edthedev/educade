@@ -1,7 +1,7 @@
 """Player handler."""
 
 from dataclasses import dataclass, field
-from typing import List, Set, Dict, Tuple, Optional
+from typing import List
 
 import pygame
 
@@ -34,14 +34,14 @@ class PlayerImages():
 @dataclass
 class Player():
     """A game player.
-    
+
     >>> Player(pos_x=9001).pos_x
     9001
-    
+  
     >>> Player(pos_x=9001).pos_y
     100
     """
-    controls: List[ControlSet]  = field(default_factory=list)
+    controls: List[ControlSet] = field(default_factory=list)
     pos_x: int = 100
     pos_y: int = 100
     size_x: int = 50
@@ -57,7 +57,7 @@ class Player():
     fatten_y: int = 5
     fat_count: int = 50
     launched: int = 0
-    images : PlayerImages = None
+    images: PlayerImages = None
 
     def logic(self):
         """Do player game logic."""
@@ -87,7 +87,7 @@ class Player():
 
     def control(self, keys=None, joystick=None):
         """Look for signals accepted by this player, and apply them.
-       
+
         Return True if the player fired.
         """
         if keys:
@@ -103,16 +103,20 @@ class Player():
         """
         fired = False
         if joystick.get_axis(JOY_Y) >= .8:
-            # self.text_print.print(self.screen, "Joystick DOWN: {}".format(joystick.get_axis(JOY_Y)))
+            # self.text_print.print(self.screen,
+            # "Joystick DOWN: {}".format(joystick.get_axis(JOY_Y)))
             self._down()
         if joystick.get_axis(JOY_Y) <= -.8:
-            # self.text_print.print(self.screen, "Joystick UP: {}".format(joystick.get_axis(JOY_Y)))
+            # self.text_print.print(self.screen,
+            # "Joystick UP: {}".format(joystick.get_axis(JOY_Y)))
             self._up()
         if joystick.get_axis(JOY_X) >= .8:
-            # self.text_print.print(self.screen, "Joystick RIGHT: {}".format(joystick.get_axis(JOY_X)))
+            # self.text_print.print(self.screen,
+            # "Joystick RIGHT: {}".format(joystick.get_axis(JOY_X)))
             self._right()
         if joystick.get_axis(JOY_X) <= -.8:
-            # self.text_print.print(self.screen, "Joystick LEFT: {}".format(joystick.get_axis(JOY_X)))
+            # self.text_print.print(self.screen,
+            # "Joystick LEFT: {}".format(joystick.get_axis(JOY_X)))
             self._left()
         if joystick.get_button(0):
             # self.text_print.print(self.screen, "Player fired!")
@@ -210,12 +214,12 @@ class Player():
         # self.text_print.print(screen, "Player message: {}".format(self.debug))
 
         if self.has_sandwich:
-            Sandwich.draw(screen, self.pos_x, 
-                    pos_y=self.pos_y - Sandwich.sandwich_tall)
-    
+            Sandwich.draw(screen, self.pos_x,
+                          pos_y=self.pos_y - Sandwich.sandwich_tall)
+   
     def land_on(self, pad):
         """Detect if we landed on a launcher.
-        
+   
         >>> Player().land_on(Player())
         False
 

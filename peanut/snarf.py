@@ -1,13 +1,11 @@
 """Player handler."""
 
-from dataclasses import dataclass, field
-from typing import List, Set, Dict, Tuple, Optional
+from dataclasses import dataclass
 
 import pygame
 
 # from text import TextPrint
 from sandwich import Sandwich
-from colors import Colors
 
 @dataclass
 class SnarfImages():
@@ -22,10 +20,10 @@ class Snarf():
     """A snarf tries to eat the sandwiches.
 
     Players can catch them in the air to stop them.
-    
+
     >>> Snarf(pos_x=9001).pos_x
     9001
-    
+
     >>> Snarf(pos_x=9001).pos_y
     100
     """
@@ -36,17 +34,18 @@ class Snarf():
     move_amt: int = 5
     dying: int = 0
     falling: int = 0
+    has_sandwich: bool = False
 
     ground_y: int = 0 # override this!
-    images : SnarfImages = None
+    images: SnarfImages = None
 
     def logic(self):
         """Do snarf game logic."""
+        self.dying = self.dying
 
         # Move in from the side.
 
         # Move down toward the sandwiches.
-        pass
 
     def collide(self, other):
         """Detect a collision."""
@@ -86,12 +85,12 @@ class Snarf():
         screen.blit(img, (self.pos_x, self.pos_y))
 
         if self.has_sandwich:
-            Sandwich.draw(screen, self.pos_x, 
-                    pos_y=self.pos_y - Sandwich.sandwich_tall)
-    
+            Sandwich.draw(screen, self.pos_x,
+                          pos_y=self.pos_y - Sandwich.sandwich_tall)
+
     def land_on(self, pad):
         """Detect if we landed on a launcher.
-        
+
         >>> Snarf().land_on(Sandwich())
         False
 
@@ -101,7 +100,7 @@ class Snarf():
         bottom_of_self = self.pos_y + self.size_y
         margin = 3
         return (
-            self.inline_with(pad) 
+            self.inline_with(pad)
             and pad.pos_y - margin < bottom_of_self
             and bottom_of_self < pad.pos_y + margin
         )
