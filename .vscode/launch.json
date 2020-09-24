@@ -12,6 +12,14 @@
             "console": "integratedTerminal"
         },
         {
+            "name": "Small Sandwich Panic",
+            "type": "python",
+            "request": "launch",
+            "program": "peanut\\peanut.py",
+            "console": "integratedTerminal",
+            "args": ["-s"]
+        }
+        {
             "name": "Sandwich Panic",
             "type": "python",
             "request": "launch",
