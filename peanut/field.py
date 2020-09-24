@@ -113,7 +113,7 @@ class PlayField():
 
     def add_snarf(self):
         """Occassionally add a snarf to the play field."""
-        self.snarfs += [Snarf()]
+        self.snarfs += [Snarf(sandwich_bar=self.sandwich_bar)]
 
     def draw(self):
         """Re-Draw the play field."""

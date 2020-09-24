@@ -22,16 +22,17 @@ class Snarf():
 
     Players can catch them in the air to stop them.
 
-    >>> Snarf(pos_x=9001).pos_x
+    >>> Snarf(SandwichBar(), pos_x=9001).pos_x
     9001
 
-    >>> Snarf(pos_x=9001).pos_y
+    >>> Snarf(SandwichBar(), pos_x=9001).pos_y
     100
 
-    >>> type(Snarf().img)
+    >>> type(Snarf(SandwichBar()).img)
     <class 'pygame.Surface'>
 
     """
+    sandwich_bar: SandwichBar
     pos_x: int = 100
     pos_y: int = 100
     size_x: int = 100
@@ -49,13 +50,16 @@ class Snarf():
         self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
 
     def logic(self):
-        """Do snarf game logic."""
+        """Do snarf game logic.
+        
+        Generally, move toward the sandwich bar.
+        """
 
         # Move in from the side.
-        if self.pos_x < SandwichBar.pos_x:
+        if self.pos_x < self.sandwich_bar.pos_x:
             self._right()
 
-        if self.pos_x > SandwichBar.pos_x:
+        if self.pos_x > self.sandwich_bar.pos_x:
             self._left()
 
         # self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
@@ -63,8 +67,8 @@ class Snarf():
         # TODO: Make Snarfs retreat after getting a sandwich.
 
         # Move down toward the sandwiches.
-        if self.inline_with(SandwichBar):
-            if self.pos_y < SandwichBar.pos_y:
+        if self.inline_with(self.sandwich_bar):
+            if self.pos_y < self.sandwich_bar.pos_y:
                 self._down()
 
         #if self.dying:
@@ -108,10 +112,10 @@ class Snarf():
     def land_on(self, pad):
         """Detect if we landed on a launcher.
 
-        >>> Snarf().land_on(SandwichBar())
+        >>> Snarf(SandwichBar()).land_on(SandwichBar())
         False
 
-        >>> Snarf(pos_y=90, size_y=10).land_on(SandwichBar(pos_y=100, size_y=10))
+        >>> Snarf(SandwichBar(), pos_y=90, size_y=10).land_on(SandwichBar(pos_y=100, size_y=10))
         True
         """
         bottom_of_self = self.pos_y + self.size_y
@@ -125,16 +129,16 @@ class Snarf():
     def inline_with(self, pad):
         """Return true if lined up in a vertical column with player.
 
-        >>> Snarf().inline_with(Snarf())
+        >>> Snarf(SandwichBar()).inline_with(Snarf(SandwichBar()))
         True
 
-        >>> Snarf(pos_x=20, size_x=10).inline_with(Snarf(pos_x=15, size_x=10))
+        >>> Snarf(SandwichBar(), pos_x=20, size_x=10).inline_with(Snarf(SandwichBar(), pos_x=15, size_x=10))
         True
 
-        >>> Snarf(pos_x=200, size_x=10).inline_with(Snarf(pos_x=15, size_x=10))
+        >>> Snarf(SandwichBar(), pos_x=200, size_x=10).inline_with(Snarf(SandwichBar(), pos_x=15, size_x=10))
         False
 
-        >>> Snarf(pos_y=100,size_y=10).inline_with(Snarf(pos_y=90))
+        >>> Snarf(SandwichBar(), pos_y=100,size_y=10).inline_with(Snarf(SandwichBar(), pos_y=90))
         True
         """
         return (
