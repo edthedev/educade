@@ -1,6 +1,8 @@
 import pygame
 import random
 
+from dataclasses import dataclass
+
 from colors import Colors
 
 class Sandwich():
@@ -23,19 +25,21 @@ class Sandwich():
             pygame.draw.rect(screen, layer_color,
                 [pos_x, pos_y + ((i - 1) * layer_tall), layer_wide, layer_tall])
 
+
+@dataclass
 class SandwichBar():
     """A place to make sandwiches."""
+    pos_x: int = 100
+    pos_y: int = 100
+    size_x: int = 50
+    size_y: int = 50
+
     slice_count = 5
     slice_size = 5
     slices_per_sandwich = 5
 
     sandwich_count = 3
 
-    def __init__(self, pos_x, pos_y, size_x, size_y):
-        self.pos_x = pos_x
-        self.pos_y = pos_y
-        self.size_x = size_x
-        self.size_y = size_y
     
     def logic(self):
         """Sandwich rules."""

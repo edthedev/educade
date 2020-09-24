@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 import pygame
 
-from sandwich import Sandwich
+from sandwich import Sandwich, SandwichBar
 
 @dataclass
 class SnarfImages():
@@ -90,11 +90,10 @@ class Snarf():
     def land_on(self, pad):
         """Detect if we landed on a launcher.
 
-        >>> Snarf().land_on(Sandwich())
+        >>> Snarf().land_on(SandwichBar())
         False
 
-        ## TODO: Sandwiches don't have a position yet. Hard to detect Snarf collision...
-        >>> Snarf(pos_y=90, size_y=10).land_on(Sandwich(pos_y=100, size_y=10))
+        >>> Snarf(pos_y=90, size_y=10).land_on(SandwichBar(pos_y=100, size_y=10))
         True
         """
         bottom_of_self = self.pos_y + self.size_y
