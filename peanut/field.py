@@ -59,15 +59,15 @@ class PlayField():
 
     def add_launchers(self):
         """Add a couple of launchers."""
-        LAUNCHER_SIZE_X = 60
-        LAUNCHER_SIZE_Y = 20
+        launcher_size_x = 60
+        launcher_size_y = 20
         self.launchers = [
-            Launcher(pos_x=self.max_x - LAUNCHER_SIZE_X, size_x=LAUNCHER_SIZE_X,
+            Launcher(pos_x=self.max_x - launcher_size_x, size_x=launcher_size_x,
                      pos_y=self.ground_y - 20,
-                     size_y=LAUNCHER_SIZE_Y),
-            Launcher(pos_x=0, size_x=LAUNCHER_SIZE_X,
+                     size_y=launcher_size_y),
+            Launcher(pos_x=0, size_x=launcher_size_x,
                      pos_y=self.ground_y - 20,
-                     size_y=LAUNCHER_SIZE_Y)
+                     size_y=launcher_size_y)
         ]
 
     def add_players(self):
@@ -78,8 +78,8 @@ class PlayField():
         player1 = Player(color=Colors.YELLOW,
                          controls=[ControlSet()])
         player1.images = PlayerImages(
-            default = Images.get_path(r'nutnik_yellow.png')
-            , jumping = Images.get_path(r'nutnik_catch_yellow.png')
+            default=Images.get_path(r'nutnik_yellow.png')
+            , jumping=Images.get_path(r'nutnik_catch_yellow.png')
         )
         player2 = Player(color=Colors.RED,
                          controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
@@ -87,8 +87,8 @@ class PlayField():
                           ControlSet(up=pygame.K_w, down=pygame.K_s,
                                                             left=pygame.K_a, right=pygame.K_d)])
         player2.images = PlayerImages(
-            default = Images.get_path(r'nutnik_red.png')
-            , jumping = Images.get_path(r'nutnik_catch_red.png')
+            default=Images.get_path(r'nutnik_red.png')
+            , jumping=Images.get_path(r'nutnik_catch_red.png')
         )
         player3 = Player(color=Colors.BLUE,
                          controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,

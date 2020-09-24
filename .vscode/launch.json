@@ -18,7 +18,7 @@
             "program": "peanut\\peanut.py",
             "console": "integratedTerminal",
             "args": ["-s"]
-        }
+        },
         {
             "name": "Sandwich Panic",
             "type": "python",

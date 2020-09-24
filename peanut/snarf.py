@@ -37,7 +37,7 @@ class Snarf():
     pos_y: int = 100
     size_x: int = 100
     size_y: int = 100
-    move_amt: int = 5
+    move_amt: int = 1
     dying: int = 0
     falling: int = 0
     has_sandwich: bool = False
@@ -51,7 +51,7 @@ class Snarf():
 
     def logic(self):
         """Do snarf game logic.
-        
+
         Generally, move toward the sandwich bar.
         """
 
@@ -60,7 +60,7 @@ class Snarf():
         # TODO: Make Snarfs retreat after getting a sandwich.
 
         # Move down toward the sandwiches.
-        if self.inline_with(self.sandwich_bar):
+        if self.inline_with_sandwich_bar():
             if self.pos_y < self.sandwich_bar.pos_y:
                 self.pos_y += self.move_amt
         else:
@@ -87,8 +87,6 @@ class Snarf():
             self.pos_y + self.size_y > other.pos_y
         )
 
-
-
     def _left(self):
         """Move self left."""
         self.pos_x -= self.move_amt
@@ -105,41 +103,26 @@ class Snarf():
         #    Sandwich.draw(screen, self.pos_x,
         #                  pos_y=self.pos_y - Sandwich.sandwich_tall)
 
-    def land_on(self, pad):
-        """Detect if we landed on a launcher.
-
-        >>> Snarf(SandwichBar()).land_on(SandwichBar())
-        False
-
-        >>> Snarf(SandwichBar(), pos_y=90, size_y=10).land_on(SandwichBar(pos_y=100, size_y=10))
-        True
-        """
-        bottom_of_self = self.pos_y + self.size_y
-        margin = 3
-        return (
-            self.inline_with(pad)
-            and pad.pos_y - margin < bottom_of_self
-            and bottom_of_self < pad.pos_y + margin
-        )
-
-    def inline_with(self, pad):
+    def inline_with_sandwich_bar(self):
         """Return true if lined up in a vertical column with player.
 
-        >>> Snarf(SandwichBar()).inline_with(Snarf(SandwichBar()))
+        >>> Snarf(SandwichBar(pos_x=500), pox_x = 500).inline_with_sandwich_bar()
         True
 
-        >>> Snarf(SandwichBar(), pos_x=20, size_x=10).inline_with(Snarf(SandwichBar(), pos_x=15, size_x=10))
-        True
-
-        >>> Snarf(SandwichBar(), pos_x=200, size_x=10).inline_with(Snarf(SandwichBar(), pos_x=15, size_x=10))
+        >>> Snarf(SandwichBar(pos_x=0), pox_x = 500).inline_with_sandwich_bar()
         False
 
-        >>> Snarf(SandwichBar(), pos_y=100,size_y=10).inline_with(Snarf(SandwichBar(), pos_y=90))
+        >>> Snarf(SandwichBar(pos_x=450), pox_x = 500).inline_with_sandwich_bar()
         True
+
         """
         return (
-            pad.pos_x + pad.size_x > self.pos_x
-            and pad.pos_x < self.pos_x + self.size_x
+            self.sandwich_bar.pos_x - 30 < self.pos_x
+            and 
+            self.sandwich_bar.pos_x + 30 > self.pos_x
+            # or 
+            # pad.pos_x + pad.size_x > self.pos_x
+            # and pad.pos_x < self.pos_x + self.size_x
         )
 
 if __name__ == "__main__":
