@@ -45,6 +45,9 @@ class Snarf():
     images: SnarfImages = SnarfImages()
     img: pygame.Surface = pygame.image.load(Images.get_path(r'snarf.png'))
 
+    def __post_init__(self):
+        self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
+
     def logic(self):
         """Do snarf game logic."""
 
@@ -55,7 +58,7 @@ class Snarf():
         if self.pos_x > SandwichBar.pos_x:
             self._left()
 
-        self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
+        # self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
 
         # TODO: Make Snarfs retreat after getting a sandwich.
 
@@ -64,15 +67,12 @@ class Snarf():
             if self.pos_y < SandwichBar.pos_y:
                 self._down()
 
-        self.img = None
-
         #if self.dying:
         #    self.img = pygame.image.load(self.images.dying)
         #elif self.falling:
         #    self.img = pygame.image.load(self.images.falling)
         # else:
         #    self.img = pygame.image.load(self.images.default)
-        # self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
 
 
     def collide(self, other):
