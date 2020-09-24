@@ -1,6 +1,6 @@
 """Player handler."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import pygame
 
@@ -27,6 +27,10 @@ class Snarf():
 
     >>> Snarf(pos_x=9001).pos_y
     100
+
+    >>> type(Snarf().img)
+    <class 'pygame.Surface'>
+
     """
     pos_x: int = 100
     pos_y: int = 100
@@ -39,12 +43,7 @@ class Snarf():
 
     ground_y: int = 0 # override this!
     images: SnarfImages = SnarfImages()
-
-    def __post_init__(self):
-        """Set our image."""
-        self.img = pygame.image.load(Images.get_path(r'snarf.png'))
-        # self.img = pygame.image.load(self.images.default)
-        self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
+    img: pygame.Surface = pygame.image.load(Images.get_path(r'snarf.png'))
 
     def logic(self):
         """Do snarf game logic."""
@@ -55,6 +54,8 @@ class Snarf():
 
         if self.pos_x > SandwichBar.pos_x:
             self._left()
+
+        self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
 
         # TODO: Make Snarfs retreat after getting a sandwich.
 
