@@ -42,7 +42,8 @@ class Snarf():
 
     def __post_init__(self):
         """Set our image."""
-        self.img = pygame.image.load(self.images.default)
+        self.img = pygame.image.load(Images.get_path(r'snarf.png'))
+        # self.img = pygame.image.load(self.images.default)
         self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
 
     def logic(self):
@@ -99,9 +100,9 @@ class Snarf():
         """Draw the snarf."""
         screen.blit(self.img, (self.pos_x, self.pos_y))
 
-        if self.has_sandwich:
-            Sandwich.draw(screen, self.pos_x,
-                          pos_y=self.pos_y - Sandwich.sandwich_tall)
+        # if self.has_sandwich:
+        #    Sandwich.draw(screen, self.pos_x,
+        #                  pos_y=self.pos_y - Sandwich.sandwich_tall)
 
     def land_on(self, pad):
         """Detect if we landed on a launcher.
