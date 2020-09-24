@@ -40,7 +40,7 @@ class Snarf():
     move_y: int = 10
 
     ground_y: int = 0 # override this!
-    images: SnarfImages = None
+    images: SnarfImages = SnarfImages()
 
     def logic(self):
         """Do snarf game logic."""
