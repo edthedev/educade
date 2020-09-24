@@ -30,34 +30,48 @@ class Snarf():
     """
     pos_x: int = 100
     pos_y: int = 100
-    size_x: int = 50
-    size_y: int = 50
+    size_x: int = 100
+    size_y: int = 100
     move_amt: int = 5
     dying: int = 0
     falling: int = 0
     has_sandwich: bool = False
-    move_x: int = 10
-    move_y: int = 10
 
     ground_y: int = 0 # override this!
     images: SnarfImages = SnarfImages()
+
+    def __post_init__(self):
+        """Set our image."""
+        self.img = pygame.image.load(self.images.default)
+        self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
 
     def logic(self):
         """Do snarf game logic."""
 
         # Move in from the side.
         if self.pos_x < SandwichBar.pos_x:
-            self.pos_x += self.move_x
+            self._right()
 
         if self.pos_x > SandwichBar.pos_x:
-            self.pos_x -= self.move_x
+            self._left()
 
         # TODO: Make Snarfs retreat after getting a sandwich.
 
         # Move down toward the sandwiches.
         if self.inline_with(SandwichBar):
             if self.pos_y < SandwichBar.pos_y:
-                self.pos_y += self.move_y
+                self._down()
+
+        self.img = None
+
+        #if self.dying:
+        #    self.img = pygame.image.load(self.images.dying)
+        #elif self.falling:
+        #    self.img = pygame.image.load(self.images.falling)
+        # else:
+        #    self.img = pygame.image.load(self.images.default)
+        # self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
+
 
     def collide(self, other):
         """Detect a collision."""
@@ -83,18 +97,7 @@ class Snarf():
 
     def draw(self, screen):
         """Draw the snarf."""
-
-        img = None
-
-        if self.dying:
-            img = pygame.image.load(self.images.dying)
-        elif self.falling:
-            img = pygame.image.load(self.images.falling)
-        else:
-            img = pygame.image.load(self.images.default)
-        img = pygame.transform.scale(img, (int(self.size_x), int(self.size_y)))
-
-        screen.blit(img, (self.pos_x, self.pos_y))
+        screen.blit(self.img, (self.pos_x, self.pos_y))
 
         if self.has_sandwich:
             Sandwich.draw(screen, self.pos_x,
