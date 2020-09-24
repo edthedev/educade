@@ -1,5 +1,4 @@
 """Most of the game is managed by the play field."""
-import os
 import random
 import pygame
 from player import Player, PlayerImages

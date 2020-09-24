@@ -5,13 +5,14 @@ from dataclasses import dataclass
 import pygame
 
 from sandwich import Sandwich, SandwichBar
+from image import Images
 
 @dataclass
 class SnarfImages():
     """Images of a Snarf"""
-    default: str = Images.get_path(r'snarf.png'))
-    alt: str = Images.get_path(r'snarf2.png'))
-    falling: str
+    default: str = Images.get_path(r'snarf.png')
+    alt: str = Images.get_path(r'snarf2.png')
+    falling: str = ''
     eating: str = ''
     dying: str = ''
 
@@ -45,17 +46,17 @@ class Snarf():
         """Do snarf game logic."""
 
         # Move in from the side.
-        if(self.pos_x < SandwichBar.pos_x):
+        if self.pos_x < SandwichBar.pos_x:
             self.pos_x += self.move_x
 
-        if(self.pos_x > SandwichBar.pos_x):
+        if self.pos_x > SandwichBar.pos_x:
             self.pos_x -= self.move_x
 
         # TODO: Make Snarfs retreat after getting a sandwich.
 
         # Move down toward the sandwiches.
-        if(self.inline_with(SandwichBar)):
-            if(self.pos_y < SandwichBar.pos_y):
+        if self.inline_with(SandwichBar):
+            if self.pos_y < SandwichBar.pos_y:
                 self.pos_y += self.move_y
 
     def collide(self, other):

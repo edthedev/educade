@@ -1,5 +1,6 @@
+"""Sandwich bar for making sandwiches."""
+
 import pygame
-import random
 
 from dataclasses import dataclass
 
@@ -23,7 +24,7 @@ class Sandwich():
         for i in range(1, layer_count + 1):
             layer_color = sandwich_colors[i - 1]
             pygame.draw.rect(screen, layer_color,
-                [pos_x, pos_y + ((i - 1) * layer_tall), layer_wide, layer_tall])
+                             [pos_x, pos_y + ((i - 1) * layer_tall), layer_wide, layer_tall])
 
 
 @dataclass
@@ -40,7 +41,6 @@ class SandwichBar():
 
     sandwich_count = 3
 
-    
     def logic(self):
         """Sandwich rules."""
         if self.slice_count >= self.slices_per_sandwich:
