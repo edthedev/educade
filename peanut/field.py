@@ -32,6 +32,7 @@ class PlayField():
         self.sprites = []
         self.players = []
         self.stars = []
+        self.snarfs = []
         self.add_players()
         self.add_sandwich_bar()
         self.add_launchers()
@@ -112,7 +113,7 @@ class PlayField():
 
     def add_snarf(self):
         """Occassionally add a snarf to the play field."""
-        self.sprites += [Snarf()]
+        self.snarfs += [Snarf()]
 
     def draw(self):
         """Re-Draw the play field."""
@@ -167,7 +168,7 @@ class PlayField():
     def logic(self):
         """Calculate game logic."""
         self.sprites = self.players + \
-            self.stars  # Changes because stars get removed.
+            self.stars + self.snarfs # Changes because stars get removed.
 
         # --- Arrange
         # The field adds things
