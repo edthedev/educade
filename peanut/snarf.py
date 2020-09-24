@@ -3,6 +3,8 @@
 from dataclasses import dataclass
 
 import pygame
+import random
+
 
 from sandwich import SandwichBar
 from image import Images
@@ -42,10 +44,13 @@ class Snarf():
     falling: int = 0
     has_sandwich: bool = False
     full: int = 0
+    img_number: int = 0
 
     ground_y: int = 0 # override this!
     images: SnarfImages = SnarfImages()
     img: pygame.Surface = pygame.image.load(Images.get_path(r'snarf.png'))
+    img1: pygame.Surface = pygame.image.load(Images.get_path(r'snarf.png'))
+    img2: pygame.Surface = pygame.image.load(Images.get_path(r'snarf2.png'))
 
     def __post_init__(self):
         self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
@@ -56,9 +61,15 @@ class Snarf():
         Generally, move toward the sandwich bar.
         """
 
+        self.img_number += 1
+        if self.img_number == 20:
+            self.img = self.img1
+        if self.img_number > 40:
+            self.img_number = 0
+            self.img = self.img2
+
         # Move in from the side.
 
-        # TODO: Make Snarfs retreat after getting a sandwich.
         if self.full:
             self.reset()
 
