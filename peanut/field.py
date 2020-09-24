@@ -84,8 +84,8 @@ class PlayField():
         player2 = Player(color=Colors.RED,
                          controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
                                               left=pygame.K_h, right=pygame.K_l),
-                          ControlSet(up=pygame.K_w, down=pygame.K_s,
-                                                            left=pygame.K_a, right=pygame.K_d)])
+                                   ControlSet(up=pygame.K_w, down=pygame.K_s,
+                                              left=pygame.K_a, right=pygame.K_d)])
         player2.images = PlayerImages(
             default=Images.get_path(r'nutnik_red.png')
             , jumping=Images.get_path(r'nutnik_catch_red.png')
@@ -94,15 +94,15 @@ class PlayField():
                          controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
                                               left=pygame.K_1, right=pygame.K_4)])
         player3.images = PlayerImages(
-            default = Images.get_path(r'nutnik_blue.png')
-            , jumping = Images.get_path(r'nutnik_catch.png')
+            default=Images.get_path(r'nutnik_blue.png')
+            , jumping=Images.get_path(r'nutnik_catch.png')
         )
         player4 = Player(color=Colors.PURPLE,
                          controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
                                               left=pygame.K_5, right=pygame.K_8)])
         player4.images = PlayerImages(
-            default = Images.get_path(r'nutnik_purple.png')
-            , jumping = Images.get_path(r'nutnik_catch_purple.png')
+            default=Images.get_path(r'nutnik_purple.png')
+            , jumping=Images.get_path(r'nutnik_catch_purple.png')
         )
 
 

@@ -64,7 +64,7 @@ class Snarf():
 
         ## Float in from off screen.
         if self.pos_y < 0:
-            self._down()
+            self.pos_y += self.move_amt
         if self.pos_x < 0:
             self._right()
 
@@ -132,9 +132,9 @@ class Snarf():
         """
         return (
             self.sandwich_bar.pos_x - 30 < self.pos_x
-            and 
+            and
             self.sandwich_bar.pos_x + 30 > self.pos_x
-            # or 
+            # or
             # pad.pos_x + pad.size_x > self.pos_x
             # and pad.pos_x < self.pos_x + self.size_x
         )
