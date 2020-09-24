@@ -124,12 +124,26 @@ class Player():
         return fired
 
     def collide(self, other):
-        """Detect a collision."""
+        """Detect a collision.
+
+        >>> Player(pos_x=500,pos_y=500).collide(Player(pos_x=500,pos_y=500))
+        True
+  
+        >>> Player(pos_x=500,pos_y=500).collide(Player(pos_x=500,pos_y=0))
+        False
+
+        >>> Player(pos_x=500,pos_y=500).collide(Player(pos_x=0,pos_y=500))
+        False
+
+        >>> Player(pos_x=510,pos_y=500).collide(Player(pos_x=500,pos_y=500))
+        True
+    
+        """
         return (
-            self.pos_x-self.size_x < other.pos_x + other.size_x and
-            self.pos_y - self.size_y < other.pos_y and
-            self.pos_x+self.size_x > other.pos_x+other.size_x and
-            self.pos_y + self.size_y > other.pos_y
+            self.pos_x-self.size_x <= other.pos_x + other.size_x and
+            self.pos_y - self.size_y <= other.pos_y and
+            self.pos_x+self.size_x >= other.pos_x+other.size_x and
+            self.pos_y + self.size_y >= other.pos_y
         )
 
     def fatten(self):

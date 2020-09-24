@@ -1,10 +1,10 @@
 """Player handler."""
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 import pygame
 
-from sandwich import Sandwich, SandwichBar
+from sandwich import SandwichBar
 from image import Images
 
 @dataclass
