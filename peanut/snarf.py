@@ -33,14 +33,15 @@ class Snarf():
 
     """
     sandwich_bar: SandwichBar
-    pos_x: int = 100
-    pos_y: int = 100
+    pos_x: int = -100
+    pos_y: int = -100
     size_x: int = 100
     size_y: int = 100
     move_amt: int = 1
     dying: int = 0
     falling: int = 0
     has_sandwich: bool = False
+    full: int = 0
 
     ground_y: int = 0 # override this!
     images: SnarfImages = SnarfImages()
@@ -58,6 +59,14 @@ class Snarf():
         # Move in from the side.
 
         # TODO: Make Snarfs retreat after getting a sandwich.
+        if self.full:
+            self.reset()
+
+        ## Float in from off screen.
+        if self.pos_y < 0:
+            self._down()
+        if self.pos_x < 0:
+            self._right()
 
         # Move down toward the sandwiches.
         if self.inline_with_sandwich_bar():
@@ -86,6 +95,11 @@ class Snarf():
             self.pos_x+self.size_x > other.pos_x+other.size_x and
             self.pos_y + self.size_y > other.pos_y
         )
+
+    def reset(self):
+        """Move soemwhere random."""
+        self.pos_y = -100
+        self.pos_x = -100
 
     def _left(self):
         """Move self left."""

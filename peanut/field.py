@@ -200,6 +200,7 @@ class PlayField():
                     self.snarfs.remove(snarf) # TODO: Cool snarf death animation.
                 if snarf.collide(self.sandwich_bar):
                     self.sandwich_bar.sandwich_count -= 1 # Snarf ate your sandwich!
+                    snarf.full = 1
             for star in self.stars:
                 if player.collide(star):  # Catch a star!
                     self.stars.remove(star)
