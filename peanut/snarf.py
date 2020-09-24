@@ -34,17 +34,28 @@ class Snarf():
     dying: int = 0
     falling: int = 0
     has_sandwich: bool = False
+    move_x: int = 10
+    move_y: int = 10
 
     ground_y: int = 0 # override this!
     images: SnarfImages = None
 
     def logic(self):
         """Do snarf game logic."""
-        self.dying = self.dying
 
         # Move in from the side.
+        if(self.pos_x < SandwichBar.pox_x):
+            self.pos_x += self.move_x
+
+        if(self.pos_x > SandwichBar.pox_x):
+            self.pos_x -= self.move_x
+
+        # TODO: Make Snarfs retreat after getting a sandwich.
 
         # Move down toward the sandwiches.
+        if(self.inline_with(SandwichBar)):
+            if(self.pos_y < SandwichBar.pox_y):
+                self.pos_y += self.move_y
 
     def collide(self, other):
         """Detect a collision."""

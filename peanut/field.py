@@ -10,6 +10,7 @@ from colors import Colors
 from launcher import Launcher
 from star import Star
 from image import Images
+from snarf import Snarf
 
 # Set these to the two buttons you want to use for 'exit'. Count up starting from 0
 SELECT = 3
@@ -110,6 +111,10 @@ class PlayField():
             player.pos_y = self.ground_y - player.size_y
             player.ground_y = self.ground_y
 
+    def add_snarf(self):
+        """Occassionally add a snarf to the play field."""
+        self.sprites += Snarf()
+
     def draw(self):
         """Re-Draw the play field."""
         self.screen.fill(Colors.BLACK)  # background
@@ -169,6 +174,10 @@ class PlayField():
         # The field adds things
         if random.randint(0, 1000) > 990:  # New star frequency
             self.add_star()
+
+
+        if random.randint(0, 1000) > 999:  # New Snarf
+            self.add_snarf()
 
         # --- Act
         # Every sprite does it's thing.
