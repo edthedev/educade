@@ -56,20 +56,19 @@ class Snarf():
         """
 
         # Move in from the side.
-        if self.pos_x < self.sandwich_bar.pos_x:
-            self._right()
-
-        if self.pos_x > self.sandwich_bar.pos_x:
-            self._left()
-
-        # self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
 
         # TODO: Make Snarfs retreat after getting a sandwich.
 
         # Move down toward the sandwiches.
         if self.inline_with(self.sandwich_bar):
             if self.pos_y < self.sandwich_bar.pos_y:
-                self._down()
+                self.pos_y += self.move_amt
+        else:
+            if self.pos_x < self.sandwich_bar.pos_x:
+                self._right()
+
+            if self.pos_x >= self.sandwich_bar.pos_x:
+                self._left()
 
         #if self.dying:
         #    self.img = pygame.image.load(self.images.dying)
@@ -89,9 +88,6 @@ class Snarf():
         )
 
 
-    def _down(self):
-        """Start descending on a sandwich."""
-        self.falling = 1
 
     def _left(self):
         """Move self left."""
