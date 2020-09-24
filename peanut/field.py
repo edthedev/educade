@@ -189,6 +189,10 @@ class PlayField():
                 self.stars.remove(star)  # It is off screen. Stop tracking it.
 
         # The field taketh away
+        for snarf in self.snarfs:
+            if snarf.collide(self.sandwich_bar):
+                self.sandwich_bar.sandwich_count -= 1 # Snarf ate your sandwich!
+                snarf.full = 1
         for player in self.players:
             # Grab a sandwich!
             if player.collide(self.sandwich_bar) \
@@ -198,9 +202,6 @@ class PlayField():
             for snarf in self.snarfs:
                 if player.collide(snarf):  # Catch a snarf!
                     self.snarfs.remove(snarf) # TODO: Cool snarf death animation.
-                if snarf.collide(self.sandwich_bar):
-                    self.sandwich_bar.sandwich_count -= 1 # Snarf ate your sandwich!
-                    snarf.full = 1
             for star in self.stars:
                 if player.collide(star):  # Catch a star!
                     self.stars.remove(star)
