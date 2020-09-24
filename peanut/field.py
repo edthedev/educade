@@ -195,6 +195,11 @@ class PlayField():
                 and (player.has_sandwich == 0) and self.sandwich_bar.sandwich_count > 0:
                 player.has_sandwich = 1
                 self.sandwich_bar.sandwich_count -= 1
+            for snarf in self.snarfs:
+                if player.collide(snarf):  # Catch a snarf!
+                    self.snarfs.remove(snarf) # TODO: Cool snarf death animation.
+                if snarf.collide(self.sandwich_bar):
+                    self.sandwich_bar.sandwich_count -= 1 # Snarf ate your sandwich!
             for star in self.stars:
                 if player.collide(star):  # Catch a star!
                     self.stars.remove(star)
