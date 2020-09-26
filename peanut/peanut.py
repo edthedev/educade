@@ -5,18 +5,19 @@ Lovingly updated for four players.
 
 Peanut Butter Panic! was easily one of my favorite games for the good old Commordore 64.
 It was a part of my inspiration to become a programmer.
-This four player tribute is presented along with full open source code in the hopes of inspiring at least a few smiles and maybe a few careers.
+This four player tribute is presented along with 
+full open source code in the hopes of inspiring at least a few smiles and maybe a few careers.
 
 TODO:
 - [x] Make sandwiches!
 - [x] Press down to eat sandwiches to get fat.
-- [ ] Fix off-by-one in sandwich display.
+- [x] Fix off-by-one in sandwich display.
 - [x] Launch eachother for the higher stars!
-- [ ] Snarfs!
+- [x] Snarfs!
 - [ ] Show total sandwiches eaten as score.
 - [ ] Show elapsed time.
 - [ ] Display welcome message at start.
-- [ ] Better collision detection for fat players.
+- [x] Better collision detection for fat players.
 
 # Per https://www.mobygames.com/game/peanut-butter-panic
 
@@ -31,10 +32,6 @@ Harold Byrd, Dick Codor, Sandy Damashek, Bernie De Koven, Lisa Feder, Laura Kurl
 
 import pygame
 # from text import TextPrint
-from controls import ControlSet
-from sandwich import SandwichBar
-from colors import Colors
-from launcher import Launcher
 from star import Star
 from field import PlayField
 

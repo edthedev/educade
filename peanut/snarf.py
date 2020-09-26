@@ -3,8 +3,6 @@
 from dataclasses import dataclass
 
 import pygame
-import random
-
 
 from sandwich import SandwichBar
 from image import Images
