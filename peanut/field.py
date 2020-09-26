@@ -37,7 +37,7 @@ class PlayField():
         self.add_sandwich_bar()
         self.add_launchers()
         self.screen = None
-        self.score = 59
+        self.score = 0
         self.score_img = pygame.transform.scale(pygame.image.load(Images.get_path(r'star.png')),
                                                 (int(30), int(30)))
         self.score_img_med = pygame.transform.scale(pygame.image.load(
@@ -204,7 +204,7 @@ class PlayField():
             self.add_star()
 
 
-        if random.randint(0, 1000) > 999:  # New Snarf
+        if random.randint(0, 10000) > (9990 - self.score):  # New Snarf
             self.add_snarf()
 
         # --- Act
