@@ -248,8 +248,10 @@ class PlayField():
             for launcher in self.launchers:
                 if player.land_on(launcher):
                     player.falling = 0
-                    launcher.launch_players_who_are_not(player)
-                    launcher.add_player(player)
+                    # Treat the two launchers as connected.
+                    for this_launcher in self.launchers:
+                        this_launcher.launch_players_who_are_not(player)
+                        this_launcher.add_player(player)
 
         # Slices add up to sandwiches.
         self.sandwich_bar.logic()
