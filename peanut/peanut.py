@@ -34,6 +34,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Peanut Butter Panic')
     parser.add_argument('-s', '--small', action='store_true')
     parser.add_argument('-d', '--debug', action='store_true')
+    parser.add_argument('-f', '--five_to_four', action='store_true')
     args = parser.parse_args()
 
     # Used to manage how fast the screen updates
@@ -41,9 +42,12 @@ if __name__ == "__main__":
 
     field = None
     if args.small:
-        field = PlayField(max_x=800, min_y=600,debug=args.debug)
+        field = PlayField(max_x=800, min_y=600, debug=args.debug)
     else:
         field = PlayField(debug=args.debug)
+
+    if args.five_to_four:
+        field = PlayField(max_x=1280, min_y=1024, debug=args.debug)
 
     while not field.done:
         field.controls()
