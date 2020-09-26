@@ -36,10 +36,10 @@ class SandwichBar():
     size_y: int = 50
 
     slice_count = 0
-    slice_size = 0
+    slice_size = 5
     slices_per_sandwich = 5
 
-    sandwich_count = 3
+    sandwich_count = 0
 
     def logic(self):
         """Sandwich rules."""
