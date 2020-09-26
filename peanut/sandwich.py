@@ -1,8 +1,8 @@
 """Sandwich bar for making sandwiches."""
 
-import pygame
 
 from dataclasses import dataclass
+import pygame
 
 from colors import Colors
 
@@ -46,6 +46,10 @@ class SandwichBar():
         if self.slice_count >= self.slices_per_sandwich:
             self.slice_count -= self.slices_per_sandwich
             self.sandwich_count += 1
+        if self.slice_count < 0:
+            self.slice_count = 0
+        if self.sandwich_count < 0:
+            self.sandwich_count = 0
 
     def draw(self, screen):
         """Draw the sandwich bar, with sandwiches on it."""
@@ -56,7 +60,8 @@ class SandwichBar():
         if self.slice_count > 0:
             for i in range(1, self.slice_count + 1):
                 pygame.draw.rect(screen, Sandwich.sandwich_colors[i - 1],
-                         [self.pos_x + 5, self.pos_y + 5 + (self.slice_size * (i-1)), self.size_x - 10, self.slice_size])
+                                 [self.pos_x + 5, self.pos_y + 5 + 
+                                  (self.slice_size * (i-1)), self.size_x - 10, self.slice_size])
 
         # -- Stack of Sandwiches
         self.drawsandwiches(screen)

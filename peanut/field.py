@@ -138,6 +138,7 @@ class PlayField():
         for player in self.players:
             player.pos_y = self.ground_y - player.size_y / 2
             player.ground_y = self.ground_y
+            player.max_x = self.max_x
 
     def add_snarf(self):
         """Occassionally add a snarf to the play field."""

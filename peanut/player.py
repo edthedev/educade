@@ -58,6 +58,7 @@ class Player():
     fat_count: int = 50
     launched: int = 0
     images: PlayerImages = None
+    max_x: int = 100
 
     def logic(self):
         """Do player game logic."""
@@ -128,7 +129,7 @@ class Player():
 
         >>> Player(pos_x=500,pos_y=500).collide(Player(pos_x=500,pos_y=500))
         True
-  
+
         >>> Player(pos_x=500,pos_y=500).collide(Player(pos_x=500,pos_y=0))
         False
 
@@ -137,7 +138,7 @@ class Player():
 
         >>> Player(pos_x=510,pos_y=500).collide(Player(pos_x=500,pos_y=500))
         True
-    
+ 
         """
         return (
             self.pos_x-self.size_x <= other.pos_x + other.size_x and
@@ -173,6 +174,8 @@ class Player():
             self.pos_x -= (self.move_amt / 3)
         else:
             self.pos_x -= self.move_amt
+        if self.pos_x < -50:
+            self.pos_x = -50
 
     def _right(self):
         """Move self right."""
@@ -182,6 +185,8 @@ class Player():
             self.pos_x += (self.move_amt / 3)
         else:
             self.pos_x += self.move_amt
+        if self.pos_x > self.max_x + 50:
+            self.pos_x = self.max_x + 50
 
     def _key_control(self, keys):
         """Apply keyboard controls - as accepted by this player.
