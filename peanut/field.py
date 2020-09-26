@@ -132,7 +132,7 @@ class PlayField():
 
         self.players = [player1, player2, player3, player4]
         for player in self.players:
-            player.pos_y = self.ground_y - player.size_y
+            player.pos_y = self.ground_y - player.size_y / 2
             player.ground_y = self.ground_y
 
     def add_snarf(self):
