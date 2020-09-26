@@ -37,14 +37,36 @@ class PlayField():
         self.add_sandwich_bar()
         self.add_launchers()
         self.screen = None
+        self.score = 59
+        self.score_img = pygame.transform.scale(pygame.image.load(Images.get_path(r'star.png')),
+                                                (int(30), int(30)))
+        self.score_img_med = pygame.transform.scale(pygame.image.load(Images.get_path(r'star_med.png')),
+                                                (int(30), int(30)))
+        self.score_img_big = pygame.transform.scale(pygame.image.load(Images.get_path(r'star_big.png')),
+                                                (int(30), int(30)))
+
 
         # Initialize the joysticks
         pygame.init()
         pygame.joystick.init()
         size = [self.max_x, self.min_y]
         self.screen = pygame.display.set_mode(size)
-        pygame.display.set_caption("Peanut Butter Panic")
+        pygame.display.set_caption("Sandwich Panic")
         pygame.mouse.set_visible(False)
+
+    def draw_score(self):
+        """Draw the score."""
+        small = self.score % 60
+        for i in range(0, small):
+            sox = 50 + 10 * (i % 60)
+            soy = self.ground_y + (i % 6) * 10
+            self.screen.blit(self.score_img, (sox, soy))
+
+        med = int(self.score / 60)
+        for i in range(0, med):
+            sox = 50 + 10 * (i % 60)
+            soy = self.ground_y + (i % 6) * 10
+            self.screen.blit(self.score_img_med, (sox, soy))
 
     def add_star(self):
         """Add a star."""
@@ -131,6 +153,7 @@ class PlayField():
         for sprite in self.sprites:
             sprite.draw(self.screen)
 
+        self.draw_score()
         # textPrint.reset()
         # joystick_count = pygame.joystick.get_count()
         # textPrint.print(screen, "Number of joysticks: {}".format(joystick_count))
@@ -202,6 +225,7 @@ class PlayField():
                 and (player.has_sandwich == 0) and self.sandwich_bar.sandwich_count > 0:
                 player.has_sandwich = 1
                 self.sandwich_bar.sandwich_count -= 1
+                self.score += 1
             for snarf in self.snarfs:
                 if player.collide(snarf):  # Catch a snarf!
                     self.snarfs.remove(snarf) # TODO: Cool snarf death animation.
