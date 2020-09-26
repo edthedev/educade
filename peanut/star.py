@@ -18,9 +18,10 @@ class Star():
     STAR_LOW_LAYER = 350
     STAR_LOWEST_LAYER = 400
     LAYERS = [STAR_TOP_LAYER, STAR_MID_LAYER,
-              STAR_MID_LAYER, STAR_LOW_LAYER, STAR_LOW_LAYER, 
+              STAR_MID_LAYER, STAR_LOW_LAYER, STAR_LOW_LAYER,
               STAR_LOWEST_LAYER, STAR_LOWEST_LAYER, STAR_LOWEST_LAYER]
-    STAR_COLORS = [Colors.RED, Colors.YELLOW, Colors.ORANGE, Colors.WHITE, Colors.BLUE, Colors.PURPLE]
+    STAR_COLORS = [Colors.RED, Colors.YELLOW, 
+                   Colors.ORANGE, Colors.WHITE, Colors.BLUE, Colors.PURPLE]
 
     def __init__(self, max_x):
         """New random star."""

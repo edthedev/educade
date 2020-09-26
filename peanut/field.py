@@ -40,10 +40,12 @@ class PlayField():
         self.score = 59
         self.score_img = pygame.transform.scale(pygame.image.load(Images.get_path(r'star.png')),
                                                 (int(30), int(30)))
-        self.score_img_med = pygame.transform.scale(pygame.image.load(Images.get_path(r'star_med.png')),
-                                                (int(30), int(30)))
-        self.score_img_big = pygame.transform.scale(pygame.image.load(Images.get_path(r'star_big.png')),
-                                                (int(30), int(30)))
+        self.score_img_med = pygame.transform.scale(pygame.image.load(
+            Images.get_path(r'star_med.png')),
+                                                    (int(30), int(30)))
+        self.score_img_big = pygame.transform.scale(pygame.image.load(
+            Images.get_path(r'star_big.png')),
+                                                    (int(30), int(30)))
 
 
         # Initialize the joysticks
