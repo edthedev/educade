@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Peanut Butter Panic!
+"""Sandwich Panic
 
-Lovingly updated for four players.
+A clone of Peanut Butter Panic, lovingly updated for four players.
 
 Peanut Butter Panic! was easily one of my favorite games for the good old Commordore 64.
 It was a part of my inspiration to become a programmer.
