@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 ref.py
+ref/*
 
 # C extensions
 *.so
