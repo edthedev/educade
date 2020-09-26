@@ -35,8 +35,8 @@ class SandwichBar():
     size_x: int = 50
     size_y: int = 50
 
-    slice_count = 5
-    slice_size = 5
+    slice_count = 0
+    slice_size = 0
     slices_per_sandwich = 5
 
     sandwich_count = 3

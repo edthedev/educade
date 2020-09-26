@@ -21,7 +21,7 @@ class PlayField():
     MIN_X = 0
     MAX_Y = 0
 
-    def __init__(self, max_x=1200, min_y=900):
+    def __init__(self, max_x=1200, min_y=900, debug=False):
         """New play field."""
 
         self.max_x = max_x
@@ -46,6 +46,10 @@ class PlayField():
         self.score_img_big = pygame.transform.scale(pygame.image.load(
             Images.get_path(r'star_big.png')),
                                                     (int(30), int(30)))
+
+        if debug:
+            self.score = 59
+            self.sandwich_bar.sandwich_count = 4
 
 
         # Initialize the joysticks

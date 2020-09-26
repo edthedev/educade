@@ -17,6 +17,14 @@
             "request": "launch",
             "program": "peanut\\peanut.py",
             "console": "integratedTerminal",
+            "args": ["-s", "-d"]
+        },
+        {
+            "name": "Small Sandwich Panic - No Debug",
+            "type": "python",
+            "request": "launch",
+            "program": "peanut\\peanut.py",
+            "console": "integratedTerminal",
             "args": ["-s"]
         },
         {
