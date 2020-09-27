@@ -28,4 +28,4 @@ class Laser():
     def draw(self, screen):
         """Draw a laser."""
         for i in range(0, int(self.size_y / self.inner_size_y)):
-            screen.blit(self.img, (self.pos_x, self.pos_y - self.inner_size_y * i))
+            screen.blit(self.img, (self.pos_x, self.pos_y + self.inner_size_y * i))
