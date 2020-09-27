@@ -63,7 +63,7 @@ class Player():
     start_x: int = 100
     secret_keys: int = 1
     lasering: int = 0
-    lasers: Laser = None
+    laser: Laser = None
 
     def __post_init__(self):
         """Set pos_x to start_x"""
@@ -100,7 +100,7 @@ class Player():
             if self.laser is None:
                 self.laser = Laser(size_y=self.ground_y, pos_y=0)
             self.laser.pos_x = self.pos_x + self.size_x / 2
-            self.laser.size_y = self.ground_y - self.pos_y - self.size_y
+            self.laser.size_y = self.pos_y
         else:
             self.laser = None
 
