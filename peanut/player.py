@@ -9,6 +9,7 @@ import pygame
 from controls import ControlSet
 from sandwich import Sandwich
 from colors import Colors
+from laser import Laser
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -60,7 +61,9 @@ class Player():
     images: PlayerImages = None
     max_x: int = 100
     start_x: int = 100
-    secret_keys: int = 0
+    secret_keys: int = 1
+    lasering: int = 0
+    lasers: Laser = None
 
     def __post_init__(self):
         """Set pos_x to start_x"""
@@ -91,6 +94,15 @@ class Player():
         if self.launched and self.pos_y < self.ground_y - 3*(self.jump_max):
             self.launched = 0
             self.falling = 1
+
+        if self.lasering > 0:
+            self.lasering -= 1
+            if self.laser is None:
+                self.laser = Laser(size_y=self.ground_y, pos_y=0)
+            self.laser.pos_x = self.pos_x + self.size_x / 2
+            self.laser.size_y = self.ground_y - self.pos_y - self.size_y
+        else:
+            self.laser = None
 
     def control(self, keys=None, joystick=None):
         """Look for signals accepted by this player, and apply them.
@@ -159,13 +171,17 @@ class Player():
 
     def _up(self):
         """Start a jump."""
-        if not self.falling and not self.jumping:
+        if not self.falling and not self.jumping \
+            and not (self.lasering > 0):
             self.jumping = 1
             self.fat_count -= 1  # Starting a jump costs your fat.
 
     def _down(self):
         """Interrupt a jump. - New experimental feature...might remove this."""
         self.falling = 1
+        if self.secret_keys > 0:
+            self.lasering = 200
+            self.secret_keys -= 1
 
         ## Eat to get fatter.
         if self.has_sandwich > 0:
@@ -241,6 +257,7 @@ class Player():
         if self.has_sandwich:
             Sandwich.draw(screen, self.pos_x,
                           pos_y=self.pos_y - Sandwich.sandwich_tall)
+
 
     def land_on(self, pad):
         """Detect if we landed on a launcher.

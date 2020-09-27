@@ -164,6 +164,10 @@ class PlayField():
         for sprite in self.sprites:
             sprite.draw(self.screen)
 
+        for player in self.players:
+            if player.laser is not None:
+                player.laser.draw(self.screen)
+
         self.draw_score()
         # textPrint.reset()
         # joystick_count = pygame.joystick.get_count()

@@ -26,7 +26,7 @@ class Launcher():
     def __post_init__(self):
         """Start with an empty player list."""
         self._players = []
-        self.img_launched = pygame.transform.scale(self.img_launched, 
+        self.img_launched = pygame.transform.scale(self.img_launched,
                                                    (self.size_x, self.size_y + self.size_change))
         self.img_launcher = pygame.transform.scale(self.img_launcher, (self.size_x, self.size_y))
         self.img = self.img_launcher
