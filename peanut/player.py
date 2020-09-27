@@ -36,10 +36,10 @@ class PlayerImages():
 class Player():
     """A game player.
 
-    >>> Player(pos_x=9001).pos_x
+    >>> Player(start_x=9001).pos_x
     9001
 
-    >>> Player(pos_x=9001).pos_y
+    >>> Player(start_x=9001).pos_y
     100
     """
     controls: List[ControlSet] = field(default_factory=list)
@@ -145,19 +145,27 @@ class Player():
     def collide(self, other):
         """Detect a collision.
 
-        >>> Player(pos_x=500,pos_y=500).collide(Player(pos_x=500,pos_y=500))
+        >>> Player(start_x=500,pos_y=500).collide(Player(start_x=500,pos_y=500))
         True
 
-        >>> Player(pos_x=500,pos_y=500).collide(Player(pos_x=500,pos_y=0))
+        >>> Player(start_x=500,pos_y=500).collide(Player(start_x=500,pos_y=0))
         False
 
-        >>> Player(pos_x=500,pos_y=500).collide(Player(pos_x=0,pos_y=500))
+        >>> Player(start_x=500,pos_y=500).collide(Player(start_x=0,pos_y=500))
         False
 
-        >>> Player(pos_x=510,pos_y=500).collide(Player(pos_x=500,pos_y=500))
+        >>> Player(start_x=510,pos_y=500).collide(Player(start_x=500,pos_y=500))
+        True
+
+        >>> Player(start_x=510,pos_y=500,lasering=0).collide(Player(start_x=500,pos_y=30))
+        False
+
+        >>> Player(start_x=510,pos_y=500,lasering=30).collide(Player(start_x=500,pos_y=30))
         True
  
         """
+        if self.lasering:
+            return self.inline_with(other)
         return (
             self.pos_x-self.size_x <= other.pos_x + other.size_x and
             self.pos_y - self.size_y <= other.pos_y and
@@ -276,24 +284,33 @@ class Player():
             and bottom_of_self < pad.pos_y + margin
         )
 
-    def inline_with(self, pad):
+    def inline_with(self, other):
         """Return true if lined up in a vertical column with player.
 
         >>> Player().inline_with(Player())
         True
 
-        >>> Player(pos_x=20, size_x=10).inline_with(Player(pos_x=15, size_x=10))
+        >>> Player(start_x=20, size_x=10).inline_with(Player(start_x=15, size_x=10))
         True
 
-        >>> Player(pos_x=200, size_x=10).inline_with(Player(pos_x=15, size_x=10))
+        >>> Player(start_x=200, size_x=10).inline_with(Player(start_x=15, size_x=10))
         False
 
         >>> Player(pos_y=100,size_y=10).inline_with(Player(pos_y=90))
         True
         """
+        # return (
+        #     pad.pos_x + pad.size_x > self.pos_x
+        #    and pad.pos_x < self.pos_x + self.size_x
+        #)
         return (
-            pad.pos_x + pad.size_x > self.pos_x
-            and pad.pos_x < self.pos_x + self.size_x
+            # Left Edge of Other within self
+            other.pos_x >= self.pos_x
+            and other.pos_x <= self.pos_x + self.size_x
+            or
+            # Right Edge of Other within self
+            other.pos_x + other.size_x >= self.pos_x
+            and other.pos_x + other.size_x <= self.pos_x + self.size_x
         )
 
 if __name__ == "__main__":
