@@ -104,12 +104,14 @@ class PlayField():
         Return an array of the players as objects with .draw methods.
         """
         player1 = Player(color=Colors.YELLOW,
+                         start_x=self.max_x / 5 * 2,
                          controls=[ControlSet()])
         player1.images = PlayerImages(
             default=Images.get_path(r'nutnik_yellow.png')
             , jumping=Images.get_path(r'nutnik_catch_yellow.png')
         )
         player2 = Player(color=Colors.RED,
+                         start_x=self.max_x / 5 * 4,
                          controls=[ControlSet(up=pygame.K_j, down=pygame.K_k,
                                               left=pygame.K_h, right=pygame.K_l),
                                    ControlSet(up=pygame.K_w, down=pygame.K_s,
@@ -119,6 +121,7 @@ class PlayField():
             , jumping=Images.get_path(r'nutnik_catch_red.png')
         )
         player3 = Player(color=Colors.BLUE,
+                         start_x=self.max_x / 5,
                          controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
                                               left=pygame.K_1, right=pygame.K_4)])
         player3.images = PlayerImages(
@@ -126,6 +129,7 @@ class PlayField():
             , jumping=Images.get_path(r'nutnik_catch.png')
         )
         player4 = Player(color=Colors.PURPLE,
+                         start_x=self.max_x / 5 * 3,
                          controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
                                               left=pygame.K_5, right=pygame.K_8)])
         player4.images = PlayerImages(

@@ -59,6 +59,11 @@ class Player():
     launched: int = 0
     images: PlayerImages = None
     max_x: int = 100
+    start_x: int = 100
+
+    def __post_init__(self):
+        """Set pos_x to start_x"""
+        self.pos_x = self.start_x
 
     def logic(self):
         """Do player game logic."""
