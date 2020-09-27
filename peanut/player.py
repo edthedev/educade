@@ -60,6 +60,7 @@ class Player():
     images: PlayerImages = None
     max_x: int = 100
     start_x: int = 100
+    secret_keys: int = 0
 
     def __post_init__(self):
         """Set pos_x to start_x"""

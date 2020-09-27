@@ -248,6 +248,7 @@ class PlayField():
                         self.sandwich_bar.slice_count += 1
                     if star.pos_y == Star.STAR_TOP_LAYER:
                         self.sandwich_bar.slice_count += 2
+                        player.secret_keys += 1
 
             for launcher in self.launchers:
                 if player.land_on(launcher):
