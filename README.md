@@ -60,6 +60,21 @@ stars to power your
 sandwich machine.
 ```
 
+### Undersea Hide and Seek
+
+Match your color to the scenery as you try to reach your cozy sunken ship without being seen.
+
+Undersea Hide and Seek is Copyright 2020 Edward Delaporte
+
+#### Inspired by Seahorse Hide and Seek by Joyce Hakansson and CBS Software
+
+[21]: https://artsandculture.google.com/asset/video-game-commodore-64-sea-horse-hide-n-seek/WAGzMakMQ4NVgA?hl=en
+
+Undersea Hide and Seek is a tribute to [Seahorse Hide and Seek - another classic by CBS Software.][21]
+
+Seahorse Hide and Seek is Copyright 1984 Joyce Hakansson
+
+
 ## References
 
 - [Python Installer][1]
