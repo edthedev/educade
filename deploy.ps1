@@ -3,9 +3,8 @@
 # $gameName = "joytest"
 # $gameName = "inv4ders"
 # $gameName = "bouncetest"
-
-# $hostName = "pi@tmntcade"
-$hostName = "pi@rampage"
+$hostName = "pi@tmntcade"
+# $hostName = "pi@rampage"
 
 $scriptDir = "/home/pi/RetroPie/roms/ports"
 
