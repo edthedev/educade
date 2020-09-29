@@ -30,8 +30,6 @@ It was a part of my inspiration to become a programmer.
 This four player tribute is presented along with
 full open source code in the hopes of inspiring at least a few smiles and maybe a few careers.
 
-Play as a 
-
 
 ### About Peanut Butter Panic
 
