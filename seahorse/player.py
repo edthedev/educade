@@ -7,9 +7,7 @@ import pygame
 
 # from text import TextPrint
 from controls import ControlSet
-from sandwich import Sandwich
 from colors import Colors
-from laser import Laser
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -63,7 +61,6 @@ class Player():
     start_x: int = 100
     secret_keys: int = 1
     lasering: int = 0
-    laser: Laser = None
 
     def __post_init__(self):
         """Set pos_x to start_x"""
@@ -94,15 +91,6 @@ class Player():
         if self.launched and self.pos_y < self.ground_y - 3*(self.jump_max):
             self.launched = 0
             self.falling = 1
-
-        if self.lasering > 0:
-            self.lasering -= 1
-            if self.laser is None:
-                self.laser = Laser(size_y=self.ground_y, pos_y=0)
-            self.laser.pos_x = self.pos_x + self.size_x / 2
-            self.laser.size_y = self.pos_y
-        else:
-            self.laser = None
 
     def control(self, keys=None, joystick=None):
         """Look for signals accepted by this player, and apply them.
@@ -261,10 +249,6 @@ class Player():
         screen.blit(img, (self.pos_x, self.pos_y))
         # self.text_print.indent()
         # self.text_print.print(screen, "Player message: {}".format(self.debug))
-
-        if self.has_sandwich:
-            Sandwich.draw(screen, self.pos_x,
-                          pos_y=self.pos_y - Sandwich.sandwich_tall)
 
 
     def land_on(self, pad):

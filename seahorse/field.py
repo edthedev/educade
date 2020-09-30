@@ -37,12 +37,9 @@ class PlayField():
         self.stars = []
         self.snarfs = []
         self.add_players()
-        self.add_sandwich_bar()
-        self.add_launchers()
         self.screen = None
-        self.score = 0
 
-        if debug:
+        if self.debug:
             pass
 
         # Initialize the joysticks
@@ -112,10 +109,6 @@ class PlayField():
         for sprite in self.sprites:
             sprite.draw(self.screen)
 
-        for player in self.players:
-            if player.laser is not None:
-                player.laser.draw(self.screen)
-
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
 
@@ -155,7 +148,7 @@ class PlayField():
 
         # --- Arrange
         # The field adds things
-        if random.randint(0, 10000) > (9990 - self.score):  # New Snarf
+        if random.randint(0, 10000) > (9990):  # New Snarf
             self.add_fish()
 
         # --- Act

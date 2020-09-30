@@ -20,6 +20,14 @@
             "args": ["-s", "-d"]
         },
         {
+            "name": "Undersea Hide and Seek",
+            "type": "python",
+            "request": "launch",
+            "program": "seahorse\\main.py",
+            "console": "integratedTerminal",
+            "args": ["-s", "-d"]
+        },
+        {
             "name": "Small Sandwich Panic - No Debug",
             "type": "python",
             "request": "launch",
