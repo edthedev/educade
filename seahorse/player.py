@@ -26,9 +26,6 @@ JOY_Y = 1
 class PlayerImages():
     """Images of a NutNik"""
     default: str
-    jumping: str
-    falling: str = ''
-    eating: str = ''
 
 @dataclass
 class Player():
@@ -47,7 +44,6 @@ class Player():
     size_y: int = 50
     move_amt: int = 5
     color: tuple = Colors.RED
-    jumping: int = 0
     falling: int = 0
     jump_max: int = 500 # this will change during play
     ground_y: int = 0 # override this!
@@ -68,29 +64,7 @@ class Player():
 
     def logic(self):
         """Do player game logic."""
-
-        # Can't jump forever.
-        if self.jumping and self.pos_y < self.ground_y - self.jump_max + self.size_x:
-            self.jumping = 0
-            self.falling = 1
-
-        if self.falling and self.pos_y > self.ground_y - self.size_y:
-            self.falling = 0
-
-        if self.jumping:
-            self.pos_y -= self.move_amt
-
-        if self.falling:
-            self.jumping = 0 # Supports voluntary fall.
-            self.pos_y += self.move_amt
-
-        if self.launched:
-            self.pos_y -= 1.5*(self.move_amt)
-
-        # Can't Launch forever
-        if self.launched and self.pos_y < self.ground_y - 3*(self.jump_max):
-            self.launched = 0
-            self.falling = 1
+        pass
 
     def control(self, keys=None, joystick=None):
         """Look for signals accepted by this player, and apply them.
@@ -166,18 +140,12 @@ class Player():
         self.fat_count += 10
 
     def _up(self):
-        """Start a jump."""
-        if not self.falling and not self.jumping \
-            and not (self.lasering > 0):
-            self.jumping = 1
-            self.fat_count -= 1  # Starting a jump costs your fat.
+        """Move up."""
+        self.pos_y -= (self.move_amt)
 
     def _down(self):
         """Interrupt a jump. - New experimental feature...might remove this."""
-        self.falling = 1
-        if self.secret_keys > 0:
-            self.lasering = 200
-            self.secret_keys -= 1
+        self.pos_y += (self.move_amt)
 
         ## Eat to get fatter.
         if self.has_sandwich > 0:
@@ -234,22 +202,9 @@ class Player():
         self.size_y = self.fat_count * 2 / 3
 
         img = None
-
-        if self.jumping:
-            img = pygame.image.load(self.images.jumping)
-        else:
-            img = pygame.image.load(self.images.default)
+        img = pygame.image.load(self.images.default)
         img = pygame.transform.scale(img, (int(self.size_x), int(self.size_y)))
-
-        #pygame.draw.rect(screen, WHITE,
-        #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
-        # pygame.draw.rect(screen, self.color,
-        #                [self.pos_x + 10, self.pos_y + 10, self.size_x - 10, self.size_y - 10])
-
         screen.blit(img, (self.pos_x, self.pos_y))
-        # self.text_print.indent()
-        # self.text_print.print(screen, "Player message: {}".format(self.debug))
-
 
     def land_on(self, pad):
         """Detect if we landed on a launcher.

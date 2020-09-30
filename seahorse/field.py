@@ -59,8 +59,7 @@ class PlayField():
                          start_x=self.max_x / 5 * 2,
                          controls=[ControlSet()])
         player1.images = PlayerImages(
-            default=Images.get_path(r'nutnik_yellow.png')
-            , jumping=Images.get_path(r'nutnik_catch_yellow.png')
+            default=Images.get_path(r'horse.purple.png')
         )
         player2 = Player(color=Colors.RED,
                          start_x=self.max_x / 5 * 4,
@@ -69,24 +68,21 @@ class PlayField():
                                    ControlSet(up=pygame.K_w, down=pygame.K_s,
                                               left=pygame.K_a, right=pygame.K_d)])
         player2.images = PlayerImages(
-            default=Images.get_path(r'nutnik_red.png')
-            , jumping=Images.get_path(r'nutnik_catch_red.png')
+            default=Images.get_path(r'squid.purple.png')
         )
         player3 = Player(color=Colors.BLUE,
                          start_x=self.max_x / 5,
                          controls=[ControlSet(up=pygame.K_3, down=pygame.K_2,
                                               left=pygame.K_1, right=pygame.K_4)])
         player3.images = PlayerImages(
-            default=Images.get_path(r'nutnik_blue.png')
-            , jumping=Images.get_path(r'nutnik_catch.png')
+            default=Images.get_path(r'flounder.purple.png')
         )
         player4 = Player(color=Colors.PURPLE,
                          start_x=self.max_x / 5 * 3,
                          controls=[ControlSet(up=pygame.K_7, down=pygame.K_6,
                                               left=pygame.K_5, right=pygame.K_8)])
         player4.images = PlayerImages(
-            default=Images.get_path(r'nutnik_purple.png')
-            , jumping=Images.get_path(r'nutnik_catch_purple.png')
+            default=Images.get_path(r'cuttlefish.purple.png')
         )
 
 
