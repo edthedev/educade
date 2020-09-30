@@ -1,3 +1,5 @@
+"""Ocean floor things to hide behind."""
+
 import pygame
 import random
 

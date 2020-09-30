@@ -109,9 +109,7 @@ class PlayField():
 
     def draw(self):
         """Re-Draw the play field."""
-        self.screen.fill(Colors.BLACK)  # background
-        pygame.draw.rect(self.screen, Colors.GROUND,
-                         [self.min_x, self.ground_y, self.max_x, self.min_y])
+        self.screen.fill(Colors.DARK_BLUE)  # background
 
         for sprite in self.sprites:
             sprite.draw(self.screen)
