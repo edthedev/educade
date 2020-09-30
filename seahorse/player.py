@@ -124,7 +124,7 @@ class Player():
 
         >>> Player(start_x=510,pos_y=500,lasering=30).collide(Player(start_x=500,pos_y=30))
         True
- 
+
         """
         if self.lasering:
             return self.inline_with(other)

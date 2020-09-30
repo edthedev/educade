@@ -1,9 +1,10 @@
 """Most of the game is managed by the play field."""
-import random
-import pygame
 
 from dataclasses import dataclass, field
 from typing import List
+
+import random
+import pygame
 
 from player import Player, PlayerImages
 from controls import ControlSet
@@ -20,11 +21,10 @@ START = 4
 @dataclass
 class PlayField():
     """Track the play field."""
-    MIN_X = 0
-    MAX_Y = 0
     min_x: int = 0
     max_x: int = 1200
     min_y: int = 900
+    max_y: int = 0
     debug: bool = False
     fish: List[ControlSet] = field(default_factory=list)
     flora: List[Flora] = field(default_factory=list)
@@ -111,7 +111,7 @@ class PlayField():
         """Re-Draw the play field."""
         self.screen.fill(Colors.BLACK)  # background
         pygame.draw.rect(self.screen, Colors.GROUND,
-                         [self.MIN_X, self.ground_y, self.max_x, self.min_y])
+                         [self.min_x, self.ground_y, self.max_x, self.min_y])
 
         for sprite in self.sprites:
             sprite.draw(self.screen)
