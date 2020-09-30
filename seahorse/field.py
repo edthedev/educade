@@ -9,10 +9,12 @@ from player import Player, PlayerImages
 from controls import ControlSet
 from colors import Colors
 from image import Images
+from flora import Flora
 
 # Set these to the two buttons you want to use for 'exit'. Count up starting from 0
 SELECT = 3
 START = 4
+
 
 
 @dataclass
@@ -25,6 +27,7 @@ class PlayField():
     min_y: int = 900
     debug: bool = False
     fish: List[ControlSet] = field(default_factory=list)
+    flora: List[Flora] = field(default_factory=list)
 
     def __post_init__(self):
         """New play field."""
@@ -35,9 +38,12 @@ class PlayField():
         self.sprites = []
         self.players = []
         self.stars = []
-        self.snarfs = []
         self.add_players()
         self.screen = None
+        self.add_flora()
+        self.add_flora()
+        self.add_flora()
+        self.add_flora()
 
         if self.debug:
             pass
@@ -92,6 +98,11 @@ class PlayField():
             player.ground_y = self.ground_y
             player.max_x = self.max_x
 
+    def add_flora(self):
+        """Add places to hide."""
+        # self.fish += [ScaryFish()]
+        self.flora += [Flora()]
+
     def add_fish(self):
         """Occassionally add a scary fish to the play field."""
         # self.fish += [ScaryFish()]
@@ -139,8 +150,7 @@ class PlayField():
 
     def logic(self):
         """Calculate game logic."""
-        self.sprites = self.players + \
-            self.stars + self.snarfs # Changes because stars get removed.
+        self.sprites = self.players + self.flora
 
         # --- Arrange
         # The field adds things
