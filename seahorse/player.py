@@ -154,25 +154,11 @@ class Player():
 
     def _left(self):
         """Move self left."""
-        if self.jumping or self.falling:
-            self.pos_x -= (self.move_amt / 2)
-        elif self.launched:
-            self.pos_x -= (self.move_amt / 3)
-        else:
-            self.pos_x -= self.move_amt
-        if self.pos_x < -50:
-            self.pos_x = -50
+        self.pos_x -= self.move_amt
 
     def _right(self):
         """Move self right."""
-        if self.jumping or self.falling:
-            self.pos_x += (self.move_amt / 2)
-        elif self.launched:
-            self.pos_x += (self.move_amt / 3)
-        else:
-            self.pos_x += self.move_amt
-        if self.pos_x > self.max_x + 50:
-            self.pos_x = self.max_x + 50
+        self.pos_x += self.move_amt
 
     def _key_control(self, keys):
         """Apply keyboard controls - as accepted by this player.
