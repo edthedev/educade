@@ -18,7 +18,7 @@ class Flora():
     size_x: int = 0
     size_y: int = 0
     variety: int = 0
-    size_multiple: int = 4
+    size_multiple: int = 2
     block_size: int = 0
 
     img: pygame.Surface = None
@@ -45,7 +45,7 @@ class Flora():
 
     def draw(self, screen):
         """Draw self on the screen."""
-        pygame.draw.rect(screen, Colors.GROUND,
+        pygame.draw.rect(screen, Colors.WHITE,
                          [self.pos_x, self.pos_y, self.size_x, self.size_y])
         screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
     

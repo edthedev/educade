@@ -111,8 +111,12 @@ class PlayField():
         """Re-Draw the play field."""
         self.screen.fill(Colors.DARK_BLUE)  # background
 
-        for sprite in self.sprites:
-            sprite.draw(self.screen)
+        for flora in self.flora:
+            flora.draw(self.screen)
+
+        for player in self.players:
+            player.draw(self.screen)
+
 
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
