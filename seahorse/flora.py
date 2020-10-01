@@ -18,7 +18,7 @@ class Flora():
     size_x: int = 0
     size_y: int = 0
     variety: int = 0
-    size_multiple: int = 1
+    size_multiple: int = .5
     block_size: int = 0
 
     img: pygame.Surface = None
@@ -29,7 +29,7 @@ class Flora():
         self.img = pygame.image.load(Images.get_path(r'flora.purple.png'))
 
         # Size
-        self.block_size = self.size_multiple * 32
+        self.block_size = int(self.size_multiple * 32)
         self.size_x = self.block_size * 2
         self.size_y = self.block_size * 2
         self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))

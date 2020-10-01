@@ -42,7 +42,7 @@ class Player():
     pos_y: int = 100
     size_x: int = 50
     size_y: int = 50
-    move_amt: int = 5
+    move_amt: int = 2
     color: tuple = Colors.RED
     falling: int = 0
     jump_max: int = 500 # this will change during play
