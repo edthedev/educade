@@ -41,15 +41,17 @@ class Flora():
                                            int(self.size_y * self.img_rows)))
 
         # Pick which variety we are.
-        self.draw_area = pygame.Rect(self.variety * self.block_size * self.img_scale,
-                                     0,
+        var_x = self.variety % self.img_cols
+        var_y = self.variety % self.img_rows
+        self.draw_area = pygame.Rect(var_x * self.block_size * self.img_scale,
+                                     var_y * self.block_size * self.img_scale,
                                      self.block_size * self.img_scale,
                                      self.block_size * self.img_scale)
 
     def draw(self, screen):
         """Draw self on the screen."""
-        pygame.draw.rect(screen, Colors.WHITE,
-                         [self.pos_x, self.pos_y, self.size_x, self.size_y])
+        #pygame.draw.rect(screen, Colors.WHITE,
+        #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
         screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
     
     def logic(self):

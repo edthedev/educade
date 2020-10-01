@@ -104,7 +104,9 @@ class PlayField():
         self.flora += [Flora(variety=0, pos_x=100),
                        Flora(variety=1, pos_x=200),
                        Flora(variety=2, pos_x=300),
-                       Flora(variety=3, pos_x=400)]
+                       Flora(variety=3, pos_x=400),
+                       Flora(variety=4, pos_x=500),
+                       Flora(variety=5, pos_x=600)]
 
     def add_fish(self):
         """Occassionally add a scary fish to the play field."""
