@@ -1,11 +1,7 @@
 """Ocean floor things to hide behind."""
+from dataclasses import dataclass
 
 import pygame
-import random
-
-from dataclasses import dataclass, field
-from typing import List
-from colors import Colors
 
 from image import Images
 
@@ -57,7 +53,7 @@ class Flora():
         #pygame.draw.rect(screen, Colors.WHITE,
         #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
         screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
-    
+   
     def logic(self):
         """Pass"""
         pass

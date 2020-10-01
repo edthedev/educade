@@ -102,7 +102,7 @@ class PlayField():
         """Add places to hide."""
         # self.fish += [ScaryFish()]
         self.flora += [Flora(variety=0, pos_x=100),
-                       Flora(variety=1, pos_x=200, img_color=pygame.Color(255,0,0)),
+                       Flora(variety=1, pos_x=200, img_color=pygame.Color(255, 0, 0)),
                        Flora(variety=2, pos_x=300),
                        Flora(variety=3, pos_x=400),
                        Flora(variety=4, pos_x=500),
