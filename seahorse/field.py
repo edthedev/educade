@@ -122,6 +122,7 @@ class PlayField():
 
 
         # Go ahead and update the screen with what we've drawn.
+        self.screen.scroll(dx=1)
         pygame.display.flip()
 
     def controls(self):

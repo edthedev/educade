@@ -24,21 +24,27 @@ class Flora():
     img: pygame.Surface = None
     draw_area: pygame.Rect = None
 
+    img_rows: int = 2
+    img_cols: int = 3
+    img_scale: int = 3
+
     def __post_init__(self):
         """Randomize self."""
         self.img = pygame.image.load(Images.get_path(r'flora.purple.png'))
 
         # Size
         self.block_size = int(self.size_multiple * 32)
-        self.size_x = self.block_size * 2
-        self.size_y = self.block_size * 2
-        self.img = pygame.transform.scale(self.img, (int(self.size_x), int(self.size_y)))
+        self.size_x = self.block_size * self.img_scale
+        self.size_y = self.block_size * self.img_scale
+        self.img = pygame.transform.scale(self.img,
+                                          (int(self.size_x * self.img_cols),
+                                           int(self.size_y * self.img_rows)))
 
         # Pick which variety we are.
-        self.draw_area = pygame.Rect(self.variety * self.block_size,
+        self.draw_area = pygame.Rect(self.variety * self.block_size * self.img_scale,
                                      0,
-                                     (self.variety + 1) * self.block_size,
-                                     self.block_size)
+                                     self.block_size * self.img_scale,
+                                     self.block_size * self.img_scale)
 
     def draw(self, screen):
         """Draw self on the screen."""
