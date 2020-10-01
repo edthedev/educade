@@ -25,6 +25,7 @@ class PlayField():
     max_x: int = 1200
     min_y: int = 900
     max_y: int = 0
+    retreat_x: int = 400
     debug: bool = False
     fish: List[ControlSet] = field(default_factory=list)
     flora: List[Flora] = field(default_factory=list)
@@ -101,6 +102,9 @@ class PlayField():
     def add_flora(self):
         """Add places to hide."""
         # self.fish += [ScaryFish()]
+        # TODO: Randomize the y position of flora.
+        # TODO: Flora only add every so often...
+        # TODO: Update flora off-screen detection to account for cycle nature of scrolling by...
         self.flora += [Flora(variety=0, pos_x=100),
                        Flora(variety=1, pos_x=200, img_color=pygame.Color(255, 0, 0)),
                        Flora(variety=2, pos_x=300),
@@ -124,7 +128,7 @@ class PlayField():
 
 
         # Go ahead and update the screen with what we've drawn.
-        self.screen.scroll(dx=1)
+        self.screen.scroll(dx=-100) # TODO: Update this value to change on a repeating cycle.
         pygame.display.flip()
 
     def controls(self):
@@ -169,6 +173,11 @@ class PlayField():
         # Every sprite does it's thing.
         for sprite in self.sprites:
             sprite.logic()
+
+
+        for flora in self.flora:
+            if flora.pos_x < 0 - self.retreat_x:
+                self.flora.remove(flora) # Past our maximum scrollback, so stop tracking.
 
         for star in self.stars:
             if star.pos_x < 0 or star.pos_x > self.max_x:
