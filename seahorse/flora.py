@@ -26,7 +26,8 @@ class Flora():
 
     img_rows: int = 2
     img_cols: int = 3
-    img_scale: int = 3
+    img_scale: int = 5
+    img_color: pygame.Color = None
 
     def __post_init__(self):
         """Randomize self."""
@@ -39,6 +40,9 @@ class Flora():
         self.img = pygame.transform.scale(self.img,
                                           (int(self.size_x * self.img_cols),
                                            int(self.size_y * self.img_rows)))
+        if self.img_color:
+            pass
+        # TODO: Blit blend in the desired color.
 
         # Pick which variety we are.
         var_x = self.variety % self.img_cols
