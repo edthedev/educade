@@ -93,6 +93,12 @@ git clone https://github.com/edthedev/tmntcade.git
 make test
 ```
 
+3. Optional - Setup an SSH key to make pushing to GitHub easier.
+```
+choco install gnupg
+gpg --full-generate-key
+```
+
 ## References
 
 - [Python Installer][1]
