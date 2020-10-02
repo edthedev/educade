@@ -43,7 +43,6 @@ class PlayField():
         self.stars = []
         self.add_players()
         self.screen = None
-        self.add_flora()
 
         if self.debug:
             pass
@@ -53,6 +52,7 @@ class PlayField():
         pygame.joystick.init()
         size = [self.max_x, self.min_y]
         self.screen = pygame.display.set_mode(size)
+        self.screen.fill(Colors.DARK_BLUE)  # background
         pygame.display.set_caption("Undersea Hide and Seek")
         pygame.mouse.set_visible(False)
 
@@ -101,10 +101,12 @@ class PlayField():
     def add_flora(self):
         """Add places to hide."""
         # TODO: Flora to spawn *not* all in a straight vertical column.
-        self.flora += [Flora(variety=random.choice(range(0, 5)),
+        new_flora = Flora(variety=random.choice(range(0, 5)),
                              size=self.flora_size,
-                             pos_x=self.max_x-200+self.clock, # TODO: Factor in self.clock
-                             pos_y=random.choice(range(0, self.min_y)))]
+                             pos_x=self.max_x-self.flora_size, 
+                             pos_y=random.choice(range(0, self.min_y)))
+        new_flora.draw(self.screen)
+        # self.flora += [new_flora]
                        # Flora(variety=1, pos_x=200, img_color=pygame.Color(255, 0, 0)),
 
     def add_fish(self):
@@ -113,20 +115,23 @@ class PlayField():
 
     def draw(self):
         """Re-Draw the play field."""
-        self.screen.fill(Colors.DARK_BLUE)  # background
 
-        for flora in self.flora:
-            flora.draw(self.screen)
+        # Only draw flora when they first appear.
+        # for flora in self.flora:
+        #    flora.draw(self.screen)
+
+        # Shift the background before drawing players.
+        # self.screen.scroll(dx=-self.clock)
+        self.screen.scroll(dx=-1)
 
         for player in self.players:
             player.draw(self.screen)
 
+        # TODO: Add movement limits to keep players on screen.
 
-        self.screen.scroll(dx=-self.clock)
-        # TODO: Players who would drift off screen get stuck at the minimum edge.
-
-        pygame.draw.rect(self.screen, Colors.DARK_BLUE,
-                         [self.max_x-self.clock, 0, self.clock, self.min_y])
+        # Stupid hack to clean up
+        # pygame.draw.rect(self.screen, Colors.DARK_BLUE,
+        #                 [self.max_x-self.clock, 0, self.clock, self.min_y])
 
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()

@@ -4,6 +4,7 @@ from dataclasses import dataclass
 import pygame
 
 from image import Images
+from colors import Colors
 
 @dataclass
 class Flora():
@@ -53,6 +54,6 @@ class Flora():
 
     def draw(self, screen):
         """Draw self on the screen."""
-        #pygame.draw.rect(screen, Colors.WHITE,
-        #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
+        pygame.draw.rect(screen, Colors.DARK_BLUE,
+                         [self.pos_x, self.pos_y, self.size_x, self.size_y])
         screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
