@@ -103,7 +103,7 @@ class PlayField():
         # TODO: Flora to spawn *not* all in a straight vertical column.
         self.flora += [Flora(variety=random.choice(range(0, 5)),
                              size=self.flora_size,
-                             pos_x=self.max_x-200, # TODO: Factor in self.clock
+                             pos_x=self.max_x-200+self.clock, # TODO: Factor in self.clock
                              pos_y=random.choice(range(0, self.min_y)))]
                        # Flora(variety=1, pos_x=200, img_color=pygame.Color(255, 0, 0)),
 
@@ -123,6 +123,7 @@ class PlayField():
 
 
         self.screen.scroll(dx=-self.clock)
+        # TODO: Players who would drift off screen get stuck at the minimum edge.
 
         pygame.draw.rect(self.screen, Colors.DARK_BLUE,
                          [self.max_x-self.clock, 0, self.clock, self.min_y])
