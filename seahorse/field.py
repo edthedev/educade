@@ -29,6 +29,7 @@ class PlayField():
     debug: bool = False
     fish: List[ControlSet] = field(default_factory=list)
     flora: List[Flora] = field(default_factory=list)
+    clock: int = 0
 
     def __post_init__(self):
         """New play field."""
@@ -41,9 +42,6 @@ class PlayField():
         self.stars = []
         self.add_players()
         self.screen = None
-        self.add_flora()
-        self.add_flora()
-        self.add_flora()
         self.add_flora()
 
         if self.debug:
@@ -105,12 +103,10 @@ class PlayField():
         # TODO: Randomize the y position of flora.
         # TODO: Flora only add every so often...
         # TODO: Update flora off-screen detection to account for cycle nature of scrolling by...
-        self.flora += [Flora(variety=0, pos_x=100),
-                       Flora(variety=1, pos_x=200, img_color=pygame.Color(255, 0, 0)),
-                       Flora(variety=2, pos_x=300),
-                       Flora(variety=3, pos_x=400),
-                       Flora(variety=4, pos_x=500),
-                       Flora(variety=5, pos_x=600)]
+        self.flora += [Flora(variety=random.choice(range(0, 5)),
+                             pos_x=self.max_x-200, # TODO: Factor in self.clock
+                             pos_y=random.choice(range(0, self.min_y)))]
+                       # Flora(variety=1, pos_x=200, img_color=pygame.Color(255, 0, 0)),
 
     def add_fish(self):
         """Occassionally add a scary fish to the play field."""
@@ -126,9 +122,8 @@ class PlayField():
         for player in self.players:
             player.draw(self.screen)
 
-
+        self.screen.scroll(dx=-self.clock) 
         # Go ahead and update the screen with what we've drawn.
-        self.screen.scroll(dx=-100) # TODO: Update this value to change on a repeating cycle.
         pygame.display.flip()
 
     def controls(self):
@@ -163,25 +158,24 @@ class PlayField():
     def logic(self):
         """Calculate game logic."""
         self.sprites = self.players + self.flora
+        self.clock = self.clock % self.max_x
+        self.clock += 1
 
         # --- Arrange
         # The field adds things
-        if random.randint(0, 10000) > (9990):  # New Snarf
+        if random.randint(0, 10000) > (9990):  # New Fish
             self.add_fish()
+        if random.randint(0, 10000) > (9990):  # New Flora
+            self.add_flora()
 
         # --- Act
         # Every sprite does it's thing.
-        for sprite in self.sprites:
-            sprite.logic()
-
+        for player in self.players:
+            player.logic()
 
         for flora in self.flora:
-            if flora.pos_x < 0 - self.retreat_x:
+            if flora.pos_x - self.clock < 0 - self.retreat_x:
                 self.flora.remove(flora) # Past our maximum scrollback, so stop tracking.
-
-        for star in self.stars:
-            if star.pos_x < 0 or star.pos_x > self.max_x:
-                self.stars.remove(star)  # It is off screen. Stop tracking it.
 
         # The field taketh away
         for player in self.players:
