@@ -29,6 +29,7 @@ class Flora():
     img_color: pygame.Color = None
     # TODO: negative blit each character each time they move
     # TODO: deal with negativie blitting through a hiding place
+    # TODO: Draw flora without blue behind them.
 
 
     def __post_init__(self):
@@ -62,8 +63,8 @@ class Flora():
 
     def draw(self, screen):
         """Draw self on the screen."""
-        pygame.draw.rect(screen, Colors.DARK_BLUE,
-                         [self.pos_x, self.pos_y, self.size_x, self.size_y])
+        #pygame.draw.rect(screen, Colors.DARK_BLUE,
+        #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
         screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
     
     def logic(self):
