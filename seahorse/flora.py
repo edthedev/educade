@@ -26,6 +26,9 @@ class Flora():
     img_cols: int = 3
     img_scale: int = 5
     img_color: pygame.Color = None
+    # TODO: negative blit each character each time they move
+    # TODO: deal with negativie blitting through a hiding place
+
 
     def __post_init__(self):
         """Randomize self."""
@@ -42,7 +45,11 @@ class Flora():
                                            int(self.size_y * self.img_rows)))
         if self.img_color:
             pass
+        # TODO: Change each sprite white and use blit.blend to change their color
+        # TODO: Try to use surface.get rgb pixel to see if our chosen hiding place matches our color?
+        # TODO: Draw a bunch of scary fish.
         # TODO: Blit blend in the desired color.
+        # TODO: Come up with a different way to more flora across the screen - scroll is not playing nice...
 
         # Pick which variety we are.
         var_x = self.variety % self.img_cols
