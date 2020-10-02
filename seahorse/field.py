@@ -30,6 +30,7 @@ class PlayField():
     fish: List[ControlSet] = field(default_factory=list)
     flora: List[Flora] = field(default_factory=list)
     clock: int = 0
+    flora_size: int = 80
 
     def __post_init__(self):
         """New play field."""
@@ -100,10 +101,8 @@ class PlayField():
     def add_flora(self):
         """Add places to hide."""
         # self.fish += [ScaryFish()]
-        # TODO: Randomize the y position of flora.
-        # TODO: Flora only add every so often...
-        # TODO: Update flora off-screen detection to account for cycle nature of scrolling by...
         self.flora += [Flora(variety=random.choice(range(0, 5)),
+                             size=self.flora_size,
                              pos_x=self.max_x-200, # TODO: Factor in self.clock
                              pos_y=random.choice(range(0, self.min_y)))]
                        # Flora(variety=1, pos_x=200, img_color=pygame.Color(255, 0, 0)),
@@ -174,7 +173,7 @@ class PlayField():
             player.logic()
 
         for flora in self.flora:
-            if flora.pos_x - self.clock < 0 - self.retreat_x:
+            if flora.pos_x - self.clock < 0 - self.flora_size:
                 self.flora.remove(flora) # Past our maximum scrollback, so stop tracking.
 
         # The field taketh away

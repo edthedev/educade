@@ -9,6 +9,7 @@ from image import Images
 class Flora():
     """Places to hide."""
 
+    size: int
     pos_x: int = 0
     pos_y: int = 0
     size_x: int = 0
@@ -31,6 +32,8 @@ class Flora():
 
         # Size
         self.block_size = int(self.size_multiple * 32)
+        self.img_scale = int(self.size / self.block_size)
+
         self.size_x = self.block_size * self.img_scale
         self.size_y = self.block_size * self.img_scale
         self.img = pygame.transform.scale(self.img,
@@ -53,7 +56,3 @@ class Flora():
         #pygame.draw.rect(screen, Colors.WHITE,
         #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
         screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
-   
-    def logic(self):
-        """Pass"""
-        pass
