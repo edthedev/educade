@@ -18,7 +18,7 @@ class Flora():
     variety: int = 0
     size_multiple: int = .5
     block_size: int = 0
-    move_delay: int = 5
+    move_delay: int = 2
     move_clock: int = 0
     move_amt: int = 1
 
@@ -71,7 +71,7 @@ class Flora():
     
     def logic(self):
         """Drift slowly to create the current."""
-        self.move_clock += 1
-        if self.move_clock > self.move_delay:
-            self.pos_x -= self.move_amt
         self.move_clock = self.move_clock % self.move_delay
+        self.move_clock += 1
+        if self.move_clock >= self.move_delay:
+            self.pos_x -= self.move_amt
