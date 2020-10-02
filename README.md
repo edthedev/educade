@@ -73,6 +73,26 @@ Undersea Hide and Seek is a tribute to [Seahorse Hide and Seek - another classic
 Seahorse Hide and Seek is Copyright 1984 Joyce Hakansson
 
 
+## Contributing
+
++ Recommended Editor: [VSCode](https://code.visualstudio.com/)
++ Requirements:
+  + [Python3](https://www.python.org/downloads/) **BE SURE TO CHECK THE BOX TO INCLUDE PIP**
+  + [Chocolatey](https://chocolatey.org/install) - To support the commands below.
+  + pygame - Install command is included below.
+
+1. In an admin terminal:
+```powershell
+choco install pip
+pip install pygame
+```
+
+2. In a non-admin terminal:
+```powershell
+git clone https://github.com/edthedev/tmntcade.git
+make test
+```
+
 ## References
 
 - [Python Installer][1]
