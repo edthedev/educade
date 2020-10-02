@@ -100,7 +100,7 @@ class PlayField():
 
     def add_flora(self):
         """Add places to hide."""
-        # self.fish += [ScaryFish()]
+        # TODO: Flora to spawn *not* all in a straight vertical column.
         self.flora += [Flora(variety=random.choice(range(0, 5)),
                              size=self.flora_size,
                              pos_x=self.max_x-200, # TODO: Factor in self.clock
@@ -169,7 +169,7 @@ class PlayField():
         # The field adds things
         if random.randint(0, 10000) > (9990):  # New Fish
             self.add_fish()
-        if random.randint(0, 10000) > (9990):  # New Flora
+        if random.randint(0, 10000) > (9000):  # New Flora
             self.add_flora()
 
         # --- Act
