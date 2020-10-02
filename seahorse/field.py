@@ -174,7 +174,7 @@ class PlayField():
         # The field adds things
         if random.randint(0, 10000) > (9990):  # New Fish
             self.add_fish()
-        if random.randint(0, 10000) > (9000):  # New Flora
+        if random.randint(0, 10000) > (9900):  # New Flora
             self.add_flora()
 
         # --- Act
