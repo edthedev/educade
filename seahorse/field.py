@@ -52,7 +52,6 @@ class PlayField():
         pygame.joystick.init()
         size = [self.max_x, self.min_y]
         self.screen = pygame.display.set_mode(size)
-        self.screen.fill(Colors.DARK_BLUE)  # background
         pygame.display.set_caption("Undersea Hide and Seek")
         pygame.mouse.set_visible(False)
 
@@ -103,10 +102,11 @@ class PlayField():
         # TODO: Flora to spawn *not* all in a straight vertical column.
         new_flora = Flora(variety=random.choice(range(0, 5)),
                              size=self.flora_size,
-                             pos_x=self.max_x-self.flora_size, 
+                             pos_x=self.max_x+self.flora_size, 
                              pos_y=random.choice(range(0, self.min_y)))
-        new_flora.draw(self.screen)
-        # self.flora += [new_flora]
+        # new_flora.draw(self.screen)
+        self.flora += [new_flora]
+        # TODO: color flora image white and blit blend flora to a new color
                        # Flora(variety=1, pos_x=200, img_color=pygame.Color(255, 0, 0)),
 
     def add_fish(self):
@@ -115,14 +115,15 @@ class PlayField():
 
     def draw(self):
         """Re-Draw the play field."""
+        self.screen.fill(Colors.DARK_BLUE)  # background
 
         # Only draw flora when they first appear.
-        # for flora in self.flora:
-        #    flora.draw(self.screen)
+        for flora in self.flora:
+           flora.draw(self.screen)
 
         # Shift the background before drawing players.
         # self.screen.scroll(dx=-self.clock)
-        self.screen.scroll(dx=-1)
+        # self.screen.scroll(dx=-1)
 
         for player in self.players:
             player.draw(self.screen)
@@ -168,8 +169,6 @@ class PlayField():
     def logic(self):
         """Calculate game logic."""
         self.sprites = self.players + self.flora
-        self.clock = self.clock % self.max_x
-        self.clock += 1
 
         # --- Arrange
         # The field adds things
@@ -184,7 +183,8 @@ class PlayField():
             player.logic()
 
         for flora in self.flora:
-            if flora.pos_x - self.clock < 0 - self.flora_size:
+            flora.logic() # Drift to create the current.
+            if flora.pos_x < 0 - self.flora_size:
                 self.flora.remove(flora) # Past our maximum scrollback, so stop tracking.
 
         # The field taketh away

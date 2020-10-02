@@ -18,6 +18,7 @@ class Flora():
     variety: int = 0
     size_multiple: int = .5
     block_size: int = 0
+    move_amt: int = 2
 
     img: pygame.Surface = None
     draw_area: pygame.Rect = None
@@ -64,3 +65,7 @@ class Flora():
         pygame.draw.rect(screen, Colors.DARK_BLUE,
                          [self.pos_x, self.pos_y, self.size_x, self.size_y])
         screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
+    
+    def logic(self):
+        """Drift slowly to create the current."""
+        self.pos_x -= self.move_amt
