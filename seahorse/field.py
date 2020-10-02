@@ -121,7 +121,12 @@ class PlayField():
         for player in self.players:
             player.draw(self.screen)
 
-        self.screen.scroll(dx=-self.clock) 
+
+        self.screen.scroll(dx=-self.clock)
+
+        pygame.draw.rect(self.screen, Colors.DARK_BLUE,
+                         [self.max_x-self.clock, 0, self.clock, self.min_y])
+
         # Go ahead and update the screen with what we've drawn.
         pygame.display.flip()
 
