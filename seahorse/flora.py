@@ -18,14 +18,16 @@ class Flora():
     variety: int = 0
     size_multiple: int = .5
     block_size: int = 0
-    move_amt: int = 2
+    move_delay: int = 5
+    move_clock: int = 0
+    move_amt: int = 1
 
     img: pygame.Surface = None
     draw_area: pygame.Rect = None
 
     img_rows: int = 2
     img_cols: int = 3
-    img_scale: int = 5
+    img_scale: int = 10
     img_color: pygame.Color = None
     # TODO: negative blit each character each time they move
     # TODO: deal with negativie blitting through a hiding place
@@ -69,4 +71,7 @@ class Flora():
     
     def logic(self):
         """Drift slowly to create the current."""
-        self.pos_x -= self.move_amt
+        self.move_clock += 1
+        if self.move_clock > self.move_delay:
+            self.pos_x -= self.move_amt
+        self.move_clock = self.move_clock % self.move_delay
