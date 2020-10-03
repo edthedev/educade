@@ -1,10 +1,7 @@
 
 
-# $gameName = "joytest"
-# $gameName = "inv4ders"
-# $gameName = "bouncetest"
-$hostName = "pi@tmntcade"
-# $hostName = "pi@rampage"
+# $hostName = "pi@tmntcade"
+$hostName = "pi@rampage"
 
 $scriptDir = "/home/pi/RetroPie/roms/ports"
 
@@ -14,7 +11,8 @@ ssh ${hostName} -C "chmod +x $scriptDir/*.sh"
 ssh ${hostName} -C "dos2unix $scriptDir/*.sh"
 
 # $games = "joytest","inv4ders","peanut"
-$games = "seahorse","inv4ders","peanut"
+# $games = "seahorse","inv4ders","peanut"
+$games = "seahorse"
 
 Write-Host "Cleaning up Game Files"
 

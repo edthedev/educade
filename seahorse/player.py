@@ -64,7 +64,6 @@ class Player():
     pos_y: int = 100
     size_x: int = 50
     size_y: int = 50
-    move_amt: int = 2
     color: tuple = Colors.RED
     falling: int = 0
     ground_y: int = 0 # override this!
@@ -73,10 +72,11 @@ class Player():
     secret_keys: int = 1
     move_delay: int = 2
     move_clock: int = 0
-    move_amt: int = 1
     color_idx: int = 0
     color_cooldown: int = 0
     images: PlayerImages = None
+    move_amt: int = 4
+    drift_amt: int = 1
 
     def __post_init__(self):
         """Set pos_x to start_x"""
@@ -89,7 +89,7 @@ class Player():
         self.move_clock += 1
         if self.move_clock >= self.move_delay:
             if self.pos_x > 0 - self.size_x:
-                self.pos_x -= self.move_amt
+                self.pos_x -= self.drift_amt
 
         if self.color_cooldown > 0:
             self.color_cooldown -= 1
@@ -200,9 +200,10 @@ class Player():
     def change_color(self):
         """Change colors."""
         if self.color_cooldown <= 0:
-            self.color_idx +=1
+            self.color_idx += 1
             self.color_idx = self.color_idx % 6
             self.color_cooldown = 10
+            # TODO: Fix for all players are chaning together.
 
     def draw(self, screen):
         """Draw the player."""
