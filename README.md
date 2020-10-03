@@ -39,8 +39,8 @@ They mainly developed educational games and software based on the Sesame Street 
 
 My eternal thanks to the **CTW Software Group Development Team for Peanut Butter Panic:**
 
-Harold Byrd, Dick Codor, Sandy Damashek, Bernie De Koven,
-Lisa Feder, Laura Kurland, Dan Oehlsen, Mary Schenck Balcer, Alan Shapiro, Debra Weinberger
+Harold Byrd, [Dick Codor](https://www.amazon.com/Books-Dick-Codor/s?rh=n%3A283155%2Cp_27%3ADick+Codor), [Sandy Damashek](https://muppet.fandom.com/wiki/Sandy_Damashek), [Bernie De Koven](https://en.wikipedia.org/wiki/Bernie_De_Koven),
+Lisa Feder, [Laura Kurland](https://www.linkedin.com/in/laura-c-kurland-17435016/), [Dan Oehlsen](https://www.linkedin.com/in/doehlsen/), [Mary Schenck Balcer](https://muppet.fandom.com/wiki/Mary_Schenck), Alan Shapiro, Debra Weinberger
 
 Your work continues to inspire me.
 
