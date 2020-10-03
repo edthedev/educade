@@ -41,12 +41,15 @@ class Fauna():
 
         self.size_x = self.block_size * self.img_scale
         self.size_y = self.block_size * self.img_scale
-        self.img = pygame.transform.scale(self.img,
-                                          (int(self.size_x * self.img_cols),
-                                           int(self.size_y * self.img_rows)))
+
+
         self.img_color = True
         if self.img_color:
             self.img.blit(red, (0, 0), special_flags=pygame.BLEND_ADD)
+
+        self.img = pygame.transform.scale(self.img,
+                                          (int(self.size_x * self.img_cols),
+                                           int(self.size_y * self.img_rows)))
 
         # TODO: Change each sprite white and use blit.blend to change their color
         # TODO: Try to use surface.get rgb pixel to see if our

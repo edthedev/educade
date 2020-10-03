@@ -14,7 +14,7 @@ ssh ${hostName} -C "chmod +x $scriptDir/*.sh"
 ssh ${hostName} -C "dos2unix $scriptDir/*.sh"
 
 # $games = "joytest","inv4ders","peanut"
-$games = "inv4ders","peanut"
+$games = "seahorse","inv4ders","peanut"
 
 Write-Host "Cleaning up Game Files"
 
