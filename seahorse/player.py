@@ -75,6 +75,7 @@ class Player():
     move_clock: int = 0
     move_amt: int = 1
     color_idx: int = 0
+    color_cooldown: int = 0
     images: PlayerImages = None
 
     def __post_init__(self):
@@ -90,7 +91,8 @@ class Player():
             if self.pos_x > 0 - self.size_x:
                 self.pos_x -= self.move_amt
 
-        # TODO: Switch player image when button is pressed.
+        if self.color_cooldown > 0:
+            self.color_cooldown -= 1
 
     def control(self, keys=None, joystick=None):
         """Look for signals accepted by this player, and apply them.
@@ -197,8 +199,10 @@ class Player():
 
     def change_color(self):
         """Change colors."""
-        self.color_idx +=1
-        self.color_idx = self.color_idx % 6
+        if self.color_cooldown <= 0:
+            self.color_idx +=1
+            self.color_idx = self.color_idx % 6
+            self.color_cooldown = 10
 
     def draw(self, screen):
         """Draw the player."""
