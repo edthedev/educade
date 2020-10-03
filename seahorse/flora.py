@@ -1,6 +1,7 @@
 """Ocean floor things to hide behind."""
 from dataclasses import dataclass
 
+import random
 import pygame
 
 from image import Images
@@ -28,12 +29,19 @@ class Flora():
     img_rows: int = 2
     img_cols: int = 3
     img_scale: int = 10
-    img_color: pygame.Color = None
-
+    img_color: int = 0
 
     def __post_init__(self):
         """Randomize self."""
-        self.img = pygame.image.load(Images.get_path(r'flora.purple.png'))
+        self.img = pygame.image.load(Images.get_path(r'flora.png'))
+
+        # Pick which color we are
+        color_file = random.choice(Images.color_files)
+        # TODO: Capture this random choice for later use...
+        color_img = pygame.image.load(Images.get_path(color_file))
+
+        # Apply chosen color
+        Images.color_image(self.img, color_img)
 
         # Size
         self.block_size = int(self.size_multiple * 32)
@@ -44,8 +52,8 @@ class Flora():
         self.img = pygame.transform.scale(self.img,
                                           (int(self.size_x * self.img_cols),
                                            int(self.size_y * self.img_rows)))
-        if self.img_color:
-            pass
+
+
 
         # Pick which variety we are.
         var_x = self.variety % self.img_cols
@@ -54,6 +62,7 @@ class Flora():
                                      var_y * self.block_size * self.img_scale,
                                      self.block_size * self.img_scale,
                                      self.block_size * self.img_scale)
+
 
     def draw(self, screen):
         """Draw self on the screen."""
