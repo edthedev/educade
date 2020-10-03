@@ -44,6 +44,8 @@ Lisa Feder, Laura Kurland, Dan Oehlsen, Mary Schenck Balcer, Alan Shapiro, Debra
 
 Your work continues to inspire me.
 
+![Sandwich Panic Screenshot](sandwich_panic.PNG)
+
 ### The Original Welcome Message from Peanut Butter Panic
 
 ```
@@ -72,6 +74,7 @@ Undersea Hide and Seek is a tribute to [Seahorse Hide and Seek - another classic
 
 Seahorse Hide and Seek is Copyright 1984 Joyce Hakansson
 
+![Undersea Hide and Seek Screenshot](hideandseek.PNG)
 
 ## Contributing
 

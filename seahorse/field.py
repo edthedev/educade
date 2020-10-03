@@ -179,6 +179,8 @@ class PlayField():
 
         # TODO: Add a safe home to make it to for a victory celebration.
         # TODO: Add a time clock to pace out the scary fish.
+        # TODO: Set the game icon to a player icon.
+        # TODO: Make current drift also affect players.
 
         # --- Arrange
         # The field adds things
