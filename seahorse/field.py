@@ -102,9 +102,9 @@ class PlayField():
     def add_flora(self):
         """Add places to hide."""
         new_flora = Flora(variety=random.choice(range(0, 5)),
-                             size=self.flora_size,
-                             pos_x=self.max_x+self.flora_size,
-                             pos_y=random.choice(range(0, self.min_y)))
+                          size=self.flora_size,
+                          pos_x=self.max_x+self.flora_size,
+                          pos_y=random.choice(range(0, self.min_y)))
         # new_flora.draw(self.screen)
         self.flora += [new_flora]
         # TODO: color flora image white and blit blend flora to a new color

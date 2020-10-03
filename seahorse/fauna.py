@@ -33,6 +33,7 @@ class Fauna():
     def __post_init__(self):
         """Size self."""
         self.img = pygame.image.load(Images.get_path(r'fauna.white.png'))
+        red = pygame.image.load(Images.get_path(r'red.png'))
 
         # Size
         self.block_size = int(self.size_multiple * 32)
@@ -43,10 +44,13 @@ class Fauna():
         self.img = pygame.transform.scale(self.img,
                                           (int(self.size_x * self.img_cols),
                                            int(self.size_y * self.img_rows)))
+        self.img_color = True
         if self.img_color:
-            pass
+            self.img.blit(red, (0, 0), special_flags=pygame.BLEND_ADD)
+
         # TODO: Change each sprite white and use blit.blend to change their color
-        # TODO: Try to use surface.get rgb pixel to see if our chosen hiding place matches our color?
+        # TODO: Try to use surface.get rgb pixel to see if our
+        # chosen hiding place matches our color?
         # TODO: Blit blend in the desired color.
 
         # Pick which variety we are.

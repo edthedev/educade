@@ -133,18 +133,12 @@ class Player():
         True
 
         """
-        if self.lasering:
-            return self.inline_with(other)
         return (
             self.pos_x-self.size_x <= other.pos_x + other.size_x and
             self.pos_y - self.size_y <= other.pos_y and
             self.pos_x+self.size_x >= other.pos_x+other.size_x and
             self.pos_y + self.size_y >= other.pos_y
         )
-
-    def fatten(self):
-        """Get fatter."""
-        self.fat_count += 10
 
     def _up(self):
         """Move up."""
