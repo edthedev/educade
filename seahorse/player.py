@@ -8,6 +8,7 @@ import pygame
 # from text import TextPrint
 from controls import ControlSet
 from colors import Colors
+from image import Images
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -26,6 +27,27 @@ JOY_Y = 1
 class PlayerImages():
     """Images of a NutNik"""
     default: str
+    size_x: int
+    size_y: int
+    images: List[pygame.Surface] = None
+
+    def __post_init__(self):
+        """Load some images."""
+        self.images = []
+        for color in [r'red.png', r'organge.png', r'yellow.png', 
+                      r'green.png', r'blue.png', r'puprle.png']:
+            color_img = pygame.image.load(Images.get_path(color))
+            horse = pygame.image.load(self.default)
+            horse.blit(color_img, (0, 0), special_flags=pygame.BLEND_ADD)
+            red_horse = pygame.transform.scale(horse, (int(self.size_x), int(self.size_y)))
+            self.images += [red_horse]
+    
+    def __getitem__(self,key):
+        """Return the image surface.
+        
+        This prevent us from having to call player.images.images[0] later.
+        """
+        return self.images[key]
 
 @dataclass
 class Player():
@@ -45,20 +67,15 @@ class Player():
     move_amt: int = 2
     color: tuple = Colors.RED
     falling: int = 0
-    jump_max: int = 500 # this will change during play
     ground_y: int = 0 # override this!
-    has_sandwich: int = 0
-    fatten_x: int = 10
-    fatten_y: int = 5
-    fat_count: int = 50
-    launched: int = 0
-    images: PlayerImages = None
     max_x: int = 100
     start_x: int = 100
     secret_keys: int = 1
     move_delay: int = 2
     move_clock: int = 0
     move_amt: int = 1
+    color_idx: int = 0
+    images: PlayerImages = None
 
     def __post_init__(self):
         """Set pos_x to start_x"""
@@ -72,6 +89,8 @@ class Player():
         if self.move_clock >= self.move_delay:
             if self.pos_x > 0 - self.size_x:
                 self.pos_x -= self.move_amt
+
+        # TODO: Switch player image when button is pressed.
 
     def control(self, keys=None, joystick=None):
         """Look for signals accepted by this player, and apply them.
@@ -148,11 +167,6 @@ class Player():
         """Interrupt a jump. - New experimental feature...might remove this."""
         self.pos_y += (self.move_amt)
 
-        ## Eat to get fatter.
-        if self.has_sandwich > 0:
-            self.has_sandwich = 0
-            self.fatten()
-
     def _left(self):
         """Move self left."""
         self.pos_x -= self.move_amt
@@ -179,18 +193,19 @@ class Player():
             fired = True
         return fired
 
+    def change_color(self):
+        """Change colors."""
+        self.color_idx +=1
+        self.color_idx = self.color_idx % 6
+
     def draw(self, screen):
         """Draw the player."""
 
         if self.fat_count < 30:
             self.fat_count = 30
 
-        self.size_x = self.fat_count
-        self.size_y = self.fat_count * 2 / 3
+        img = self.images[self.color_idx]
 
-        img = None
-        img = pygame.image.load(self.images.default)
-        img = pygame.transform.scale(img, (int(self.size_x), int(self.size_y)))
         screen.blit(img, (self.pos_x, self.pos_y))
 
     def land_on(self, pad):
