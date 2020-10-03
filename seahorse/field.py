@@ -33,6 +33,7 @@ class PlayField():
     fauna: List[Fauna] = field(default_factory=list)
     clock: int = 0
     flora_size: int = 80
+    player_size: int = 40
 
     def __post_init__(self):
         """New play field."""
@@ -67,8 +68,8 @@ class PlayField():
                          controls=[ControlSet()])
         player1.images = PlayerImages(
             default=Images.get_path(r'seahorse.png'),
-            size_x=self.flora_size,
-            size_y=self.flora_size
+            size_x=self.player_size,
+            size_y=self.player_size
         )
         player2 = Player(color=Colors.RED,
                          start_x=self.max_x / 5 * 4,
@@ -78,8 +79,8 @@ class PlayField():
                                               left=pygame.K_a, right=pygame.K_d)])
         player2.images = PlayerImages(
             default=Images.get_path(r'squid.png'),
-            size_x=self.flora_size,
-            size_y=self.flora_size
+            size_x=self.player_size,
+            size_y=self.player_size
         )
         player3 = Player(color=Colors.BLUE,
                          start_x=self.max_x / 5,
@@ -87,8 +88,8 @@ class PlayField():
                                               left=pygame.K_1, right=pygame.K_4)])
         player3.images = PlayerImages(
             default=Images.get_path(r'flounder.png'),
-            size_x=self.flora_size,
-            size_y=self.flora_size
+            size_x=self.player_size,
+            size_y=self.player_size
         )
         player4 = Player(color=Colors.PURPLE,
                          start_x=self.max_x / 5 * 3,
@@ -96,8 +97,8 @@ class PlayField():
                                               left=pygame.K_5, right=pygame.K_8)])
         player4.images = PlayerImages(
             default=Images.get_path(r'cuttlefish.png'),
-            size_x=self.flora_size,
-            size_y=self.flora_size
+            size_x=self.player_size,
+            size_y=self.player_size
         )
 
 

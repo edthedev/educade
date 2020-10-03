@@ -34,8 +34,8 @@ class PlayerImages():
     def __post_init__(self):
         """Load some images."""
         self.images = []
-        for color in [r'red.png', r'organge.png', r'yellow.png', 
-                      r'green.png', r'blue.png', r'puprle.png']:
+        for color in [r'red.png', r'orange.png', r'yellow.png', 
+                      r'green.png', r'blue.png', r'purple.png']:
             color_img = pygame.image.load(Images.get_path(color))
             horse = pygame.image.load(self.default)
             horse.blit(color_img, (0, 0), special_flags=pygame.BLEND_ADD)
@@ -127,6 +127,7 @@ class Player():
             self._left()
         if joystick.get_button(0):
             # self.text_print.print(self.screen, "Player fired!")
+            self.change_color()
             fired = True
         return fired
 
@@ -190,6 +191,7 @@ class Player():
             if keys[control_set.right_key]:
                 self._right()
         if keys[pygame.K_SPACE]:
+            self.change_color()
             fired = True
         return fired
 
@@ -200,10 +202,6 @@ class Player():
 
     def draw(self, screen):
         """Draw the player."""
-
-        if self.fat_count < 30:
-            self.fat_count = 30
-
         img = self.images[self.color_idx]
 
         screen.blit(img, (self.pos_x, self.pos_y))
