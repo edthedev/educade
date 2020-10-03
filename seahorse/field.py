@@ -11,6 +11,7 @@ from controls import ControlSet
 from colors import Colors
 from image import Images
 from flora import Flora
+from fauna import Fauna
 
 # Set these to the two buttons you want to use for 'exit'. Count up starting from 0
 SELECT = 3
@@ -29,6 +30,7 @@ class PlayField():
     debug: bool = False
     fish: List[ControlSet] = field(default_factory=list)
     flora: List[Flora] = field(default_factory=list)
+    fauna: List[Fauna] = field(default_factory=list)
     clock: int = 0
     flora_size: int = 80
 
@@ -99,10 +101,9 @@ class PlayField():
 
     def add_flora(self):
         """Add places to hide."""
-        # TODO: Flora to spawn *not* all in a straight vertical column.
         new_flora = Flora(variety=random.choice(range(0, 5)),
                              size=self.flora_size,
-                             pos_x=self.max_x+self.flora_size, 
+                             pos_x=self.max_x+self.flora_size,
                              pos_y=random.choice(range(0, self.min_y)))
         # new_flora.draw(self.screen)
         self.flora += [new_flora]
@@ -111,11 +112,18 @@ class PlayField():
 
     def add_fish(self):
         """Occassionally add a scary fish to the play field."""
-        # self.fish += [ScaryFish()]
+        self.fauna += [Fauna(variety=random.choice(range(0, 5)),
+                             size=self.flora_size,
+                             pos_x=self.max_x+self.flora_size,
+                             pos_y=random.choice(range(0, self.min_y))
+        )]
 
     def draw(self):
         """Re-Draw the play field."""
         self.screen.fill(Colors.DARK_BLUE)  # background
+
+        for fauna in self.fauna:
+           fauna.draw(self.screen)
 
         # Only draw flora when they first appear.
         for flora in self.flora:
@@ -168,11 +176,13 @@ class PlayField():
 
     def logic(self):
         """Calculate game logic."""
-        self.sprites = self.players + self.flora
+
+        # TODO: Add a safe home to make it to for a victory celebration.
+        # TODO: Add a time clock to pace out the scary fish.
 
         # --- Arrange
         # The field adds things
-        if random.randint(0, 10000) > (9990):  # New Fish
+        if random.randint(0, 10000) > (9950):  # New Fish
             self.add_fish()
         if random.randint(0, 10000) > (9900):  # New Flora
             self.add_flora()
@@ -186,6 +196,11 @@ class PlayField():
             flora.logic() # Drift to create the current.
             if flora.pos_x < 0 - self.flora_size:
                 self.flora.remove(flora) # Past our maximum scrollback, so stop tracking.
+        
+        for fauna in self.fauna:
+            fauna.logic() # Swim
+            if fauna.pos_x < 0 - self.flora_size:
+                self.fauna.remove(fauna) # Swim away
 
         # The field taketh away
         for player in self.players:

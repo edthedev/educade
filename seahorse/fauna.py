@@ -1,4 +1,4 @@
-"""Ocean floor things to hide behind."""
+"""Things in the ocean to hide from."""
 from dataclasses import dataclass
 
 import pygame
@@ -7,8 +7,8 @@ from image import Images
 from colors import Colors
 
 @dataclass
-class Flora():
-    """Places to hide."""
+class Fauna():
+    """Something to hide from."""
 
     size: int
     pos_x: int = 0
@@ -18,7 +18,7 @@ class Flora():
     variety: int = 0
     size_multiple: int = .5
     block_size: int = 0
-    move_delay: int = 2
+    move_delay: int = 1
     move_clock: int = 0
     move_amt: int = 1
 
@@ -30,10 +30,9 @@ class Flora():
     img_scale: int = 10
     img_color: pygame.Color = None
 
-
     def __post_init__(self):
-        """Randomize self."""
-        self.img = pygame.image.load(Images.get_path(r'flora.purple.png'))
+        """Size self."""
+        self.img = pygame.image.load(Images.get_path(r'fauna.white.png'))
 
         # Size
         self.block_size = int(self.size_multiple * 32)
@@ -46,6 +45,9 @@ class Flora():
                                            int(self.size_y * self.img_rows)))
         if self.img_color:
             pass
+        # TODO: Change each sprite white and use blit.blend to change their color
+        # TODO: Try to use surface.get rgb pixel to see if our chosen hiding place matches our color?
+        # TODO: Blit blend in the desired color.
 
         # Pick which variety we are.
         var_x = self.variety % self.img_cols
@@ -62,7 +64,7 @@ class Flora():
         screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
     
     def logic(self):
-        """Drift slowly to create the current."""
+        """Swim slowly against the current."""
         self.move_clock = self.move_clock % self.move_delay
         self.move_clock += 1
         if self.move_clock >= self.move_delay:
