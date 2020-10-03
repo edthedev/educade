@@ -114,10 +114,9 @@ class PlayField():
                           size=self.flora_size,
                           pos_x=self.max_x+self.flora_size,
                           pos_y=random.choice(range(0, self.min_y)))
-        # new_flora.draw(self.screen)
         self.flora += [new_flora]
-        # TODO: color flora image white and blit blend flora to a new color
-                       # Flora(variety=1, pos_x=200, img_color=pygame.Color(255, 0, 0)),
+        # Let's draw from back to front...
+        self.flora.sort(key=lambda x: x.pos_y, reverse=False)
 
     def add_fish(self):
         """Occassionally add a scary fish to the play field."""
