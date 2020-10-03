@@ -56,15 +56,22 @@ class Player():
     max_x: int = 100
     start_x: int = 100
     secret_keys: int = 1
-    lasering: int = 0
+    move_delay: int = 2
+    move_clock: int = 0
+    move_amt: int = 1
 
     def __post_init__(self):
         """Set pos_x to start_x"""
         self.pos_x = self.start_x
 
+
     def logic(self):
-        """Do player game logic."""
-        pass
+        """Drift slowly to create the current."""
+        self.move_clock = self.move_clock % self.move_delay
+        self.move_clock += 1
+        if self.move_clock >= self.move_delay:
+            if self.pos_x > 0 - self.size_x:
+                self.pos_x -= self.move_amt
 
     def control(self, keys=None, joystick=None):
         """Look for signals accepted by this player, and apply them.

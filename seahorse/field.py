@@ -178,9 +178,10 @@ class PlayField():
         """Calculate game logic."""
 
         # TODO: Add a safe home to make it to for a victory celebration.
-        # TODO: Add a time clock to pace out the scary fish.
+        # TODO: Add a time clock to add more scary fish later in the round.
         # TODO: Set the game icon to a player icon.
-        # TODO: Make current drift also affect players.
+
+        # TODO: Add hide vs inline detection for fish catching players.
 
         # --- Arrange
         # The field adds things
