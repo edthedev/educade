@@ -1,7 +1,7 @@
 
 
-$hostName = "pi@tmntcade"
-# $hostName = "pi@rampage"
+# $hostName = "pi@tmntcade"
+$hostName = "pi@rampage"
 
 $scriptDir = "/home/pi/RetroPie/roms/ports"
 
@@ -30,3 +30,5 @@ foreach ($gameName in $games) {
 }
 Write-Host "List of Launcher Scripts"
 ssh ${hostName} -C "ls -al /home/pi/RetroPie/roms/ports"
+
+Write-Host "Deployed to $hostName"

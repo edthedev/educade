@@ -5,7 +5,6 @@ import random
 import pygame
 
 from image import Images
-from colors import Colors
 
 @dataclass
 class Flora():
@@ -36,8 +35,8 @@ class Flora():
         self.img = pygame.image.load(Images.get_path(r'flora.png'))
 
         # Pick which color we are
-        color_file = random.choice(Images.color_files)
-        # TODO: Capture this random choice for later use...
+        self.img_color = random.choice(range(0, 5))
+        color_file = Images.color_files[self.img_color]
         color_img = pygame.image.load(Images.get_path(color_file))
 
         # Apply chosen color

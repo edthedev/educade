@@ -38,9 +38,11 @@ class PlayerImages():
                       r'green.png', r'blue.png', r'purple.png']:
             color_img = pygame.image.load(Images.get_path(color))
             horse = pygame.image.load(self.default)
-            horse.blit(color_img, (0, 0), special_flags=pygame.BLEND_ADD)
+            Images.color_image(base_image=horse, color_image=color_img)
             red_horse = pygame.transform.scale(horse, (int(self.size_x), int(self.size_y)))
             self.images += [red_horse]
+
+        pygame.display.set_icon(self.images[0])
     
     def __getitem__(self,key):
         """Return the image surface.

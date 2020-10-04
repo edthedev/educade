@@ -123,19 +123,18 @@ class PlayField():
         self.fauna += [Fauna(variety=random.choice(range(0, 5)),
                              size=self.flora_size,
                              pos_x=self.max_x+self.flora_size,
-                             pos_y=random.choice(range(0, self.min_y))
-        )]
+                             pos_y=random.choice(range(0, self.min_y)))]
 
     def draw(self):
         """Re-Draw the play field."""
         self.screen.fill(Colors.DARK_BLUE)  # background
 
         for fauna in self.fauna:
-           fauna.draw(self.screen)
+            fauna.draw(self.screen)
 
         # Only draw flora when they first appear.
         for flora in self.flora:
-           flora.draw(self.screen)
+            flora.draw(self.screen)
 
         # Shift the background before drawing players.
         # self.screen.scroll(dx=-self.clock)
@@ -181,19 +180,26 @@ class PlayField():
             _ = self.players[i].control(joystick=joystick)
             # if jumped:
             #     self.jumped(self.players[i])
+    def add_castle(self):
+        """Add victory castle."""
+        pass
+        # TODO: Add a safe home to make it to for a victory celebration.
 
     def logic(self):
         """Calculate game logic."""
 
-        # TODO: Add a safe home to make it to for a victory celebration.
-        # TODO: Add a time clock to add more scary fish later in the round.
+        self.clock += 1
+
+        if self.clock >= 100:
+            self.add_castle()
+
         # TODO: Set the game icon to a player icon.
 
         # TODO: Add hide vs inline detection for fish catching players.
 
         # --- Arrange
         # The field adds things
-        if random.randint(0, 10000) > (9950):  # New Fish
+        if random.randint(0, 10000) > (9950 - int(self.clock/100)):  # New Fish
             self.add_fish()
         if random.randint(0, 10000) > (9900):  # New Flora
             self.add_flora()

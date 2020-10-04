@@ -20,4 +20,3 @@ class Images:
         """Color an image."""
         base_image.blit(color_image, (0, 0), special_flags=pygame.BLEND_ADD)
         return base_image
-        # TODO: Clean up Player code to use this helper too.
