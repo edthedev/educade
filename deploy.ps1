@@ -1,7 +1,7 @@
 
 
-# $hostName = "pi@tmntcade"
-$hostName = "pi@rampage"
+$hostName = "pi@tmntcade"
+# $hostName = "pi@rampage"
 
 $scriptDir = "/home/pi/RetroPie/roms/ports"
 

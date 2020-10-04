@@ -4,7 +4,6 @@ from dataclasses import dataclass
 import pygame
 
 from image import Images
-from colors import Colors
 from player import Player
 
 # TODO: Sweep to make all lib names plural.
@@ -56,11 +55,6 @@ class Fauna():
                                           (int(self.size_x * self.img_cols),
                                            int(self.size_y * self.img_rows)))
 
-        # TODO: Change each sprite white and use blit.blend to change their color
-        # TODO: Try to use surface.get rgb pixel to see if our
-        # chosen hiding place matches our color?
-        # TODO: Blit blend in the desired color.
-
         # Pick which variety we are.
         var_x = self.variety % self.img_cols
         var_y = self.variety % self.img_rows
@@ -74,9 +68,10 @@ class Fauna():
         #pygame.draw.rect(screen, Colors.DARK_BLUE,
         #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
         screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
-    
+   
     def logic(self):
         """Swim slowly against the current."""
+        # TODO: Catch players and drag them off screen.
         self.move_clock = self.move_clock % self.move_delay
         self.move_clock += 1
         if self.move_clock >= self.move_delay:
@@ -90,5 +85,4 @@ class Fauna():
 
     def can_see(self, player):
         """Can we see this player?"""
-        # TODO: support camuflage
         return player.hidden_in is None and player.inline_with(self)

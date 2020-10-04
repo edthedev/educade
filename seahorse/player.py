@@ -34,7 +34,7 @@ class PlayerImages():
     def __post_init__(self):
         """Load some images."""
         self.images = []
-        for color in [r'red.png', r'orange.png', r'yellow.png', 
+        for color in [r'red.png', r'orange.png', r'yellow.png',
                       r'green.png', r'blue.png', r'purple.png']:
             color_img = pygame.image.load(Images.get_path(color))
             horse = pygame.image.load(self.default)
@@ -43,10 +43,10 @@ class PlayerImages():
             self.images += [red_horse]
 
         pygame.display.set_icon(self.images[0])
-    
-    def __getitem__(self,key):
+
+    def __getitem__(self, key):
         """Return the image surface.
-        
+    
         This prevent us from having to call player.images.images[0] later.
         """
         return self.images[key]

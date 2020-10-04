@@ -193,9 +193,6 @@ class PlayField():
         if self.clock >= 100:
             self.add_castle()
 
-
-        # TODO: Add hide vs inline detection for fish catching players.
-
         # --- Arrange
         # The field adds things
         if random.randint(0, 10000) > (9950 - int(self.clock/100)):  # New Fish
@@ -220,7 +217,7 @@ class PlayField():
             flora.logic() # Drift to create the current.
             if flora.pos_x < 0 - self.flora_size:
                 self.flora.remove(flora) # Past our maximum scrollback, so stop tracking.
-        
+       
         for fauna in self.fauna:
             # Chase!
             for player in self.players:

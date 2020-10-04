@@ -68,7 +68,7 @@ class Flora():
         #pygame.draw.rect(screen, Colors.DARK_BLUE,
         #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
         screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
-    
+
     def logic(self):
         """Drift slowly to create the current."""
         self.move_clock = self.move_clock % self.move_delay
