@@ -207,13 +207,22 @@ class PlayField():
         # Every sprite does it's thing.
         for player in self.players:
             player.logic()
+            player.hidden_in = None # Re-check hiding spots every loop.
 
         for flora in self.flora:
+            # Be a place to hide.
+            for player in self.players:
+                if player.collide(flora):
+                    if player.img_color == flora.img_color:
+                        player.hidden_in = flora
+
+            # Drift by in the current.
             flora.logic() # Drift to create the current.
             if flora.pos_x < 0 - self.flora_size:
                 self.flora.remove(flora) # Past our maximum scrollback, so stop tracking.
         
         for fauna in self.fauna:
+            # Chase!
             for player in self.players:
                 if fauna.chasing_player is None:
                     if fauna.can_see(player):
@@ -222,17 +231,10 @@ class PlayField():
                     if not fauna.can_see(fauna.chasing_player):
                         fauna.chasing_player = None
 
+            # Just keep swimming!
             fauna.logic() # Swim
             if fauna.pos_x < 0 - self.flora_size:
                 self.fauna.remove(fauna) # Swim away
-
-        # The field taketh away
-        for player in self.players:
-            # Grab a sandwich!
-            for fish in self.fish:
-                if player.collide(fish):  # Catch a snarf!
-                    pass
-                    # TODO: Rewind back to last hiding place.
 
         # --- Assert --- Event Processing
         for event in pygame.event.get():

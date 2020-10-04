@@ -74,7 +74,7 @@ class Player():
     secret_keys: int = 1
     move_delay: int = 2
     move_clock: int = 0
-    color_idx: int = 0
+    img_color: int = 0
     color_cooldown: int = 0
     images: PlayerImages = None
     move_amt: int = 4
@@ -202,14 +202,14 @@ class Player():
     def change_color(self):
         """Change colors."""
         if self.color_cooldown <= 0:
-            self.color_idx += 1
-            self.color_idx = self.color_idx % 6
+            self.img_color += 1
+            self.img_color = self.img_color % 6
             self.color_cooldown = 10
             # TODO: Fix for all players are chaning together.
 
     def draw(self, screen):
         """Draw the player."""
-        img = self.images[self.color_idx]
+        img = self.images[self.img_color]
 
         screen.blit(img, (self.pos_x, self.pos_y))
 

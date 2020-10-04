@@ -91,4 +91,4 @@ class Fauna():
     def can_see(self, player):
         """Can we see this player?"""
         # TODO: support camuflage
-        return player.inline_with(self)
+        return player.hidden_in is None and player.inline_with(self)
