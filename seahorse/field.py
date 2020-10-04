@@ -193,7 +193,6 @@ class PlayField():
         if self.clock >= 100:
             self.add_castle()
 
-        # TODO: Set the game icon to a player icon.
 
         # TODO: Add hide vs inline detection for fish catching players.
 
@@ -215,6 +214,14 @@ class PlayField():
                 self.flora.remove(flora) # Past our maximum scrollback, so stop tracking.
         
         for fauna in self.fauna:
+            for player in self.players:
+                if fauna.chasing_player is None:
+                    if fauna.can_see(player):
+                        fauna.chasing_player = player
+                else:
+                    if not fauna.can_see(fauna.chasing_player):
+                        fauna.chasing_player = None
+
             fauna.logic() # Swim
             if fauna.pos_x < 0 - self.flora_size:
                 self.fauna.remove(fauna) # Swim away

@@ -5,6 +5,9 @@ import pygame
 
 from image import Images
 from colors import Colors
+from player import Player
+
+# TODO: Sweep to make all lib names plural.
 
 @dataclass
 class Fauna():
@@ -29,6 +32,8 @@ class Fauna():
     img_cols: int = 3
     img_scale: int = 10
     img_color: pygame.Color = None
+
+    chasing_player: Player = None
 
     def __post_init__(self):
         """Size self."""
@@ -75,4 +80,15 @@ class Fauna():
         self.move_clock = self.move_clock % self.move_delay
         self.move_clock += 1
         if self.move_clock >= self.move_delay:
-            self.pos_x -= self.move_amt
+            if self.chasing_player is None:
+                self.pos_x -= self.move_amt
+            else:
+                if self.pos_y > self.chasing_player.pos_y:
+                    self.pos_y -= self.move_amt
+                else:
+                    self.pos_y += self.move_amt
+
+    def can_see(self, player):
+        """Can we see this player?"""
+        # TODO: support camuflage
+        return player.inline_with(self)
