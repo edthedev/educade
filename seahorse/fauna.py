@@ -31,7 +31,6 @@ class Fauna():
     img_cols: int = 3
     img_scale: int = 10
     img_color: pygame.Color = None
-
     chasing_player: Player = None
 
     def __post_init__(self):
@@ -45,7 +44,6 @@ class Fauna():
 
         self.size_x = self.block_size * self.img_scale
         self.size_y = self.block_size * self.img_scale
-
 
         self.img_color = True
         if self.img_color:
@@ -68,7 +66,7 @@ class Fauna():
         #pygame.draw.rect(screen, Colors.DARK_BLUE,
         #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
         screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
-   
+
     def logic(self):
         """Swim slowly against the current."""
         # TODO: Catch players and drag them off screen.

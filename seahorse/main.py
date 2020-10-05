@@ -5,9 +5,10 @@ import pygame
 # from text import TextPrint
 from field import PlayField
 
-if __name__ == "__main__":
-    import argparse
+def main():
+    """The main game loop."""
 
+    import argparse
     parser = argparse.ArgumentParser(description='Peanut Butter Panic')
     parser.add_argument('-s', '--small', action='store_true')
     parser.add_argument('-d', '--debug', action='store_true')
@@ -34,3 +35,6 @@ if __name__ == "__main__":
         clock.tick(60)
 
     pygame.quit()
+
+if __name__ == "__main__":
+    main()

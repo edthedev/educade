@@ -46,7 +46,7 @@ class PlayerImages():
 
     def __getitem__(self, key):
         """Return the image surface.
-    
+   
         This prevent us from having to call player.images.images[0] later.
         """
         return self.images[key]
