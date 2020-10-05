@@ -31,6 +31,7 @@ class Flora():
     img_color: int = 0
 
     is_home: bool = False
+    looks_like_home: bool = False
 
     def __post_init__(self):
         """Randomize self."""
@@ -38,6 +39,7 @@ class Flora():
 
         if self.is_home:
             self.img = pygame.image.load(Images.get_path(r'home.png'))
+            self.looks_like_home = True
 
         # Pick which color we are
         self.img_color = random.choice(range(0, 5))
@@ -71,7 +73,7 @@ class Flora():
         """Draw self on the screen."""
         #pygame.draw.rect(screen, Colors.DARK_BLUE,
         #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
-        if self.is_home:
+        if self.looks_like_home:
             screen.blit(self.img, (self.pos_x, self.pos_y))
         else:
             screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
@@ -81,4 +83,5 @@ class Flora():
         self.move_clock = self.move_clock % self.move_delay
         self.move_clock += 1
         if self.move_clock >= self.move_delay:
-            self.pos_x -= self.move_amt
+            if not self.is_home or self.pos_x > 0:
+                self.pos_x -= self.move_amt

@@ -196,7 +196,8 @@ class PlayField():
         """Calculate game logic."""
 
         self.clock += 1
-        round_length = 100
+        round_length = 1000
+        # round_length = 100
 
         # --- Arrange
         if self.clock == round_length:
@@ -219,6 +220,11 @@ class PlayField():
             # Be a place to hide.
             for player in self.players:
                 if player.collide(flora):
+                    if flora.is_home:
+                        # TODO: Add fireworks! I don't care that we're undersea... Bubbles maybe.
+                        flora.is_home = False # Allow it to scroll away now.
+                        self.clock = 0
+
                     if player.img_color == flora.img_color:
                         player.hidden_in = flora
 
