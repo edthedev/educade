@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """Undersea Hide and Seek"""
 
+import argparse
+
 import pygame
+
 # from text import TextPrint
 from field import PlayField
 
 def main():
     """The main game loop."""
 
-    import argparse
     parser = argparse.ArgumentParser(description='Peanut Butter Panic')
     parser.add_argument('-s', '--small', action='store_true')
     parser.add_argument('-d', '--debug', action='store_true')

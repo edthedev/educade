@@ -6,10 +6,10 @@ from typing import List
 import random
 import pygame
 
-from player import Player, PlayerImages
+from players import Player, PlayerImages
 from controls import ControlSet
 from colors import Colors
-from image import Images
+from images import Images
 from flora import Flora
 from fauna import Fauna
 
@@ -143,8 +143,6 @@ class PlayField():
         for player in self.players:
             player.draw(self.screen)
 
-        # TODO: Add movement limits to keep players on screen.
-
         # Stupid hack to clean up
         # pygame.draw.rect(self.screen, Colors.DARK_BLUE,
         #                 [self.max_x-self.clock, 0, self.clock, self.min_y])
@@ -180,10 +178,11 @@ class PlayField():
             _ = self.players[i].control(joystick=joystick)
             # if jumped:
             #     self.jumped(self.players[i])
+
     def add_castle(self):
         """Add victory castle."""
-        pass
         # TODO: Add a safe home to make it to for a victory celebration.
+        pass
 
     def logic(self):
         """Calculate game logic."""
@@ -217,7 +216,7 @@ class PlayField():
             flora.logic() # Drift to create the current.
             if flora.pos_x < 0 - self.flora_size:
                 self.flora.remove(flora) # Past our maximum scrollback, so stop tracking.
-      
+
         for fauna in self.fauna:
             # Chase!
             for player in self.players:

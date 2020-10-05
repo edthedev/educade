@@ -3,10 +3,8 @@ from dataclasses import dataclass
 
 import pygame
 
-from image import Images
-from player import Player
-
-# TODO: Sweep to make all lib names plural.
+from images import Images
+from players import Player
 
 @dataclass
 class Fauna():

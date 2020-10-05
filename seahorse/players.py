@@ -8,7 +8,7 @@ import pygame
 # from text import TextPrint
 from controls import ControlSet
 from colors import Colors
-from image import Images
+from images import Images
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -46,7 +46,7 @@ class PlayerImages():
 
     def __getitem__(self, key):
         """Return the image surface.
-   
+
         This prevent us from having to call player.images.images[0] later.
         """
         return self.images[key]
@@ -200,12 +200,15 @@ class Player():
         return fired
 
     def change_color(self):
-        """Change colors."""
+        """Change colors.
+        
+        Note that Spacebar is routed to all players, so will chnage all their colors.
+        This will not happen when joysticks are connected.
+        """
         if self.color_cooldown <= 0:
             self.img_color += 1
             self.img_color = self.img_color % 6
             self.color_cooldown = 10
-            # TODO: Fix for all players are chaning together.
 
     def draw(self, screen):
         """Draw the player."""
