@@ -181,7 +181,6 @@ class PlayField():
 
     def add_castle(self):
         """Add victory castle."""
-        # TODO: Add a safe home to make it to for a victory celebration.
         new_flora = Flora(variety=0,
                           is_home=True,
                           size=self.flora_size*2,

@@ -163,7 +163,8 @@ class Player():
             self.pos_x+self.size_x >= other.pos_x+other.size_x and
             self.pos_y + self.size_y >= other.pos_y
         )
-        # TODO: Add a test tha
+        # TODO: Add a test that ensures the castle celebration is easy enough to trigger.
+        # But first setup a very visible celebration when a player gets home. Bubbles!
 
     def _up(self):
         """Move up."""
