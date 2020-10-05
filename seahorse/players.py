@@ -203,7 +203,7 @@ class Player():
 
     def change_color(self):
         """Change colors.
-        
+
         Note that Spacebar is routed to all players, so will chnage all their colors.
         This will not happen when joysticks are connected.
         """

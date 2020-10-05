@@ -20,9 +20,9 @@ class Colors():
     @staticmethod
     def fill(surface, color):
         """Fill all pixels of the surface with color, preserve transparency."""
-        w, h = surface.get_size()
-        r, g, b = color
-        for x in range(w):
-            for y in range(h):
-                a = surface.get_at((x, y))[3]
-                surface.set_at((x, y), pygame.Color(r, g, b, a))
+        wide, high = surface.get_size()
+        red, green, blue = color
+        for xii in range(wide):
+            for yii in range(high):
+                area = surface.get_at((xii, yii))[3]
+                surface.set_at((xii, yii), pygame.Color(red, green, blue, area))
