@@ -182,22 +182,32 @@ class PlayField():
     def add_castle(self):
         """Add victory castle."""
         # TODO: Add a safe home to make it to for a victory celebration.
-        pass
+        new_flora = Flora(variety=0,
+                          is_home=True,
+                          size=self.flora_size*2,
+                          pos_x=self.max_x+self.flora_size,
+                          pos_y=self.flora_size)
+        self.flora += [new_flora]
+        # Let's draw from back to front...
+        self.flora.sort(key=lambda x: x.pos_y, reverse=False)
+        
 
     def logic(self):
         """Calculate game logic."""
 
         self.clock += 1
-
-        if self.clock >= 100:
-            self.add_castle()
+        round_length = 100
 
         # --- Arrange
-        # The field adds things
-        if random.randint(0, 10000) > (9950 - int(self.clock/100)):  # New Fish
-            self.add_fish()
-        if random.randint(0, 10000) > (9900):  # New Flora
-            self.add_flora()
+        if self.clock == round_length:
+            self.add_castle()
+        
+        if self.clock < round_length: # Add nothing at round end.
+            # The field adds things
+            if random.randint(0, 10000) > (9950 - int(self.clock/100)):  # New Fish
+                self.add_fish()
+            if random.randint(0, 10000) > (9900):  # New Flora
+                self.add_flora()
 
         # --- Act
         # Every sprite does it's thing.

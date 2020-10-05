@@ -4,7 +4,7 @@ from dataclasses import dataclass
 import random
 import pygame
 
-from image import Images
+from images import Images
 
 @dataclass
 class Flora():
@@ -30,9 +30,14 @@ class Flora():
     img_scale: int = 10
     img_color: int = 0
 
+    is_home: bool = False
+
     def __post_init__(self):
         """Randomize self."""
         self.img = pygame.image.load(Images.get_path(r'flora.png'))
+
+        if self.is_home:
+            self.img = pygame.image.load(Images.get_path(r'home.png'))
 
         # Pick which color we are
         self.img_color = random.choice(range(0, 5))
@@ -40,7 +45,8 @@ class Flora():
         color_img = pygame.image.load(Images.get_path(color_file))
 
         # Apply chosen color
-        Images.color_image(self.img, color_img)
+        if not self.is_home:
+            Images.color_image(self.img, color_img)
 
         # Size
         self.block_size = int(self.size_multiple * 32)
@@ -51,8 +57,6 @@ class Flora():
         self.img = pygame.transform.scale(self.img,
                                           (int(self.size_x * self.img_cols),
                                            int(self.size_y * self.img_rows)))
-
-
 
         # Pick which variety we are.
         var_x = self.variety % self.img_cols
@@ -67,7 +71,10 @@ class Flora():
         """Draw self on the screen."""
         #pygame.draw.rect(screen, Colors.DARK_BLUE,
         #                 [self.pos_x, self.pos_y, self.size_x, self.size_y])
-        screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
+        if self.is_home:
+            screen.blit(self.img, (self.pos_x, self.pos_y))
+        else:
+            screen.blit(self.img, (self.pos_x, self.pos_y), area=self.draw_area)
 
     def logic(self):
         """Drift slowly to create the current."""
