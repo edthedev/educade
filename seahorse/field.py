@@ -189,7 +189,6 @@ class PlayField():
         self.flora += [new_flora]
         # Let's draw from back to front...
         self.flora.sort(key=lambda x: x.pos_y, reverse=False)
-   
 
     def logic(self):
         """Calculate game logic."""
@@ -201,7 +200,7 @@ class PlayField():
         # --- Arrange
         if self.clock == round_length:
             self.add_castle()
-      
+
         if self.clock < round_length - self.flora_size: # Add nothing at round end.
             # The field adds things
             if random.randint(0, 10000) > (9950 - int(self.clock/100)):  # New Fish
