@@ -127,7 +127,7 @@ class PlayField():
 
     def draw(self):
         """Re-Draw the play field."""
-        self.screen.fill(Colors.DARK_BLUE)  # background
+        self.screen.fill(Colors.SAND)  # background
 
         for fauna in self.fauna:
             fauna.draw(self.screen)
@@ -202,7 +202,7 @@ class PlayField():
         if self.clock == round_length:
             self.add_castle()
         
-        if self.clock < round_length: # Add nothing at round end.
+        if self.clock < round_length - self.flora_size: # Add nothing at round end.
             # The field adds things
             if random.randint(0, 10000) > (9950 - int(self.clock/100)):  # New Fish
                 self.add_fish()

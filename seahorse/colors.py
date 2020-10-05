@@ -10,6 +10,7 @@ class Colors():
     RED = (255, 0, 0)
     BLUE = (0, 0, 255)
     DARK_BLUE = (70, 100, 200)
+    SAND = (230, 200, 150)
     PURPLE = (128, 0, 128)
     YELLOW = (255, 255, 0)
     ORANGE = (255, 128, 0)
