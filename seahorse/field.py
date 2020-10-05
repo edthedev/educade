@@ -245,7 +245,7 @@ class PlayField():
 
             # Just keep swimming!
             fauna.logic() # Swim
-            if fauna.pos_x < 0 - self.flora_size:
+            if fauna.pos_x < 0 - self.flora_size * 2: # Bigger to allow castle to scroll off.
                 self.fauna.remove(fauna) # Swim away
 
         # --- Assert --- Event Processing

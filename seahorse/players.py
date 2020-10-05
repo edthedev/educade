@@ -163,6 +163,7 @@ class Player():
             self.pos_x+self.size_x >= other.pos_x+other.size_x and
             self.pos_y + self.size_y >= other.pos_y
         )
+        # TODO: Add a test tha
 
     def _up(self):
         """Move up."""
