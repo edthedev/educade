@@ -16,13 +16,3 @@ class Colors():
     ORANGE = (255, 128, 0)
     GROUND = (0, 128, 0)
     BROWN = (100, 100, 60)
-
-    @staticmethod
-    def fill(surface, color):
-        """Fill all pixels of the surface with color, preserve transparency."""
-        wide, high = surface.get_size()
-        red, green, blue = color
-        for xii in range(wide):
-            for yii in range(high):
-                area = surface.get_at((xii, yii))[3]
-                surface.set_at((xii, yii), pygame.Color(red, green, blue, area))
