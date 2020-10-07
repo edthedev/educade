@@ -74,6 +74,8 @@ class Fauna():
             if self.chasing_player is None:
                 self.pos_x -= self.move_amt
             else:
+                if self.pos_x > self.chasing_player.pos_x:
+                    self.pos_x -= int(self.move_amt * 1.5)
                 if self.pos_y > self.chasing_player.pos_y:
                     self.pos_y -= self.move_amt
                 else:
@@ -81,4 +83,4 @@ class Fauna():
 
     def can_see(self, player):
         """Can we see this player?"""
-        return player.hidden_in is None and player.inline_with(self)
+        return player.hidden_in is None and player.seen_by(self)

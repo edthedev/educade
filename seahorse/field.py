@@ -194,7 +194,7 @@ class PlayField():
         """Calculate game logic."""
 
         self.clock += 1
-        round_length = 1000
+        round_length = 3000
         # round_length = 100
 
         # --- Arrange

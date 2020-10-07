@@ -230,12 +230,12 @@ class Player():
         bottom_of_self = self.pos_y + self.size_y
         margin = 3
         return (
-            self.inline_with(pad)
+            self.seen_by(pad)
             and pad.pos_y - margin < bottom_of_self
             and bottom_of_self < pad.pos_y + margin
         )
 
-    def inline_with(self, other):
+    def seen_by(self, other):
         """Return true if lined up in a vertical column with player.
 
         >>> Player().inline_with(Player())
@@ -255,6 +255,10 @@ class Player():
         #    and pad.pos_x < self.pos_x + self.size_x
         #)
         return (
+            self.pos_x > 0 and (
+            # Substantiall to the left of
+            other.pos_x > self.pos_x + 200
+            or
             # Left Edge of Other within self
             other.pos_x >= self.pos_x
             and other.pos_x <= self.pos_x + self.size_x
@@ -262,6 +266,7 @@ class Player():
             # Right Edge of Other within self
             other.pos_x + other.size_x >= self.pos_x
             and other.pos_x + other.size_x <= self.pos_x + self.size_x
+            )
         )
 
 if __name__ == "__main__":
