@@ -50,9 +50,10 @@ class PlayerImages():
         This prevent us from having to call player.images.images[0] later.
         """
         return self.images[key]
+    
 
 @dataclass
-class Player():
+class Player(pygame.sprite.Sprite):
     """A game player.
 
     >>> Player(start_x=9001).pos_x
@@ -79,10 +80,17 @@ class Player():
     images: PlayerImages = None
     move_amt: int = 4
     drift_amt: int = 1
+    # box: pygame.rect = None
 
     def __post_init__(self):
         """Set pos_x to start_x"""
         self.pos_x = self.start_x
+        # self.images = PlayerImages( # Set a default of size 100 for unit tests.
+        #    default=Images.get_path(r'seahorse.png'),
+        #    size_x=100,
+        #    size_y=100
+        #)
+        # self.box = self.images[0].get_rect()
 
 
     def logic(self):
@@ -138,6 +146,14 @@ class Player():
     def collide(self, other):
         """Detect a collision.
 
+        Left side
+
+        >>> Player(start_x=0, size_x=100).collide(Player(start_x=101))
+        False
+
+        >>> Player(start_x=0, size_x=100).collide(Player(start_x=100))
+        True
+
         >>> Player(start_x=500,pos_y=500).collide(Player(start_x=500,pos_y=500))
         True
 
@@ -150,21 +166,16 @@ class Player():
         >>> Player(start_x=510,pos_y=500).collide(Player(start_x=500,pos_y=500))
         True
 
-        >>> Player(start_x=510,pos_y=500,lasering=0).collide(Player(start_x=500,pos_y=30))
-        False
-
-        >>> Player(start_x=510,pos_y=500,lasering=30).collide(Player(start_x=500,pos_y=30))
-        True
-
         """
+        # return self.box.colliderect(other.box) == 1
+        # TODO: Add a test that ensures the castle celebration is easy enough to trigger.
+        # But first setup a very visible celebration when a player gets home. Bubbles!
         return (
             self.pos_x-self.size_x <= other.pos_x + other.size_x and
             self.pos_y - self.size_y <= other.pos_y and
             self.pos_x+self.size_x >= other.pos_x+other.size_x and
             self.pos_y + self.size_y >= other.pos_y
         )
-        # TODO: Add a test that ensures the castle celebration is easy enough to trigger.
-        # But first setup a very visible celebration when a player gets home. Bubbles!
 
     def _up(self):
         """Move up."""
@@ -218,42 +229,21 @@ class Player():
 
         screen.blit(img, (self.pos_x, self.pos_y))
 
-    def land_on(self, pad):
-        """Detect if we landed on a launcher.
-
-        >>> Player().land_on(Player())
-        False
-
-        >>> Player(pos_y=90, size_y=10).land_on(Player(pos_y=100, size_y=10))
-        True
-        """
-        bottom_of_self = self.pos_y + self.size_y
-        margin = 3
-        return (
-            self.seen_by(pad)
-            and pad.pos_y - margin < bottom_of_self
-            and bottom_of_self < pad.pos_y + margin
-        )
-
     def seen_by(self, other):
         """Return true if lined up in a vertical column with player.
 
-        >>> Player().inline_with(Player())
+        >>> Player().seen_by(Player())
         True
 
-        >>> Player(start_x=20, size_x=10).inline_with(Player(start_x=15, size_x=10))
+        >>> Player(start_x=20, size_x=10).seen_by(Player(start_x=15, size_x=10))
         True
 
-        >>> Player(start_x=200, size_x=10).inline_with(Player(start_x=15, size_x=10))
+        >>> Player(start_x=200, size_x=10).seen_by(Player(start_x=15, size_x=10))
         False
 
-        >>> Player(pos_y=100,size_y=10).inline_with(Player(pos_y=90))
+        >>> Player(pos_y=100,size_y=10).seen_by(Player(pos_y=90))
         True
         """
-        # return (
-        #     pad.pos_x + pad.size_x > self.pos_x
-        #    and pad.pos_x < self.pos_x + self.size_x
-        #)
         return (
             self.pos_x > 0 and (
             # Substantiall to the left of
