@@ -81,6 +81,8 @@ class Player(pygame.sprite.Sprite):
     move_amt: int = 4
     drift_amt: int = 1
 
+    rect: pygame.Rect = None
+
     def __post_init__(self):
         """Set pos_x to start_x"""
         self.pos_x = self.start_x
@@ -90,6 +92,7 @@ class Player(pygame.sprite.Sprite):
         #    size_y=100
         #)
         # self.box = self.images[0].get_rect()
+        self.logic()
 
     def logic(self):
         """Drift slowly to create the current."""

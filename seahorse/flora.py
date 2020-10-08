@@ -33,6 +33,8 @@ class Flora(pygame.sprite.Sprite):
     is_home: bool = False
     looks_like_home: bool = False
 
+    rect: pygame.Rect = None
+
     def __post_init__(self):
         """Randomize self."""
         self.img = pygame.image.load(Images.get_path(r'flora.png'))
@@ -67,6 +69,8 @@ class Flora(pygame.sprite.Sprite):
                                      var_y * self.block_size * self.img_scale,
                                      self.block_size * self.img_scale,
                                      self.block_size * self.img_scale)
+
+        self.logic() # Bootstrap our collision rect.
 
     def draw(self, screen):
         """Draw self on the screen."""
