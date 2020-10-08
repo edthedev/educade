@@ -7,7 +7,7 @@ import pygame
 from images import Images
 
 @dataclass
-class Flora():
+class Flora(pygame.sprite.Sprite):
     """Places to hide."""
 
     size: int
@@ -67,6 +67,9 @@ class Flora():
                                      var_y * self.block_size * self.img_scale,
                                      self.block_size * self.img_scale,
                                      self.block_size * self.img_scale)
+
+        # Collision detection box.
+        self.rect = pygame.Rect(self.pos_x, self.pos_y, self.size_x, self.size_y)
 
 
     def draw(self, screen):

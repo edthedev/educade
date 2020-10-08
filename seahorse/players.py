@@ -153,6 +153,16 @@ class Player(pygame.sprite.Sprite):
         >>> Player(start_x=0, size_x=100).collide(Player(start_x=99))
         True
 
+        Right Side
+
+        >>> Player(start_x=100, size_x=100).collide(Player(start_x=0, size_x=90))
+        False
+
+        >>> Player(start_x=100, size_x=100).collide(Player(start_x=0, size_x=110))
+        True
+
+        Older Tests
+
         >>> Player(start_x=500,pos_y=500).collide(Player(start_x=500,pos_y=500))
         True
 
