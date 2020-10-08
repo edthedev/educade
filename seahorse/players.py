@@ -80,7 +80,6 @@ class Player(pygame.sprite.Sprite):
     images: PlayerImages = None
     move_amt: int = 4
     drift_amt: int = 1
-    # box: pygame.rect = None
 
     def __post_init__(self):
         """Set pos_x to start_x"""
@@ -91,7 +90,7 @@ class Player(pygame.sprite.Sprite):
         #    size_y=100
         #)
         # self.box = self.images[0].get_rect()
-
+        self.rect = pygame.Rect(self.pos_x, self.pos_y, self.size_x, self.size_y)
 
     def logic(self):
         """Drift slowly to create the current."""
@@ -148,10 +147,10 @@ class Player(pygame.sprite.Sprite):
 
         Left side
 
-        >>> Player(start_x=0, size_x=100).collide(Player(start_x=101))
+        >>> Player(start_x=0, size_x=100).collide(Player(start_x=102))
         False
 
-        >>> Player(start_x=0, size_x=100).collide(Player(start_x=100))
+        >>> Player(start_x=0, size_x=100).collide(Player(start_x=99))
         True
 
         >>> Player(start_x=500,pos_y=500).collide(Player(start_x=500,pos_y=500))
@@ -167,15 +166,16 @@ class Player(pygame.sprite.Sprite):
         True
 
         """
-        # return self.box.colliderect(other.box) == 1
+        return pygame.sprite.collide_rect(self, other) == 1
         # TODO: Add a test that ensures the castle celebration is easy enough to trigger.
         # But first setup a very visible celebration when a player gets home. Bubbles!
-        return (
-            self.pos_x-self.size_x <= other.pos_x + other.size_x and
-            self.pos_y - self.size_y <= other.pos_y and
-            self.pos_x+self.size_x >= other.pos_x+other.size_x and
-            self.pos_y + self.size_y >= other.pos_y
-        )
+        
+        # return (
+        #    self.pos_x-self.size_x <= other.pos_x + other.size_x and
+        #    self.pos_y - self.size_y <= other.pos_y and
+        #    self.pos_x+self.size_x >= other.pos_x+other.size_x and
+        #    self.pos_y + self.size_y >= other.pos_y
+        #)
 
     def _up(self):
         """Move up."""
