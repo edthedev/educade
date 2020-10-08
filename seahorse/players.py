@@ -182,15 +182,6 @@ class Player(pygame.sprite.Sprite):
 
         """
         return pygame.sprite.collide_rect(self, other) == 1
-        # TODO: Add a test that ensures the castle celebration is easy enough to trigger.
-        # But first setup a very visible celebration when a player gets home. Bubbles!
-        
-        # return (
-        #    self.pos_x-self.size_x <= other.pos_x + other.size_x and
-        #    self.pos_y - self.size_y <= other.pos_y and
-        #    self.pos_x+self.size_x >= other.pos_x+other.size_x and
-        #    self.pos_y + self.size_y >= other.pos_y
-        #)
 
     def _up(self):
         """Move up."""
@@ -259,18 +250,17 @@ class Player(pygame.sprite.Sprite):
         >>> Player(pos_y=100,size_y=10).seen_by(Player(pos_y=90))
         True
         """
-        return (
-            self.pos_x > 0 and (
-            # Substantiall to the left of
-            other.pos_x > self.pos_x + 200
-            or
-            # Left Edge of Other within self
-            other.pos_x >= self.pos_x
-            and other.pos_x <= self.pos_x + self.size_x
-            or
-            # Right Edge of Other within self
-            other.pos_x + other.size_x >= self.pos_x
-            and other.pos_x + other.size_x <= self.pos_x + self.size_x
+        return (self.pos_x > 0 and (
+                                    # Substantiall to the left of
+                                    other.pos_x > self.pos_x + 200
+                                    or
+                                    # Left Edge of Other within self
+                                    other.pos_x >= self.pos_x
+                                    and other.pos_x <= self.pos_x + self.size_x
+                                    or
+                                    # Right Edge of Other within self
+                                    other.pos_x + other.size_x >= self.pos_x
+                                    and other.pos_x + other.size_x <= self.pos_x + self.size_x
             )
         )
 

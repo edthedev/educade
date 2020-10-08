@@ -1,3 +1,5 @@
+"""A controller mapping."""
+
 import pygame
 
 class ControlSet():
