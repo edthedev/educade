@@ -50,7 +50,7 @@ class PlayerImages():
         This prevent us from having to call player.images.images[0] later.
         """
         return self.images[key]
-    
+
 
 @dataclass
 class Player(pygame.sprite.Sprite):
@@ -251,18 +251,16 @@ class Player(pygame.sprite.Sprite):
         True
         """
         return (self.pos_x > 0 and (
-                                    # Substantiall to the left of
-                                    other.pos_x > self.pos_x + 200
-                                    or
-                                    # Left Edge of Other within self
-                                    other.pos_x >= self.pos_x
-                                    and other.pos_x <= self.pos_x + self.size_x
-                                    or
-                                    # Right Edge of Other within self
-                                    other.pos_x + other.size_x >= self.pos_x
-                                    and other.pos_x + other.size_x <= self.pos_x + self.size_x
-            )
-        )
+            # Substantiall to the left of
+            other.pos_x > self.pos_x + 200
+            or
+            # Left Edge of Other within self
+            other.pos_x >= self.pos_x
+            and other.pos_x <= self.pos_x + self.size_x
+            or
+            # Right Edge of Other within self
+            other.pos_x + other.size_x >= self.pos_x
+            and other.pos_x + other.size_x <= self.pos_x + self.size_x))
 
 if __name__ == "__main__":
     import doctest
