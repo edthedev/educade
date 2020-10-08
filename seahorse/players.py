@@ -90,7 +90,6 @@ class Player(pygame.sprite.Sprite):
         #    size_y=100
         #)
         # self.box = self.images[0].get_rect()
-        self.rect = pygame.Rect(self.pos_x, self.pos_y, self.size_x, self.size_y)
 
     def logic(self):
         """Drift slowly to create the current."""
@@ -102,6 +101,9 @@ class Player(pygame.sprite.Sprite):
 
         if self.color_cooldown > 0:
             self.color_cooldown -= 1
+
+        # Update Collision detection box.
+        self.rect = pygame.Rect(self.pos_x, self.pos_y, self.size_x, self.size_y)
 
     def control(self, keys=None, joystick=None):
         """Look for signals accepted by this player, and apply them.

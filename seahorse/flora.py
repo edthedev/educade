@@ -68,10 +68,6 @@ class Flora(pygame.sprite.Sprite):
                                      self.block_size * self.img_scale,
                                      self.block_size * self.img_scale)
 
-        # Collision detection box.
-        self.rect = pygame.Rect(self.pos_x, self.pos_y, self.size_x, self.size_y)
-
-
     def draw(self, screen):
         """Draw self on the screen."""
         #pygame.draw.rect(screen, Colors.DARK_BLUE,
@@ -88,3 +84,6 @@ class Flora(pygame.sprite.Sprite):
         if self.move_clock >= self.move_delay:
             if not self.is_home or self.pos_x > 0:
                 self.pos_x -= self.move_amt
+
+        # Update Collision detection box.
+        self.rect = pygame.Rect(self.pos_x, self.pos_y, self.size_x, self.size_y)
