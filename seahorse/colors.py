@@ -1,7 +1,5 @@
 """Helper for some colors."""
 
-import pygame
-
 class Colors():
     """Define some colors."""
     BLACK = (0, 0, 0)

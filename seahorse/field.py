@@ -12,6 +12,7 @@ from colors import Colors
 from images import Images
 from flora import Flora
 from fauna import Fauna
+from fireworks import Firework
 
 # Set these to the two buttons you want to use for 'exit'. Count up starting from 0
 SELECT = 3
@@ -31,6 +32,7 @@ class PlayField():
     fish: List[ControlSet] = field(default_factory=list)
     flora: List[Flora] = field(default_factory=list)
     fauna: List[Fauna] = field(default_factory=list)
+    fireworks: List[Firework] = field(default_factory=list)
     clock: int = 0
     flora_size: int = 80
     player_size: int = 40
@@ -129,6 +131,12 @@ class PlayField():
         """Re-Draw the play field."""
         self.screen.fill(Colors.SAND)  # background
 
+        for firework in self.fireworks:
+            firework.draw(self.screen)
+            if firework.variety >= 6:
+                self.fireworks.remove(firework)
+
+
         for fauna in self.fauna:
             fauna.draw(self.screen)
 
@@ -194,8 +202,8 @@ class PlayField():
         """Calculate game logic."""
 
         self.clock += 1
-        round_length = 3000
-        # round_length = 100
+        # round_length = 3000
+        round_length = 100
 
         # --- Arrange
         if self.clock == round_length:
@@ -214,14 +222,17 @@ class PlayField():
             player.logic()
             player.hidden_in = None # Re-check hiding spots every loop.
 
+        self.fireworks += [Firework(pos_x=100, pos_y=100, size=40)]
+
         for flora in self.flora:
             # Be a place to hide.
             for player in self.players:
                 if player.collide(flora):
                     if flora.is_home:
-                        # TODO: Add fireworks! I don't care that we're undersea... Bubbles maybe.
                         flora.is_home = False # Allow it to scroll away now.
                         self.clock = 0
+                        # TODO: Add fireworks! I don't care that we're undersea... Bubbles maybe.
+                        self.sprites += [Firework(pos_x=flora.pos_x, pos_y=flora.pos_y, size=40)]
 
                     if player.img_color == flora.img_color:
                         player.hidden_in = flora

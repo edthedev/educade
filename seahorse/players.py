@@ -34,8 +34,7 @@ class PlayerImages():
     def __post_init__(self):
         """Load some images."""
         self.images = []
-        for color in [r'red.png', r'orange.png', r'yellow.png',
-                      r'green.png', r'blue.png', r'purple.png']:
+        for color in Images.color_files:
             color_img = pygame.image.load(Images.get_path(color))
             horse = pygame.image.load(self.default)
             Images.color_image(base_image=horse, color_image=color_img)
