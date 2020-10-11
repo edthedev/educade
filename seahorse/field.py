@@ -37,6 +37,11 @@ class PlayField():
     flora_size: int = 80
     player_size: int = 40
 
+    # TODO: Move image grid selection code into images.py
+    # TODO: Fix firework graphics.
+    # TODO: Fix for Fireworks are not rising.
+
+
     def __post_init__(self):
         """New play field."""
 
