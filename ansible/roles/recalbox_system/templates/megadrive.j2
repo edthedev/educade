@@ -1,9 +1,9 @@
 <system 
  uuid="{{ 1000 | random | to_uuid }}"
- name="{{ rom_folder }}"
+ name="megadrive"
  fullname="{{ system_name }}"
  platforms="megadrive">
-    <descriptor path="%ROOT%/megadrive" theme="{{ rom_folder }}" extensions=".gen .bin .7z .smd .md .68k .mdx
+    <descriptor path="%ROOT%/{{ rom_folder }}" theme="{{ rom_folder }}" extensions=".gen .bin .7z .smd .md .68k .mdx
  .zip" icon="$F26b"/>
     <scraper screenscraper="1"/>
     <properties type="console" pad="mandatory" keyboard="no" mouse="no" lightgun="recommended" release
