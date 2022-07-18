@@ -1,28 +1,25 @@
 ---
-- name: Install a new 'Arcade Classics' collection on RecalBox 8
+- name: Install a new system on RecalBox 8
   gather_facts: no
-  hosts: all
   vars:
-    cfg_new_system: files/arcade_classics.j2
     dot_es: "/recalbox/share_init/system/.emulationstation"
-    rom_folder: arcadeclassics
 
   tasks:
     - name: Allow writing to root so we can make changes
       tags:
         - quick
       shell: mount -o remount,rw /
-    - name: Add 'Aracde Classics' to available systems
+    - name: Add {{ system_name }} to available systems
       tags:
         - quick
       blockinfile:
-        marker: "<!-- {mark} added by Ansible for Aracde Classics -->"
+        marker: "<!-- {mark} added by Ansible for {{ system_name }} -->"
         backup: no
         path: "{{ dot_es }}/systemlist.xml"
         state: present
         insertbefore: "</systemList>"
-        block: "{{ cfg_new_system }}"
-    - name: Add Arcade Classics Theme
+        block: "{{ cfg_template }}"
+    - name: Add Theme for {{ system_name }}
       tags:
         - quick
       copy:

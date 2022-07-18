@@ -1,7 +1,7 @@
 <system>
-        <fullname>Sega Megadrive Co-Op</fullname>
-        <name>megadrive_coop</name>
-        <path>/recalbox/share/roms/megadrive_coop</path>
+        <fullname>{{ system_name }}</fullname>
+        <name>{{ rom_folder }}</name>
+        <path>/recalbox/share/roms/{{ rom_folder }}</path>
         <extension>.md .MD .bin .BIN .zip .ZIP .gen .GEN .smd .SMD</extension>
         <command>python /usr/lib/python2.7/site-packages/configgen/emulatorlauncher.pyc %CONTROLLERSCONFIG% -system %SYSTEM% -rom %ROM% -emulator %EMULATOR% -core %CORE% -ratio %RATIO%</command>
         <platform>genesis, megadrive</platform>
