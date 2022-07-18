@@ -3,7 +3,7 @@
   tags:
     - quick
   shell: mount -o remount,rw /
-- name: Add {{ system_name }} to available systems
+- name: Add system to available systems
   tags:
     - quick
   blockinfile:
@@ -13,7 +13,7 @@
     state: present
     insertbefore: "</systemList>"
     block: "{{ cfg_template }}"
-- name: Add Theme for {{ system_name }}
+- name: Add Theme for system
   tags:
     - quick
   copy:

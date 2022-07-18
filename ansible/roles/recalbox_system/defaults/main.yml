@@ -1,4 +1,0 @@
----
-gather_facts: no
-vars:
-  dot_es: "/recalbox/share_init/system/.emulationstation"
