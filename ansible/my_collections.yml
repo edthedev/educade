@@ -10,7 +10,7 @@
       vars:
         system_name: 'Arcade Classics'
         cfg_template: arcade.j2
-        rom_folder: arcade_classics
+        rom_folder: arcadeclassics
 
     - name: Add Megadrive Co-Op Collection
       include_role:
@@ -18,4 +18,4 @@
       vars:
         system_name: 'Megadrive Co-Op'
         cfg_template: megadrive.j2
-        rom_folder: megadrive_coop
+        rom_folder: megadrivecoop
