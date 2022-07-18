@@ -1,7 +1,7 @@
 ---
 - name: Install my custom collections to RecalBox 8
   gather_facts: no
-  hosts: arcade
+  hosts: arcades
 
   tasks:
     - name: Add Arcade Classics Collection
