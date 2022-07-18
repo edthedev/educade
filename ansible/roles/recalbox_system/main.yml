@@ -23,7 +23,7 @@
       tags:
         - quick
       copy:
-        src: "files/themes/{{ rom_folder }}"
+        src: "files/es"
         dest: "{{ dot_es }}/themes/{{ rom_folder }}"
     - name: Create Arcade Classics ROMS folder
       file:
