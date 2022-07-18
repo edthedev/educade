@@ -1,19 +1,20 @@
 # Ansible for Recalbox
 
-Add custom systems to RecalBox.
+Adds custom systems to RecalBox.
+Each system is simply another menu item for an existing system, i.e. 'Megadrive Co-Op'. Add your ROMS to that folder to have them appear under that system.
 
 See [RecalBox es_systems.cfg][5] for examples.
 
 [5]: https://github.com/recalbox/recalbox-buildroot/blob/master/board/recalbox/fsoverlay/recalbox/share_init/system/.emulationstation/es_systems.cfg
 
-## Add a `Classics` Collection
+## Add my custom collections
+
+Example command:
 
 ```sh
-ansible-playbook classics.yml --hosts
+ansible-playbook -i "tmntcade.local," --user "root" ./my_collections.yml
 ```
 
 ## TODO:
 
-- Grab example code from my work on McAirpos
-- Create a template config that maps a new name to a folder 
-- Look into how to do art for the collection main page...
+- [ ] Look into how to do art for the collection main page...
