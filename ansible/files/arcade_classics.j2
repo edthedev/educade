@@ -1,0 +1,23 @@
+  <system>
+        <fullname>{{ collection_name }}</fullname>
+        <name>{{ collection_name }}</name>
+        <path>/recalbox/share/roms/{{ rom_folder }}</path>
+        <extension>.zip .ZIP</extension>
+	<command>python /usr/lib/python2.7/site-packages/configgen/emulatorlauncher.pyc %CONTROLLERSCONFIG% -system %SYSTEM% -rom %ROM% -emulator %EMULATOR% -core %CORE% -ratio %RATIO%</command>
+	<platform>arcade</platform>
+        <theme>mame</theme>
+	<emulators>
+	    <emulator name="libretro">
+	        <cores>
+		    <core>imame4all</core>
+		    <core>mame078</core>
+		</cores>
+	    </emulator>
+	    <emulator name="advancemame">
+	        <cores>
+		    <core>advancemame</core>
+		</cores>
+	    </emulator>
+	</emulators>
+    </system>
+  <system>

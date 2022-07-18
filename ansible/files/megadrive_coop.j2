@@ -1,0 +1,17 @@
+<system>
+        <fullname>Sega Megadrive Co-Op</fullname>
+        <name>megadrive_coop</name>
+        <path>/recalbox/share/roms/megadrive_coop</path>
+        <extension>.md .MD .bin .BIN .zip .ZIP .gen .GEN .smd .SMD</extension>
+        <command>python /usr/lib/python2.7/site-packages/configgen/emulatorlauncher.pyc %CONTROLLERSCONFIG% -system %SYSTEM% -rom %ROM% -emulator %EMULATOR% -core %CORE% -ratio %RATIO%</command>
+        <platform>genesis, megadrive</platform>
+        <theme>megadrive</theme>
+	<emulators>
+	    <emulator name="libretro">
+	        <cores>
+		    <core>genesisplusgx</core>
+		    <core>picodrive</core>
+		</cores>
+	    </emulator>
+	</emulators>
+</system>
