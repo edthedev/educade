@@ -1,17 +1,23 @@
-<system>
-        <fullname>{{ system_name }}</fullname>
-        <name>{{ rom_folder }}</name>
-        <path>/recalbox/share/roms/{{ rom_folder }}</path>
-        <extension>.md .MD .bin .BIN .zip .ZIP .gen .GEN .smd .SMD</extension>
-        <command>python /usr/lib/python2.7/site-packages/configgen/emulatorlauncher.pyc %CONTROLLERSCONFIG% -system %SYSTEM% -rom %ROM% -emulator %EMULATOR% -core %CORE% -ratio %RATIO%</command>
-        <platform>genesis, megadrive</platform>
-        <theme>{{ rom_folder }}</theme>
-	<emulators>
-	    <emulator name="libretro">
-	        <cores>
-		    <core>genesisplusgx</core>
-		    <core>picodrive</core>
-		</cores>
-	    </emulator>
-	</emulators>
+<system 
+ uuid="{{ ansible_date_time.iso8601_micro | to_uuid }}"
+ name="{{ rom_folder }}"
+ fullname="{{ system_name }}"
+ platforms="megadrive">
+    <descriptor path="%ROOT%/megadrive" theme="{{ rom_folder }}" extensions=".gen .bin .7z .smd .md .68k .mdx
+ .zip" icon="$F26b"/>
+    <scraper screenscraper="1"/>
+    <properties type="console" pad="mandatory" keyboard="no" mouse="no" lightgun="recommended" release
+date="1988-10" retroachievements="1" crt.multiresolution="0" crt.multiregion="1"/>
+    <emulatorList>
+      <emulator name="libretro">
+        <core name="picodrive" priority="1" extensions=".68k .bin .gen .md .smd .zip .7z" netplay="1"
+compatibility="high" speed="high"/>
+        <core name="genesisplusgx" priority="2" extensions=".68k .mdx .bin .gen .md .smd .zip .7z" net
+play="1" compatibility="high" speed="high"/>
+        <core name="genesisplusgxwide" priority="3" extensions=".gen .md .smd .zip .7z" netplay="1" co
+mpatibility="good" speed="high"/>
+        <core name="fbneo" priority="4" extensions=".zip .7z" netplay="1" compatibility="high" speed="
+high"/>
+      </emulator>
+    </emulatorList>
 </system>
