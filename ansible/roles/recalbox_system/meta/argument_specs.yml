@@ -1,0 +1,17 @@
+---
+argument_specs:
+  main:
+    short_description: main entry point for the recalbox_system role
+    options:
+      system_name:
+        type: "str"
+        required: true
+        description: "System name to display"
+      cfg_template:
+        type: "str"
+        required: true
+        description: "Configuration template to use"
+      rom_folder:
+        type: "str"
+        required: true
+        description: "New ROMS folder to create"
