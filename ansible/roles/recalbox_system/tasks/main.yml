@@ -17,8 +17,8 @@
   tags:
     - quick
   copy:
-    src: "files/es"
-    dest: "{{ dot_es }}/themes/{{ rom_folder }}"
+    src: "files/themes/{{ rom_folder }}"
+    dest: "{{ theme_root }}"
 - name: Create Arcade Classics ROMS folder
   file:
     path: "/recalbox/share/roms/{{ rom_folder }}"
