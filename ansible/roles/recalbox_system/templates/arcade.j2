@@ -1,5 +1,5 @@
 <system 
- uuid="{{ ansible_date_time.iso8601_micro | to_uuid }}"
+ uuid="{{ 1000 | random | to_uuid }}"
  name="{{ rom_folder }}"
  fullname="{{ system_name }}"
  platforms="arcade">
