@@ -1,23 +1,28 @@
-  <system>
-        <fullname>{{ system_name }}</fullname>
-        <name>{{ rom_folder }}</name>
-        <path>/recalbox/share/roms/{{ rom_folder }}</path>
-        <extension>.zip .ZIP</extension>
-	<command>python /usr/lib/python2.7/site-packages/configgen/emulatorlauncher.pyc %CONTROLLERSCONFIG% -system %SYSTEM% -rom %ROM% -emulator %EMULATOR% -core %CORE% -ratio %RATIO%</command>
-	<platform>arcade</platform>
-        <theme>{{ rom_folder }}</theme>
-	<emulators>
-	    <emulator name="libretro">
-	        <cores>
-		    <core>imame4all</core>
-		    <core>mame078</core>
-		</cores>
-	    </emulator>
-	    <emulator name="advancemame">
-	        <cores>
-		    <core>advancemame</core>
-		</cores>
-	    </emulator>
-	</emulators>
-    </system>
-  <system>
+<system 
+ uuid="{{ ansible_date_time.iso8601_micro | to_uuid }}"
+ name="{{ rom_folder }}"
+ fullname="{{ system_name }}"
+ platforms="arcade">
+    <descriptor path="%ROOT%/mame" theme="mame" extensions=".7z .zip" icon="$F255"/>
+    <scraper screenscraper="75"/>
+    <properties type="arcade" pad="mandatory" keyboard="no" mouse="no" lightgun="recommended" released
+ate="1997-02" retroachievements="1" crt.multiresolution="0" crt.multiregion="0"/>
+    <emulatorList>
+      <emulator name="libretro">
+        <core name="mame2003_plus" priority="1" extensions=".zip .7z" netplay="0" compatibility="high"
+ speed="high"/>
+        <core name="mame2003" priority="2" extensions=".zip .7z" netplay="0" compatibility="high" spee
+d="high"/>
+        <core name="mame2000" priority="3" extensions=".zip .7z" netplay="0" compatibility="high" spee
+d="high"/>
+        <core name="mame2010" priority="4" extensions=".zip .7z" netplay="0" compatibility="high" spee
+d="high"/>
+        <core name="mame2015" priority="5" extensions=".zip .7z" netplay="0" compatibility="high" spee
+d="high"/>
+      </emulator>
+      <emulator name="advancemame">
+        <core name="advancemame" priority="7" extensions=".zip .7z" netplay="0" compatibility="high" s
+peed="high"/>
+      </emulator>
+    </emulatorList>
+  </system>
