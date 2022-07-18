@@ -17,4 +17,7 @@ ansible-playbook -i "tmntcade.local," --user "root" ./my_collections.yml
 
 ## TODO:
 
-- [ ] Look into how to do art for the collection main page...
+- [ ] Convert to SVG for the main theme icon
+
+## Debugging
+

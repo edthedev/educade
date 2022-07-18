@@ -5,7 +5,7 @@
         <extension>.md .MD .bin .BIN .zip .ZIP .gen .GEN .smd .SMD</extension>
         <command>python /usr/lib/python2.7/site-packages/configgen/emulatorlauncher.pyc %CONTROLLERSCONFIG% -system %SYSTEM% -rom %ROM% -emulator %EMULATOR% -core %CORE% -ratio %RATIO%</command>
         <platform>genesis, megadrive</platform>
-        <theme>megadrive</theme>
+        <theme>{{ rom_folder }}</theme>
 	<emulators>
 	    <emulator name="libretro">
 	        <cores>
