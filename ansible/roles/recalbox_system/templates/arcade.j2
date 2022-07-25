@@ -1,10 +1,10 @@
 <system 
  uuid="{{ 1000 | random | to_uuid }}"
- name="arcade"
+ name="{{ rom_folder }}"
  fullname="{{ system_name }}"
- platforms="arcade">
+ platforms="{{ rom_folder }}">
     <descriptor path="%ROOT%/{{ rom_folder}}" theme="{{ rom_folder }}" extensions=".7z .zip" icon="$F255"/>
-    <scraper screenscraper="75"/>
+    <scraper screenscraper="76"/>
     <properties type="arcade" pad="mandatory" keyboard="no" mouse="no" lightgun="recommended" released
 ate="1997-02" retroachievements="1" crt.multiresolution="0" crt.multiregion="0"/>
     <emulatorList>
@@ -25,4 +25,4 @@ d="high"/>
 peed="high"/>
       </emulator>
     </emulatorList>
-  </system>
+</system>
