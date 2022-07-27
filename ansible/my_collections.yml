@@ -4,13 +4,13 @@
   hosts: arcades
 
   tasks:
-    # - name: Add Arcade Classics Collection
-    #   include_role:
-    #     name: recalbox_system
-    #   vars:
-    #     system_name: 'Arcade Classics'
-    #     cfg_template: arcade.j2
-    #     rom_folder: arcadeclassics
+    - name: Add Arcade Classics Collection
+      include_role:
+        name: recalbox_system
+      vars:
+        system_name: 'Arcade Classics'
+        cfg_template: arcade.j2
+        rom_folder: arcadeclassics
 
     - name: Add Megadrive Co-Op Collection
       include_role:
