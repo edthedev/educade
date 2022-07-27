@@ -3,21 +3,35 @@
  name="{{ rom_folder }}"
  fullname="{{ system_name }}"
  platforms="megadrive">
-    <descriptor path="%ROOT%/{{ rom_folder }}" theme="{{ rom_folder }}" extensions=".gen .bin .7z .smd .md .68k .mdx
- .zip" icon="$F26b"/>
+    <descriptor 
+    path="%ROOT%/{{ rom_folder }}" 
+    theme="{{ rom_folder }}" 
+    extensions=".gen .bin .7z .smd .md .68k .mdx .zip" 
+    icon="$F26b"/>
+ 
     <scraper screenscraper="1"/>
-    <properties type="console" pad="mandatory" keyboard="no" mouse="no" lightgun="recommended" release
-date="1988-10" retroachievements="1" crt.multiresolution="0" crt.multiregion="1"/>
+    <properties type="console" 
+    pad="mandatory" 
+    keyboard="no" 
+    mouse="no" 
+    lightgun="recommended" 
+    releasedate="1988-10" 
+    retroachievements="1" 
+    crt.multiresolution="0" 
+    crt.multiregion="1"/>
     <emulatorList>
       <emulator name="libretro">
-        <core name="picodrive" priority="1" extensions=".68k .bin .gen .md .smd .zip .7z" netplay="1"
+        <core name="picodrive" priority="1" 
+        extensions=".68k .bin .gen .md .smd .zip .7z" netplay="1"
 compatibility="high" speed="high"/>
-        <core name="genesisplusgx" priority="2" extensions=".68k .mdx .bin .gen .md .smd .zip .7z" net
-play="1" compatibility="high" speed="high"/>
-        <core name="genesisplusgxwide" priority="3" extensions=".gen .md .smd .zip .7z" netplay="1" co
-mpatibility="good" speed="high"/>
-        <core name="fbneo" priority="4" extensions=".zip .7z" netplay="1" compatibility="high" speed="
-high"/>
+        <core name="genesisplusgx" priority="2" 
+        extensions=".68k .mdx .bin .gen .md .smd .zip .7z" netplay="1"
+         compatibility="high" speed="high"/>
+        <core name="genesisplusgxwide" priority="3" 
+        extensions=".gen .md .smd .zip .7z" netplay="1" 
+        compatibility="good" speed="high"/>
+        <core name="fbneo" priority="4" extensions=".zip .7z" 
+        netplay="1" compatibility="high" speed="high"/>
       </emulator>
     </emulatorList>
 </system>
