@@ -12,12 +12,6 @@ See [RecalBox es_systems.cfg][5] for examples.
 Example command:
 
 ```sh
-ansible-playbook -i "tmntcade.local," --user "root" ./my_collections.yml
+ansible-playbook -i "tmntcade.local," --user "root" ./arcade_collections.yml
 ```
-
-## TODO:
-
-- [ ] Convert to SVG for the main theme icon
-
-## Debugging
 
