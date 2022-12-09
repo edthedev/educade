@@ -44,7 +44,7 @@ Lisa Feder, [Laura Kurland](https://www.linkedin.com/in/laura-c-kurland-17435016
 
 Your work continues to inspire me.
 
-![Sandwich Panic Screenshot](sandwich_panic.PNG)
+![Sandwich Panic Screenshot](img/sandwich_panic.PNG)
 
 ### The Original Welcome Message from Peanut Butter Panic
 
@@ -74,7 +74,7 @@ Undersea Hide and Seek is a tribute to [Seahorse Hide and Seek - another classic
 
 Seahorse Hide and Seek is Copyright 1984 Joyce Hakansson
 
-![Undersea Hide and Seek Screenshot](hideandseek.PNG)
+![Undersea Hide and Seek Screenshot](img/hideandseek.PNG)
 
 ## Contributing
 
