@@ -1,0 +1,3 @@
+---
+dot_es: "/recalbox/share_init/system/.emulationstation"
+theme_root: "{{ dot_es }}/themes/recalbox-next"

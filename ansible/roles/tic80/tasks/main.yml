@@ -1,0 +1,18 @@
+---
+- name: Install Tic80 dependencies
+  apt:
+    - git
+    - build-essential
+    - ruby-full
+    - libsdl2-dev
+    - zlib1g-dev
+    - liblua5.1-dev # May need to be 5.3
+- name: Git Clone Tic80 source
+  git:
+    clone: https://github.com/nesbox/TIC-80 
+    dest: /tmp/tic80
+    recursive: true
+- name: Build Tic80 from source
+  shell: cd /tmp/TIC-80/build && cmake .. -DBUILD_PRO=On
+- name: Build Tic80 from source 2
+  shell: cd /tmp/TIC-80/build && make -j4
