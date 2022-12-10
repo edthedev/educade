@@ -2,6 +2,8 @@
 - name: Install Tic80
   gather_facts: no
   hosts: tic80s
+  vars:
+    - install_root: /usr/tic80
   become: yes
 
   tasks:

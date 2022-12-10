@@ -1,32 +1,46 @@
 ---
- - name: add signature for mit apt repos
-   ansible.builtin.apt_key:
-     keyserver: pgpkeys.mit.edu
-     id: 8B48AD6246925553
- - name: add another signature for apt repos
-   ansible.builtin.apt_key:
-     keyserver: pgpkeys.mit.edu
-     id: 7638D0442B90D010
- - apt:
-     state: present
+# - name: add dirmngr to support adding keys
+#   apt:
+#     state: present
+#     package: dirmngr
+ - name: install the easy stuff
+   apt:
      name:
       - git
       - build-essential
       - ruby-full
-      - libsdl2-dev
-      - zlib1g-dev
- - name: backport liblua5.3 
-   apt:
-     state: present
-     default_release: jessie-backports
-     name:
-      - liblua5.3-dev
+# - name: add signature for mit apt repos
+#   ansible.builtin.apt_key:
+#     keyserver: pgpkeys.mit.edu
+#     id: 8B48AD6246925553
+# - apt_repository:
+#     repo: deb http://archive.debian.org/debian jessie-backports main
+#     state: present
+# - name: add another signature for apt repos
+#   ansible.builtin.apt_key:
+#     keyserver: pgpkeys.mit.edu
+#     id: 7638D0442B90D010
+# - name: backport liblua5.3 
+#   apt:
+#     state: present
+#     default_release: jessie-backports
+#     name:
+#      - liblua5.3-dev
+# - apt:
+#     state: present
+#     name:
+#      - git
+#      - build-essential
+#      - ruby-full
+#      - libsdl2-dev
+#      - zlib1g-dev
  - name: Git Clone Tic80 source
    git:
-     clone: https://github.com/nesbox/TIC-80 
-     dest: /tmp/tic80
+     repo: https://github.com/nesbox/TIC-80 
+     dest: "{{ install_root }}"
      recursive: true
- - name: Build Tic80 from source
-   shell: cd /tmp/TIC-80/build && cmake .. -DBUILD_PRO=On
- - name: Build Tic80 from source 2
-   shell: cd /tmp/TIC-80/build && make -j4
+     depth: 1
+ - name: Build Tic80 from source - cmake
+   shell: cd "{{ install_root }}/build" && cmake .. -DBUILD_PRO=On
+ - name: Build Tic80 from source - make
+   shell: cd "{{ install root }}/build" && make -j4
