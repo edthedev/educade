@@ -1,4 +1,12 @@
 ---
+ - name: add signature for mit apt repos
+   ansible.builtin.apt_key:
+     keyserver: pgpkeys.mit.edu
+     id: 8B48AD6246925553
+ - name: add another signature for apt repos
+   ansible.builtin.apt_key:
+     keyserver: pgpkeys.mit.edu
+     id: 7638D0442B90D010
  - apt:
      state: present
      name:
@@ -7,7 +15,12 @@
       - ruby-full
       - libsdl2-dev
       - zlib1g-dev
-      - liblua5.1-dev # May need to be 5.3
+ - name: backport liblua5.3 
+   apt:
+     state: present
+     default_release: jessie-backports
+     name:
+      - liblua5.3-dev
  - name: Git Clone Tic80 source
    git:
      clone: https://github.com/nesbox/TIC-80 

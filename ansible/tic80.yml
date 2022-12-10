@@ -2,6 +2,7 @@
 - name: Install Tic80
   gather_facts: no
   hosts: tic80s
+  become: yes
 
   tasks:
     - name: Install tic80
