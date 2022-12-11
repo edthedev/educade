@@ -18,19 +18,30 @@
 #      - ruby-full
 #      - libsdl2-dev
 #      - zlib1g-dev
+ - name: install the easy stuff
+   apt:
+     name:
+      - libreadline-dev
+ - stat:
+     path: "/usr/{{ lua_version }}.tar.gz"
+   register: have_tgz
  - name: get lua
    uri:
      url: "https://www.lua.org/ftp/{{ lua_version }}.tar.gz"
-     decompress: true
+     dest: "/usr/{{ lua_version }}.tar.gz"
+   when: not have_tgz.stat.exists
+ - name: decompress
+   unarchive:
+     creates: "/usr/{{ lua_version }}/README"
+     src: "/usr/{{ lua_version }}.tar.gz"
      dest: "/usr/{{ lua_version }}"
+     remote_src: true
  - name: build lua
    shell: | 
-     cd "/usr/{{ lua_version }}"
-     && make linux test
+     cd "/usr/{{ lua_version }}"; make linux test
  - name: build lua
    shell: | 
-     cd "/usr/{{ lua_version }}"
-     && make install
+     cd "/usr/{{ lua_version }}"; make install
 
  - name: download tic80
    get_url: 
