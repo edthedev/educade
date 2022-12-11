@@ -4,6 +4,7 @@
   hosts: tic80s
   vars:
     - install_root: /usr/tic80
+    - lua_version: lua-5.3.6
   become: yes
 
   tasks:
