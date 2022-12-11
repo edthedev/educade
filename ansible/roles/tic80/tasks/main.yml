@@ -18,10 +18,17 @@
 #      - ruby-full
 #      - libsdl2-dev
 #      - zlib1g-dev
- - name: install the easy stuff
+ - name: install lua dependencies
    apt:
      name:
       - libreadline-dev
+      - libraspberrypi0
+      - libraspberrypi-dev
+      - libraspberrypi-doc
+      - libraspberrypi-bin 
+ - stat:
+     path: "/usr/local/bin/lua"
+   register: have_lua
  - stat:
      path: "/usr/{{ lua_version }}.tar.gz"
    register: have_tgz
@@ -39,18 +46,19 @@
  - name: build lua
    shell: | 
      cd "/usr/{{ lua_version }}"; make linux test
- - name: build lua
+   when: not have_lua.stat.exists
+ - name: install lua
    shell: | 
      cd "/usr/{{ lua_version }}"; make install
-
- - name: download tic80
-   get_url: 
-     url: https://github.com/nesbox/TIC-80/releases/download/v1.0.2164/tic80-v1.0-rpi.deb
-     dest: /usr/tic80.deb
- - shell: apt-get dist-upgrade
- - name: install from deb
-   apt:
-     deb: /usr/tic80.deb
+   when: not have_lua.stat.exists
+# - name: download tic80
+#   get_url: 
+#     url: https://github.com/nesbox/TIC-80/releases/download/v1.0.2164/tic80-v1.0-rpi.deb
+#     dest: /usr/tic80.deb
+# - shell: apt-get dist-upgrade
+# - name: install from deb
+#   apt:
+#     deb: /usr/tic80.deb
 # - name: add another signature for apt repos
 #   ansible.builtin.apt_key:
 #     keyserver: pgpkeys.mit.edu
@@ -73,15 +81,20 @@
 #   apt:
 #     name:
 #       - cmake
-# - name: Git Clone Tic80 source
-#   git:
-#     repo: https://github.com/nesbox/TIC-80 
-#     dest: "{{ install_root }}"
-#     recursive: true
-#     depth: 1
-#     accept_hostkey: yes
-# - name: Build Tic80 from source - cmake
-#   shell: cd "{{ install_root }}/build" && cmake .. -DBUILD_PRO=On
-# - name: Build Tic80 from source - make
-#   shell: cd "{{ install_root }}/build" && make -j4
+ - name: Git Clone Tic80 source
+   git:
+     repo: https://github.com/nesbox/TIC-80 
+     dest: "{{ install_root }}"
+     recursive: true
+     depth: 1
+     accept_hostkey: yes
+ - stat:
+     path: "{{ install_root }}/bin/tic80"
+   register: have_tic80
+ - name: Build Tic80 from source - cmake
+   shell: cd "{{ install_root }}/build" && cmake .. -DBUILD_PRO=On
+   when: not have_tic80.stat.exists
+ - name: Build Tic80 from source - make
+   shell: cd "{{ install_root }}/build" && make -j4
+   when: not have_tic80.stat.exists
 
