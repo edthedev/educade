@@ -10,20 +10,19 @@
 # - apt_repository:
 #     repo: deb http://archive.debian.org/debian jessie-backports main
 #     state: present
- - name: install the easy stuff
-   apt:
-     name:
-      - git
-      - build-essential
-      - ruby-full
-      - libsdl2-dev
-      - zlib1g-dev
+# - name: install the easy stuff
+#   apt:
+#     name:
+#      - git
+#      - build-essential
+#      - ruby-full
+#      - libsdl2-dev
+#      - zlib1g-dev
  - name: get lua
-   vars:
-     - lua: lua-5.3.6
-   shell: |
-     curl "https://www.lua.org/ftp/{{ lua_version }}.tar.gz"
-     && tar zxf "{{ lua_version }}.tar.gz" -o "/usr/{{ lua_version }}"
+   uri:
+     url: "https://www.lua.org/ftp/{{ lua_version }}.tar.gz"
+     decompress: true
+     dest: "/usr/{{ lua_version }}"
  - name: build lua
    shell: | 
      cd "/usr/{{ lua_version }}"
