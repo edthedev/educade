@@ -81,25 +81,35 @@
 #   apt:
 #     name:
 #       - cmake
-# - name: Git Clone Tic80 source
-#   git:
-#     repo: https://github.com/nesbox/TIC-80 
-#     dest: "{{ install_root }}"
-#     recursive: true
-#     depth: 1
-#     accept_hostkey: yes
  - name: symlink fix missing so
    file:
      src: /opt/vc/lib/libbcm_host.so
      dest: /usr/lib/libbcm_host.so.0
      state: link
  - stat:
-     path: "{{ install_root }}/bin/tic80"
+     path: "{{ install_root }}"
+   register: cloned_tic80
+ - stat:
+     path: "/usr/local/bin/tic80"
    register: have_tic80
-# - name: Build Tic80 from source - cmake
-#   shell: cd "{{ install_root }}/build" && cmake .. -DBUILD_PRO=On
-#   when: not have_tic80.stat.exists
-# - name: Build Tic80 from source - make
-#   shell: cd "{{ install_root }}/build" && make -j4
-#   when: not have_tic80.stat.exists
-#
+ - name: Git Clone Tic80 source
+   git:
+     repo: https://github.com/nesbox/TIC-80 
+     dest: "{{ install_root }}"
+     recursive: false # Bonus shallow clone to stop issue
+     depth: 1
+     accept_hostkey: yes
+ - name: Git Clone Tic80 source
+   git:
+     repo: https://github.com/nesbox/TIC-80 
+     dest: "{{ install_root }}"
+     recursive: true
+     depth: 1
+     accept_hostkey: yes
+   when: not cloned_tic80.stat.exists
+ - name: Build Tic80 from source - cmake
+   shell: cd "{{ install_root }}/build" && cmake .. -DBUILD_PRO=On
+   when: not have_tic80.stat.exists
+ - name: Build Tic80 from source - make
+   shell: cd "{{ install_root }}/build" && make -j4
+   when: not have_tic80.stat.exists
