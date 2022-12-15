@@ -1,0 +1,25 @@
+---
+- name: Setup a new arcade machine
+  gather_facts: no
+  hosts: new
+  vars_prompt:
+    - name: new_hostname
+      prompt: New hostname?
+  become: yes
+
+  tasks:
+    - name: hostname 1/3
+      lineinfile:
+        state: absent
+        path: /etc/hostname
+        line: lepotato
+    - name: hostname 2/3
+      lineinfile:
+        state: present
+        path: /etc/hostname
+        line: "{{ new_hostname }}"
+    - name: hostname 3/3
+      lineinfile:
+        state: present
+        path: /etc/hosts
+        line: "127.0.0.1    {{ new_hostname }}"

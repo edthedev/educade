@@ -1,0 +1,13 @@
+---
+- name: Setup a new Armbian host
+  gather_facts: no
+  hosts: new
+  become: yes
+
+  tasks:
+    # Run with --ask-become-pass the first time
+    # Remember to set vars ansible_admin and ansible_pubkey
+    - name: setup admin
+      include_role:
+        name: school_admin
+
