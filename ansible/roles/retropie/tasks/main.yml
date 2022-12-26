@@ -1,0 +1,60 @@
+---
+  - stat:
+      path: "{{ clone_to }}/RetroPie-Setup/retropie_setup.sh"
+    register: install_script
+  - debug:
+      msg: "Install script found in {{ clone_to }}."
+    when: install_script.stat.exists
+  - git: 
+      repo: https://github.com/RetroPie/RetroPie-Setup.git
+      dest: "{{ clone_to }}"
+      depth: 1
+      accept_newhostkey: true
+    when: not install_script.stat.exists
+  - name: make pi user own RetroPie-Setup
+    file:
+      path: "{{ clone_to }}"
+      group: "{{ pi_user }}"
+      owner: "{{ pi_user }}"
+  - name: remove unused emulators
+    file:
+      state: absent
+      path: "{{ clone_to }}/{{ item }}"
+    with_items:
+      - scriptmodules/emulators/basilisk.sh
+      - scriptmodules/emulators/jzintv.sh
+      - scriptmodules/emulators/ppsspp.sh
+      - scriptmodules/emulators/daphne.sh
+      - scriptmodules/emulators/scummvm.sh
+      - scriptmodules/emulators/scummvm-sdl1.sh
+      - scriptmodules/emulators/mupen64plus.sh
+  - name: remove unused cores
+    file:
+      state: absent
+      path: "{{ clone_to }}/{{ item }}"
+    with_items:
+      - scriptmodules/libretrocores/lr-flycast.sh
+      - scriptmodules/libretrocores/lr-mame2000.sh
+      - scriptmodules/libretrocores/reicast.sh
+      - scriptmodules/libretrocores/lr-mame2010.sh
+      - scriptmodules/libretrocores/lr-ppsspp.sh
+      - scriptmodules/libretrocores/lr-scummvm.sh
+      - scriptmodules/libretrocores/lr-mupen64plus.sh
+      - scriptmodules/libretrocores/lr-mupen64plus-next.sh
+  - name: remove unused ports
+    file:
+      state: absent
+      path: "{{ clone_to }}/{{ item }}"
+    with_items:
+      - scriptmodules/ports/kodi.sh
+      - scriptmodules/ports/uqm.sh
+  - name: remove scrapers
+    file:
+      state: absent
+      path: "{{ clone_to }}/{{ item }}"
+    with_items:
+      - scriptmodules/supplementary/scraper.sh
+      - scriptmodules/supplementary/skyscraper.sh
+  - name: reminder
+    debug:
+      msg: "Retropie script is isntalled. login and run __platform=genericx11 ./retropie-setup.sh"
