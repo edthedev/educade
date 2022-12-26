@@ -1,16 +1,16 @@
 ---
   - stat:
-      path: "{{ clone_to }}/RetroPie-Setup/retropie_setup.sh"
-    register: install_script
+      path: "{{ clone_to }}/retropie_setup.sh"
+    register: bobbo
   - debug:
       msg: "Install script found in {{ clone_to }}."
-    when: install_script.stat.exists
+    when: bobbo.stat.exists
   - git: 
       repo: https://github.com/RetroPie/RetroPie-Setup.git
       dest: "{{ clone_to }}"
       depth: 1
       accept_newhostkey: true
-    when: not install_script.stat.exists
+    when: not bobbo.stat.exists
   - name: make pi user own RetroPie-Setup
     file:
       path: "{{ clone_to }}"
@@ -20,6 +20,7 @@
     file:
       state: absent
       path: "{{ clone_to }}/{{ item }}"
+    when: not bobbo.stat.exists
     with_items:
       - scriptmodules/emulators/basilisk.sh
       - scriptmodules/emulators/jzintv.sh
@@ -32,6 +33,7 @@
     file:
       state: absent
       path: "{{ clone_to }}/{{ item }}"
+    when: not bobbo.stat.exists
     with_items:
       - scriptmodules/libretrocores/lr-flycast.sh
       - scriptmodules/libretrocores/lr-mame2000.sh
@@ -45,6 +47,7 @@
     file:
       state: absent
       path: "{{ clone_to }}/{{ item }}"
+    when: not bobbo.stat.exists
     with_items:
       - scriptmodules/ports/kodi.sh
       - scriptmodules/ports/uqm.sh
@@ -52,6 +55,7 @@
     file:
       state: absent
       path: "{{ clone_to }}/{{ item }}"
+    when: not bobbo.stat.exists
     with_items:
       - scriptmodules/supplementary/scraper.sh
       - scriptmodules/supplementary/skyscraper.sh

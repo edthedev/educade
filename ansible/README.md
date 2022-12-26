@@ -15,6 +15,8 @@ Expected intenvory categories:
 - `[armbian]` - hosts that run Armbian
 - `[legacy_arcades]` - hosts installed to an Aracde machine, but running Batocera rather than Armbian
 
+> Add hosts to these inventories when you get a 'no matching hosts found' message from a Playbook.
+
 ## Playbooks
 
 Run these playbooks with the `ansible-playbook` command.

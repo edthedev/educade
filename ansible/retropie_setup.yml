@@ -7,9 +7,9 @@
     - pi_user: pi
 
   tasks:
-#    - name: setup admin
-#      include_role:
-#        name: school_admin
+    - name: setup admin
+      include_role:
+        name: school_admin
     - user:
         name: "{{ pi_user }}"
         comment: Arcade Player
