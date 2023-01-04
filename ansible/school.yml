@@ -9,10 +9,13 @@
   tasks:
     # Run with --ask-become-pass the first time
     # Remember to set vars ansible_admin and ansible_pubkey
-    - name: setup admin
+    - name: Add admin
       include_role:
         name: school_admin
-    - name: Install school software
+    - name: Add desktop with auto-login
+      include_role:
+        name: armbian_desktop
+    - name: Add school software
       include_role:
         name: schoolbox
 

@@ -27,7 +27,15 @@ ansible-playbook --ask-become-pass new.yml
 
 > Either `--ask-become-pass` the first time, or `scp` a public key to the root user.
 
+### For New Armbian Hosts
+
 - `new.yml` - Creates users for reliable access by Ansible.
 - `hostname.yml` sets a new hostname on Armbian.
+
+> Tip: Be sure to add the host IP to [new] in `/etc/ansible/hosts`.
+
+### More playbooks
+
 - `retropie_setup.yml` clones the RetroPie setup scripts onto the Armbian computer, defaulting to `/home/pi/RetroPie-Setup/`.
+
 
