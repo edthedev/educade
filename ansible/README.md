@@ -22,10 +22,10 @@ Expected intenvory categories:
 Run these playbooks with the `ansible-playbook` command.
 
 ```sh
-ansible-playbook --ask-become-pass new.yml
+ansible-playbook new.yml
 ```
 
-> Either `--ask-become-pass` the first time, or `scp` a public key to the root user.
+> Tip: `new.yml` will prompt for username and password to use to connect.
 
 ### For New Armbian Hosts
 
@@ -33,6 +33,8 @@ ansible-playbook --ask-become-pass new.yml
 - `hostname.yml` sets a new hostname on Armbian.
 
 > Tip: Be sure to add the host IP to [new] in `/etc/ansible/hosts`.
+
+> Tip: Run `armbian-config` to enable auto-login, and disable `ssh` root user.
 
 ### More playbooks
 

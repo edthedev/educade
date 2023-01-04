@@ -1,29 +1,38 @@
 ---
- - name: install learning software
-   apt:
-     name:
-      - atomix
-      - dosbox
-      - education-menus
-      - einstein
-      - glpeces
-      - gnuchess
-      - lmemory
-      - ri-li
-      - tuxmath
-      - tuxpaint
-      - tuxtype
+- name: Add student user
+  user:
+    name: student
+    comment: Student
+    password: "{{ student_password }}"
+- name: Add school software
+  apt:
+    update_cache: true
+    name:
+     - atomix
+     - einstein
+     - glpeces
+     - gnuchess
+     - lmemory
+     - ri-li
+     - tuxmath
+     - tuxpaint
+     - tuxtype
 # - name: get ye some Python
 #   apt:
 #     name: 
 #      - python3-pip
 # - pip:
 #     name: PythonTurtle
- - name: Copy dosbox files
-   unarchive:
-     src: "{{ item }}"
-     dest: "{{ dosbox_files }}"
-   with_fileglob:
-     - "{{ dosbox_files }}/*"
- - name: tic80
-   apt: tic80
+# - name: Add dosbox
+#   apt:
+#     name:
+#      - dosbox
+# - name: Copy dosbox files
+#   unarchive:
+#     src: "{{ item }}"
+#     dest: "{{ dosbox_files }}"
+#   with_fileglob:
+#     - "{{ dosbox_files }}/*"
+# - name: tic80
+#   apt:
+#     name: tic80

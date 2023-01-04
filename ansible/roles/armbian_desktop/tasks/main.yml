@@ -1,0 +1,40 @@
+---
+- name: Add desktop
+  apt:
+    name: lightdm
+- name: autologin.conf
+  copy:
+    src: 22-armbian-autologin.conf
+    dest: /etc/lightdm/lightdm.conf
+    owner: root
+    group: root
+    mode: '0644'
+- name: xinitrc
+  file:
+    path: /home/student/.xinitrc
+    state: touch
+    owner: student
+- name: xinitrc exec lightdm
+  lineinfile:
+    path: /home/student/.xinitrc
+    line: exec lightdm
+- name: Add auto login 1
+  file:
+    path: /etc/lightdm/lightdm.conf
+    state: touch
+    owner: root
+- name: Add auto login 2
+  lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    line: autologin-user=student
+- name: Add auto login 3
+  lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    line: autologin-timeout=0
+- name: disable access point
+  # Fixed in https://github.com/armbian/build/pull/4327/files
+  shell:
+    cmd: systemctl --no-reload disable hostapd.service
+- name: graphical
+  shell:
+    cmd: systemctl set-default graphical.target

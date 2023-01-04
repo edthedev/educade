@@ -3,6 +3,12 @@
   gather_facts: no
   hosts: new
   become: yes
+  vars_prompt:
+    - name: ansible_user
+      prompt: login user?
+    - name: ansible_ssh_pass
+      prompt: login password?
+
 
   tasks:
     # Run with --ask-become-pass the first time

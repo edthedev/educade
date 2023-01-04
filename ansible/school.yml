@@ -4,18 +4,15 @@
   hosts: school
   vars:
     - install_root: /usr/tic80
+  vars_prompt:
+    - name: student_password
+      prompt: Student password
+      private: true
+      encrypt: sha512_crypt
   become: yes
 
   tasks:
-    # Run with --ask-become-pass the first time
-    # Remember to set vars ansible_admin and ansible_pubkey
-    - name: Add admin
-      include_role:
-        name: school_admin
-    - name: Add desktop with auto-login
-      include_role:
-        name: armbian_desktop
-    - name: Add school software
-      include_role:
+    - name: Add school
+      import_role:
         name: schoolbox
 

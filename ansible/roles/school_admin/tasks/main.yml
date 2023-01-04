@@ -12,16 +12,16 @@
     validate: 'visudo -cf %s'
 - name: Add sudoers users to sudo group
   user:
-    name: "{{ ansible_admin }}"
+    name: "{{ add_ansible_admin }}"
     groups: sudo
     append: yes
     state: present
     createhome: yes
 - name: Set up authorized keys for the deployer user
   authorized_key: 
-    user: "{{ ansible_admin }}"
+    user: "{{ add_ansible_admin }}"
     state: present
     key: "{{ item }}"
   with_file:
-    - "{{ ansible_pubkey }}"
+    - "{{ add_ansible_pubkey }}"
 
