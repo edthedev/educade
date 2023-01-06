@@ -24,4 +24,5 @@
     key: "{{ item }}"
   with_file:
     - "{{ add_ansible_pubkey }}"
-
+- apt:
+    upgrade: safe
