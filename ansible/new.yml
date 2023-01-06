@@ -15,5 +15,5 @@
     # Remember to set vars ansible_admin and ansible_pubkey
     - name: Add remote login
       include_role:
-        name: lab_new
+        name: new
 
