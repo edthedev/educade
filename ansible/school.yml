@@ -12,6 +12,9 @@
   become: yes
 
   tasks:
+    - name: Add lab
+      import_role:
+        name: lab
     - name: Add school
       import_role:
         name: schoolbox
