@@ -13,7 +13,7 @@
   tasks:
     # Run with --ask-become-pass the first time
     # Remember to set vars ansible_admin and ansible_pubkey
-    - name: setup admin
+    - name: Add remote login
       include_role:
-        name: school_admin
+        name: lab_new
 
