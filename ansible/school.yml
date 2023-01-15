@@ -15,6 +15,9 @@
     - name: Add lab
       import_role:
         name: lab
+    - name: Add remote desktop
+      import_role:
+        name: lab-desktop
     - name: Add school
       import_role:
         name: schoolbox

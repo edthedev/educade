@@ -1,0 +1,13 @@
+---
+# tasks file for lab-desktop
+- name: Add remote desktop
+  apt:
+    update_cache: true
+    name:
+      - xrdp
+      - xorgxrdp
+- name: Enable remote desktop
+  systemd:
+    name: xrdp
+    enabled: yes
+    state: started
