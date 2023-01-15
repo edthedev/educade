@@ -1,0 +1,30 @@
+---
+- name: Make sure we have a sudo group
+  group:
+    name: sudo
+    state: present
+- name: Allow sudo group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%sudo'
+    line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+- name: Add sudoers users to sudo group
+  user:
+    name: "{{ add_ansible_admin }}"
+    groups: sudo
+    append: yes
+    state: present
+    createhome: yes
+- name: Set up authorized keys for the deployer user
+  authorized_key: 
+    user: "{{ add_ansible_admin }}"
+    state: present
+    key: "{{ item }}"
+  with_file:
+    - "{{ add_ansible_pubkey }}"
+- name: Remove root
+  user:
+    name: root
+    password_lock: true
