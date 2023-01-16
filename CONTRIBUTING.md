@@ -45,7 +45,9 @@ python -m venv ansible
 
 Now activate the virtual environment and install Ansible.
 
+```sh
 source ~/venvs/ansible/bin/activate
+pip install --upgrade pip
 pip install ansible
 ```
 
