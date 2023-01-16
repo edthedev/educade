@@ -46,8 +46,8 @@ python -m venv ansible
 Now activate the virtual environment and install Ansible.
 
 ```sh
-export CRYPTOGRAPHY_DONT_BUILD_RUST=1
 source ~/venvs/ansible/bin/activate
+export CRYPTOGRAPHY_DONT_BUILD_RUST=1
 pip install --upgrade pip
 pip install ansible
 ```
