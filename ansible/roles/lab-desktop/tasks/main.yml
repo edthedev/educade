@@ -11,3 +11,8 @@
     name: xrdp
     enabled: yes
     state: started
+- name: Remove first login script
+  file: 
+    path: /etc/profile.d/armbian-check-first-login.sh
+    state: absent
+
