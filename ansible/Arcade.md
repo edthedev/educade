@@ -26,24 +26,32 @@ On your Ansible host - a different machine on the same network:
 	<new IP here>
 	```
 
-2. Generate an SSH key by running `ssh-keygen`. Add the path to your new .pub file to your ansible inventory file in a new section called `[new:vars]`. Make up any username to use on the ansible computer. Set the `ansible_user` variable to `root` to tell Ansible to use the `root` user for this first playbook.
+2. On your Ansible computer, generate an SSH key by running `ssh-keygen`. 
+3. Configure `/etc/ansible/hosts` with information for the new computer.
+
+		- Add the path to your new .pub file to your ansible inventory file in a new section called `[new:vars]`. 
+	  - Set the `add_ansible_admin` variable to `pi` to tell Ansible that we will use the `pi` user on the new computer.
+    - Set the `ansible_user` variable to `root` to tell Ansible to use the `root` user for this first playbook.
 
 	In `/etc/ansible/hosts`:
 
 	```ini
 	[new:vars]
 	ansible_user = root
-	add_ansible_admin = set_any_username
-	add_ansible_pubkey = /home//.ssh/id_ed25519.pub
+	add_ansible_admin = pi 
+	add_ansible_pubkey = <path to your ssh public key .pub>
 	```
 
 3. On your Ansible computer, run `ansible-playbook new.yml`. This will create a non-root user on the new computer for you and Ansible to remote connect using SSH. The `root` user will be cleaned up in a later playbook.
 
 > Tip: If the `ansible-playbook` command failes, you may need to SSH manually first to the new computer once to accept the SSH host key.
 
+4. (Optional) Run `ansible-playbook hostname.yml` to assign a new hostname to the new computer.
+
 ## Install RetroPie
 
-1. On the Ansible computer, run `ansible-playbook arcade.yml`. This may take some time.
+1. Add the new computer to the `[arcades]` group in `/etc/ansible/hosts`.
+1. On the Ansible computer, run `ansible-playbook retropie_setup.yml`. This may take some time.
 2. On the new computer, run `sudo retropie_setup.sh` in the `/home/pi/RetroPie/` directory.
 3. Disconnect the keyboard from the new computer. Connect a game controller.
 4. Reboot the new computer. It should now boot directly to EmultationStation.
