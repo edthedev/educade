@@ -13,6 +13,8 @@ mkdir -p ~/.local/bin
 ls -s ~/.pyenv/bin ~/.local/bin/pyenv
 ```
 
+Confirm this worked with `which pyenv`. You may need to restart your shell first.
+
 Install a modern version of Python
 ```sh
 pyenv install 3.11.0
