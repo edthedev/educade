@@ -7,6 +7,9 @@
     - pi_user: pi
 
   tasks:
+    - name: setup lab
+      include_role:
+        name: lab
     - name: setup admin
       include_role:
         name: school_admin
