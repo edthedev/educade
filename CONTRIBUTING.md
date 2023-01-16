@@ -2,6 +2,9 @@
 
 ## Set up PyEnv
 
+Setup PyEnv per instructions at [PyEnv README](https://github.com/pyenv/pyenv)
+
+Should look a bit like:
 ```sh
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 ```
@@ -15,11 +18,7 @@ ln -s ~/.pyenv/bin/pyenv ~/.local/bin/
 
 Confirm this worked with `which pyenv`. You may need to restart your shell first.
 
-Now add `pyenv` to your profile:
-
-```sh
-eval "$(pyenv init --path)"
-```
+## Install modern Python
 
 Install a modern version of Python
 ```sh
