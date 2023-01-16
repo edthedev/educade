@@ -9,7 +9,8 @@ git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 Add `~/.pyenv/bin/` to your PATH.
 
 ```sh
-ls -s ~/.pyenv/bin ~/.local/bin
+mkdir -p ~/.local/bin
+ls -s ~/.pyenv/bin ~/.local/bin/pyenv
 ```
 
 Install a modern version of Python
