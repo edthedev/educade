@@ -2,7 +2,9 @@
 
 ## Set up PyEnv
 
-Setup PyEnv per instructions at [PyEnv README](https://github.com/pyenv/pyenv)
+Setup PyEnv per instructions at [PyEnv README](https://github.com/pyenv/pyenv). 
+
+> Tip: Since my Ansible computer is a Raspberry Pi, I use the `git clone` version for Linux.
 
 Confirm this worked with `which pyenv`. You may need to restart your shell first.
 
