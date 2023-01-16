@@ -21,3 +21,9 @@
 - name: reminder
   debug:
     msg: "login and run __platform=genericx11 ~/Retropie-Setup/retropie-setup.sh"
+- copy:
+    src: /data/roms/pacman
+    dest: /home/pi/RetroPie/roms
+- copy:
+    src: /data/roms/bios
+    dest: /home/pi/RetroPie/BIOS
