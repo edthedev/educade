@@ -27,6 +27,15 @@ Python 3.11.0
 
 ## Create a virtual environment for Ansible
 
+
+It's a good idea to make sure `pip` is up to date.
+
+```sh
+pip install --upgrade pip
+```
+
+Now create a Virtual Environment for Ansible.
+
 ```sh
 mkdir ~/venvs
 cd ~/venvs
