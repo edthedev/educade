@@ -54,3 +54,12 @@ When creating a new shell to use thse commands in the future, activate the Ansib
 ```sh
 source ~/venvs/ansible/bin/activate
 ```
+
+Verify the expected version of Ansible is installed.
+
+```sh
+$ source ~/venvs/ansible/bin/activate
+$ pip freeze | grep ansible
+ansible==7.1.0
+ansible-core==2.14.1
+```
