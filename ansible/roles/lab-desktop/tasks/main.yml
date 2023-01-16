@@ -15,4 +15,3 @@
   file: 
     path: /etc/profile.d/armbian-check-first-login.sh
     state: absent
-

@@ -39,7 +39,7 @@ On your Ansible host - a different machine on the same network:
 
 3. On your Ansible computer, run `ansible-playbook new.yml`. This will create a non-root user on the new computer for you and Ansible to remote connect using SSH. The `root` user will be cleaned up in a later playbook.
 
-> Tip: All Ansible commands will be run on the computer with Ansible installed.
+> Tip: If the `ansible-playbook` command failes, you may need to SSH manually first to the new computer once to accept the SSH host key.
 
 ## Install RetroPie
 

@@ -6,6 +6,7 @@
   vars_prompt:
     - name: ansible_user
       prompt: login user?
+      private: false
     - name: ansible_ssh_pass
       prompt: login password?
 
