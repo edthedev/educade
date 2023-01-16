@@ -10,7 +10,7 @@ Add `~/.pyenv/bin/` to your PATH.
 
 ```sh
 mkdir -p ~/.local/bin
-ln -s ~/.pyenv/bin ~/.local/bin/pyenv
+ln -s ~/.pyenv/bin/pyenv ~/.local/bin/pyenv
 ```
 
 Confirm this worked with `which pyenv`. You may need to restart your shell first.
