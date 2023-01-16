@@ -35,11 +35,16 @@ pip install --upgrade pip
 ```
 
 Now create a Virtual Environment for Ansible.
+This will take a couple of minutes.
 
 ```sh
 mkdir ~/venvs
 cd ~/venvs
 python -m venv ansible
+```
+
+Now activate the virtual environment and install Ansible.
+
 source ~/venvs/ansible/bin/activate
 pip install ansible
 ```
