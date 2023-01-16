@@ -16,6 +16,15 @@ pyenv install 3.11.0
 pyenv global 3.11.0
 ```
 
+Confirm this by running `python -V`.
+
+```sh
+$ python -V
+Python 3.11.0
+```
+
+> Tip: If the result is not Python 3.11.0, double check the `PyEnv` was added to your profile correctly.
+
 ## Create a virtual environment for Ansible
 
 ```sh
