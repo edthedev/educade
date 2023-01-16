@@ -15,6 +15,12 @@ ln -s ~/.pyenv/bin/pyenv ~/.local/bin/
 
 Confirm this worked with `which pyenv`. You may need to restart your shell first.
 
+Now let `pyenv` update your profile files.
+
+```sh
+eval "$(pyenv init -)"
+```
+
 Install a modern version of Python
 ```sh
 pyenv install 3.11.0
