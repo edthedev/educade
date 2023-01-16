@@ -1,0 +1,14 @@
+---
+- name: Setup a new arcade machine
+  gather_facts: no
+  hosts: arcades
+  become: yes
+  vars:
+    - pi_user: pi
+
+  tasks:
+    - name: Add retropie
+      include_role:
+        name: arcade
+
+
