@@ -1,7 +1,23 @@
 ---
 - copy:
     src: "/data/roms/{{ inventory_hostname }}/"
-    dest: /home/pi/RetroPie/roms
+    dest: "/home/{{ pi_user }}/RetroPie/roms"
 - copy:
     src: /data/roms/bios
     dest: /home/pi/RetroPie/BIOS
+- name: Remove defaults
+  lineinfile:
+    path: /opt/retropie/configs/all/retroarch.cfg
+    state: absent
+    line: "{{ item }}"
+  with_items:
+      - input_joypad_driver = "udev"
+- name: Add joypad config
+  lineinfile:
+    path: /opt/retropie/configs/all/retroarch.cfg
+    state: present 
+    line: "{{ item }}"
+  with_items:
+      - input_joypad_driver = "sdl"
+
+

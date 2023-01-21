@@ -8,7 +8,7 @@
 
   tasks:
     - name: Add retropie
-      include_role:
+      import_role:
         name: arcade
 
 
