@@ -6,9 +6,9 @@
     - name: new_hostname
       prompt: New hostname?
       private: false
-    - name: motd_file
-      prompt: Message file?
-      private: false
+      #    - name: motd_file
+      #prompt: Message file?
+      #private: false
   become: yes
 
   tasks:
@@ -20,6 +20,7 @@
       with_items:
         - lepotato
         - renegade
+        - retropie
     - name: Add to /etc/hostname
       lineinfile:
         state: present
@@ -32,6 +33,6 @@
         line: "127.0.0.1    {{ new_hostname }}"
     - name: Add message of the day
       copy:
-        src: "{{ motd_file }}"
+        src: "~/motd/{{ new_hostname }}"
         dest: /etc/motd
 
