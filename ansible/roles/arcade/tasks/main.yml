@@ -14,6 +14,8 @@
     regexp: ^disable*
 # Hint: Use RetroArch (launched from EmulationStation, not mid-game) to rotate in-game.
 # enable 'advanced options' and 'save current configuration' and restart RetroArch to get the video rotate option.
+# Settings - Video - Output - Video Rotation - 90 deg
+# Conffiguration File - Save Current Configuration
 - name: Rotate for vertical monitor
   lineinfile:
     path: "{{ item }}"
@@ -23,3 +25,8 @@
   with_items:
     - /opt/retropie/configs/all/autostart.sh
     #    - /home/pi/.profile
+# Tip: Solved missing audio on Pi2/Pi3 by adding 
+#  snd_bcm2835.enable_hdmi=1 snd_bcm2835.enable_headphones=1 snd_bcm2835.enable_compat_alsa=1
+#  to the one line in
+#  /boot/cmdline.txt
+#  This won't work on Armbian based build, since that file is not present.
