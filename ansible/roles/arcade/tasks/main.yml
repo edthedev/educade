@@ -1,5 +1,6 @@
 ---
-- copy:
+- name: roms
+  copy:
     src: "/data/roms/{{ inventory_hostname }}/"
     dest: "/home/{{ pi_user }}/RetroPie/roms"
 - copy:
@@ -11,4 +12,12 @@
     state: present 
     line: disable_menu = "1"
     regexp: ^disable*
-
+- name: Rotate screen for vertical monitor
+  lineinfile:
+    path: "{{ item }}"
+    state: present 
+    line: emultationstation --screenrotate 3 --resolution 960 1280
+    regexp: ^emulationstation*
+  with_items:
+    - /home/pi/.profile
+    - /opt/retropie/configs/all/autostart.sh
