@@ -5,7 +5,8 @@
   - debug:
       msg: "Install script found in {{ clone_to }}."
     when: bobbo.stat.exists
-  - git: 
+  - name: add install script
+    git: 
       repo: https://github.com/RetroPie/RetroPie-Setup.git
       dest: "{{ clone_to }}"
       depth: 1
