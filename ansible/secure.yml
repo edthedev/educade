@@ -1,0 +1,10 @@
+---
+- name: Secure host
+  gather_facts: no
+  hosts: secure
+  become: yes
+
+  tasks:
+    - name: Lock root password
+      include_role:
+        name: secure

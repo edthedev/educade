@@ -15,7 +15,7 @@
 # Hint: Use RetroArch (launched from EmulationStation, not mid-game) to rotate in-game.
 # enable 'advanced options' and 'save current configuration' and restart RetroArch to get the video rotate option.
 # Settings - Video - Output - Video Rotation - 90 deg
-# Conffiguration File - Save Current Configuration
+# Configuration File - Save Current Configuration
 - name: Rotate for vertical monitor
   lineinfile:
     path: "{{ item }}"
