@@ -23,8 +23,8 @@
     line: emulationstation --screenrotate 3 --resolution 960 1280
     regexp: ^emulationstation*
   with_items:
-    - /opt/retropie/configs/all/autostart.sh
-    #    - /home/pi/.profile
+    # - /opt/retropie/configs/all/autostart.sh
+    - /home/pi/.profile
 # Tip: Solved missing audio on Pi2/Pi3 by adding 
 #  snd_bcm2835.enable_hdmi=1 snd_bcm2835.enable_headphones=1 snd_bcm2835.enable_compat_alsa=1
 #  to the one line in

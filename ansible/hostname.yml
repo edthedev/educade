@@ -6,9 +6,6 @@
     - name: new_hostname
       prompt: New hostname?
       private: false
-      #    - name: motd_file
-      #prompt: Message file?
-      #private: false
   become: yes
 
   tasks:
@@ -21,6 +18,7 @@
         - lepotato
         - renegade
         - retropie
+        - kali-raspberry-pi
     - name: Add to /etc/hostname
       lineinfile:
         state: present
