@@ -39,5 +39,4 @@ ansible-playbook new.yml
 ### More playbooks
 
 - `retropie_setup.yml` clones the RetroPie setup scripts onto the Armbian computer, defaulting to `/home/pi/RetroPie-Setup/`.
-
-
+- See also https://github.com/edthedev/edthedev.github.io/tree/main/_includes/ansible
