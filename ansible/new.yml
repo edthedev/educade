@@ -12,6 +12,10 @@
 
 
   tasks:
+
+    - name: Allow changes on Recallbox
+      include_role:
+        name: recalbox_system
     # Run with --ask-become-pass the first time
     # Remember to set vars ansible_admin and ansible_pubkey
     - name: Add remote login
