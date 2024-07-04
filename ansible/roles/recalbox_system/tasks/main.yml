@@ -3,22 +3,3 @@
   tags:
     - debug
   shell: mount -o remount,rw /
-- name: Add system to systemlist.xml
-  tags:
-    - debug
-  blockinfile:
-    marker: "<!-- {mark} added by Ansible for {{ system_name }} -->"
-    backup: no
-    path: "{{ dot_es }}/systemlist.xml"
-    state: present
-    insertbefore: "</systemList>"
-    block: "{{ lookup('ansible.builtin.template', cfg_template ) }}"
-- name: Add Theme for system
-  copy:
-    src: "files/themes/{{ rom_folder }}"
-    dest: "{{ theme_root }}"
-- name: Create new ROMS folder
-  file:
-    path: "/recalbox/share/roms/{{ rom_folder }}"
-    state: directory
-    mode: '0755'
