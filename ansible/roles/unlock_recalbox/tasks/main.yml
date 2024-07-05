@@ -1,0 +1,5 @@
+---
+- name: Allow writing to root so we can make changes
+  tags:
+    - debug
+  shell: mount -o remount,rw /
