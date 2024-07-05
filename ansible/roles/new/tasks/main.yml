@@ -9,7 +9,7 @@
     state: present
     regexp: '^%sudo'
     line: '%sudo ALL=(ALL) NOPASSWD: ALL'
-    validate: 'visudo -cf %s'
+  # TODO: Could use community.general.sudoers here
 - name: Add sudoers users to sudo group
   user:
     name: "{{ add_ansible_admin }}"
@@ -24,5 +24,3 @@
     key: "{{ item }}"
   with_file:
     - "{{ add_ansible_pubkey }}"
-- apt:
-    upgrade: safe

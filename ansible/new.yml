@@ -3,21 +3,24 @@
   gather_facts: no
   hosts: new
   become: yes
+  vars:
+    add_ansible_pubkey: ~/.ssh/id_ed25519.pub
   vars_prompt:
     - name: ansible_user
-      prompt: login user?
+      prompt: current login user?
       private: false
     - name: ansible_ssh_pass
-      prompt: login password?
-
-
+      prompt: current login password?
+    - name: add_ansible_admin
+      prompt: new ansible user name?
+      private: false
+    
   tasks:
 
-    - name: Allow changes on Recallbox
-      include_role:
-        name: recalbox_system
+    # - name: Allow changes on Recallbox
+    #  include_role:
+    #    name: unlock_recalbox
     # Run with --ask-become-pass the first time
-    # Remember to set vars ansible_admin and ansible_pubkey
     - name: Add remote login
       include_role:
         name: new
