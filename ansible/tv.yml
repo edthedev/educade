@@ -1,0 +1,15 @@
+---
+- name: Setup Kodi media center
+  gather_facts: no
+  hosts: tv 
+  become: yes
+
+  tasks:
+    - name: Add retropie
+      import_role:
+        name: retropie
+    - name: Add roms
+      import_role:
+        name: arcade
+
+
