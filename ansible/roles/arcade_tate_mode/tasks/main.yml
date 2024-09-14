@@ -1,0 +1,14 @@
+---
+# Hint: Use RetroArch (launched from EmulationStation, not mid-game) to rotate in-game.
+# enable 'advanced options' and 'save current configuration' and restart RetroArch to get the video rotate option.
+# Settings - Video - Output - Video Rotation - 90 deg
+# Configuration File - Save Current Configuration
+- name: Rotate for vertical monitor
+  lineinfile:
+    path: "{{ item }}"
+    state: present 
+    line: emulationstation --screenrotate 3 --resolution 960 1280
+    regexp: ^emulationstation*
+  with_items:
+    # - /opt/retropie/configs/all/autostart.sh
+    - /home/pi/.profile
