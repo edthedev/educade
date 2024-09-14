@@ -1,17 +1,36 @@
 ---
 - name: Setup a new Armbian host
-  gather_facts: yes
+  gather_facts: no  
   hosts: new
   become: yes
   vars:
     add_ansible_pubkey: ~/.ssh/id_ed25519.pub
     
   tasks:
-    # - name: Allow changes on Recallbox
-    #  include_role:
-    #    name: unlock_recalbox
-    # Run with --ask-become-pass the first time
-    - name: Add remote login
-      include_role:
-        name: new
+    - name: Make sure we have a sudo group
+      group:
+        name: sudo
+        state: present
+    - name: Allow sudo group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%sudo'
+        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+      # TODO: Could use community.general.sudoers here
+    - name: Add sudoers users to sudo group
+      user:
+        name: "{{ add_ansible_user }}"
+        groups: sudo
+        append: yes
+        state: present
+        createhome: yes
+    - name: Set up authorized keys for the deployer user
+      authorized_key: 
+        user: "{{ add_ansible_user }}"
+        state: present
+        key: "{{ item }}"
+      with_file:
+        - "{{ add_ansible_pubkey }}"
+
 

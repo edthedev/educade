@@ -1,0 +1,7 @@
+---
+- name: Setup RetroPi
+  gather_facts: no  
+  hosts: retropi
+  become: yes
+  vars:
+    roms_folder: /data/roms
