@@ -1,0 +1,17 @@
+---
+- name: Setup a new Recalbox host
+  gather_facts: no
+  hosts: new
+  become: yes
+  vars:
+    add_ansible_pubkey: ~/.ssh/id_ed25519.pub
+    
+  tasks:
+    - name: Set up authorized keys for the deployer user
+      authorized_key: 
+        user: "{{ ansible_user }}"
+        state: present
+        key: "{{ item }}"
+      with_file:
+        - "{{ add_ansible_pubkey }}"
+
