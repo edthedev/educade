@@ -62,4 +62,4 @@
       - scriptmodules/supplementary/skyscraper.sh
   - name: reminder
     debug:
-      msg: "Retropie script is isntalled. login and run __platform=genericx11 ./retropie-setup.sh"
+      msg: "Retropie script is installed. login and run __platform=genericx11 ./retropie-setup.sh"

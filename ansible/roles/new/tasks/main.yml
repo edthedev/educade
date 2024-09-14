@@ -12,14 +12,14 @@
   # TODO: Could use community.general.sudoers here
 - name: Add sudoers users to sudo group
   user:
-    name: "{{ ansible_user }}"
+    name: "{{ add_ansible_user }}"
     groups: sudo
     append: yes
     state: present
     createhome: yes
 - name: Set up authorized keys for the deployer user
   authorized_key: 
-    user: "{{ ansible_user }}"
+    user: "{{ add_ansible_user }}"
     state: present
     key: "{{ item }}"
   with_file:

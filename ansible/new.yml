@@ -1,22 +1,12 @@
 ---
 - name: Setup a new Armbian host
-  gather_facts: no
+  gather_facts: yes
   hosts: new
   become: yes
   vars:
     add_ansible_pubkey: ~/.ssh/id_ed25519.pub
-  vars_prompt:
-    - name: ssh_user
-      prompt: current login user?
-      private: false
-    - name: ansible_ssh_pass
-      prompt: current login password?
-    - name: ansible_user
-      prompt: new ansible user name?
-      private: false
     
   tasks:
-
     # - name: Allow changes on Recallbox
     #  include_role:
     #    name: unlock_recalbox

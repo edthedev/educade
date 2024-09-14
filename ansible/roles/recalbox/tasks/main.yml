@@ -1,5 +1,5 @@
 ---
-- name: Allow writing to root so we can make changes
+- name: allow_disk_changes
   tags:
     - debug
   shell: mount -o remount,rw /
