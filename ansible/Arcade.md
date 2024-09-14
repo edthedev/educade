@@ -30,15 +30,15 @@ On your Ansible host - a different machine on the same network:
 3. Configure `/etc/ansible/hosts` with information for the new computer.
 
 		- Add the path to your new .pub file to your ansible inventory file in a new section called `[new:vars]`. 
-	  - Set the `add_ansible_admin` variable to `pi` to tell Ansible that we will use the `pi` user on the new computer.
-    - Set the `ansible_user` variable to `root` to tell Ansible to use the `root` user for this first playbook.
+	  - Set the `ansible_user` variable to `pi` to tell Ansible that we will use the `pi` user on the new computer.
+    - Set the `ssh_user` variable to `root` to tell Ansible to use the `root` user for this first playbook.
 
 	In `/etc/ansible/hosts`:
 
 	```ini
 	[new:vars]
-	ansible_user = root
-	add_ansible_admin = pi 
+	ssh_user = root
+	ansible_user = pi 
 	add_ansible_pubkey = <path to your ssh public key .pub>
 	```
 
