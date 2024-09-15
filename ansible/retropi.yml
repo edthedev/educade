@@ -6,17 +6,18 @@
   vars:
     # roms_dir: /data/roms
     # bios_dir: /data/roms
-    pi_user: pi
+    ansible_user: pi
 
 
   tasks:
-    - name: roms
+    - name: install bios 
       copy:
-        src: "{{ roms_dir }}/"
-        dest: "/home/{{ pi_user }}/RetroPie/roms"
-    - copy:
         src: "{{ bios_dir }}/"
-        dest: /home/pi/RetroPie/BIOS
+        dest: /home/pi/RetroPie/BIOS/
+    #- name: roms
+    #  copy:
+  #    src: "{{ roms_dir }}/"
+    #    dest: "/home/{{ pi_user }}/RetroPie/roms"
     - name: Disable runcommand
       lineinfile:
         path: /opt/retropie/configs/all/runcommand.cfg
