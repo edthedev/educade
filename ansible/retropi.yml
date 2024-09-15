@@ -4,4 +4,22 @@
   hosts: retropi
   become: yes
   vars:
-    roms_folder: /data/roms
+    # roms_dir: /data/roms
+    # bios_dir: /data/roms
+    pi_user: pi
+
+
+  tasks:
+    - name: roms
+      copy:
+        src: "{{ roms_dir }}/"
+        dest: "/home/{{ pi_user }}/RetroPie/roms"
+    - copy:
+        src: "{{ bios_dir }}/"
+        dest: /home/pi/RetroPie/BIOS
+    - name: Disable runcommand
+      lineinfile:
+        path: /opt/retropie/configs/all/runcommand.cfg
+        state: present 
+        line: disable_menu = "1"
+        regexp: ^disable*
